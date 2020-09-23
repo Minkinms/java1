@@ -62,19 +62,19 @@ public class CyclesGoldenFibo {
         boolean digitFound = false;
 
         while (number >= 0) {
+            if (digit == (number%10)) {   //Сравниваем цифру с остатком от деления на 10
+                digitFound = true;
+                break;
+            }
+            number /= 10;                   //Уменьшаем число на 10 и повторяем проверку остатка
+            //System.out.println(number);
+
             //Добавил после проверки роботом и указанием проблемы со значениями (0, 0)
             //Для обеспечения проверки, но исключения бесконечности цикла, дополнительно проверяю на ноль
             if (number == 0) {
                 break;
             }
 
-            if (digit == (number%10)) {   //Сравниваем цифру с остатком от деления на 10
-                digitFound = true;
-                break;
-            }
-
-            number /= 10;                   //Уменьшаем число на 10 и повторяем проверку остатка
-            //System.out.println(number);
         }
         //System.out.println(digitFound);
         return digitFound;
