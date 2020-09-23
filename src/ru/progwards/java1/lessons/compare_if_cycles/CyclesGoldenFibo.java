@@ -29,14 +29,15 @@ public class CyclesGoldenFibo {
 
 
         //Тест containsDigit()
-        /*System.out.println("Тест containsDigit()");
+        System.out.println("Тест containsDigit()");
         System.out.println(containsDigit(10, 9));
         System.out.println(containsDigit(19, 9));
         System.out.println(containsDigit(99, 9));
         System.out.println(containsDigit(195678, 9));
         System.out.println(containsDigit(125078, 0));
         System.out.println(containsDigit(125078, 3));
-        */
+        System.out.println(containsDigit(0, 0));
+
 
         //Тест fiboNumber()
         //System.out.println("Последовательность Фибоначчи");
@@ -60,9 +61,14 @@ public class CyclesGoldenFibo {
     public static boolean containsDigit(int number, int digit) {
         boolean digitFound = false;
 
-        while (number > 0) {
+        while (number >= 0) {
             if (digit == (number%10)) {   //Сравниваем цифру с остатком от деления на 10
                 digitFound = true;
+                break;
+            }
+            //Добавил после проверки роботом и указанием проблемы со значениями (0, 0)
+            //Для обеспечения проверки, но исключения бесконечности цикла, дополнительно проверяю на ноль
+            if (number == 0) {
                 break;
             }
             number /= 10;                   //Уменьшаем число на 10 и повторяем проверку остатка

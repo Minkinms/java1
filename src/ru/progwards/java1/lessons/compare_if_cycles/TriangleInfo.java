@@ -25,9 +25,9 @@ public class TriangleInfo {
         System.out.println(isIsoscelesTriangle(2, 2, 3));
         System.out.println(isIsoscelesTriangle(5, 2, 2));
         System.out.println(isIsoscelesTriangle(3 ,4, 5));   //Пифагорова тройка
+*/
 
 
-        */
 
     }
 
@@ -62,7 +62,9 @@ public class TriangleInfo {
         boolean triangleIsIsosceles;
         //Реализована последовательная проверка равенства сторон с условием выполнения хотя бы одного равенства
         //Также добавлено дополнительное условие проверки для исключения равностороннего треугольника
-        if ((a == b || a == c || c == b) && !((a == b) && (a == c))){
+        // Изначально применил устовие исключающее равносторонний треугольник, чтобы выявлять именно равнобедренные
+        //if ((a == b || a == c || c == b) && !((a == b) && (a == c))){
+        if ((a == b || a == c || c == b)){
             triangleIsIsosceles = true;
         } else {
             triangleIsIsosceles = false;
