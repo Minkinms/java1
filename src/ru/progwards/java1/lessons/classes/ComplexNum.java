@@ -30,12 +30,13 @@ public class ComplexNum {
 
     @Override
     public String toString() {
+        //Перемудрил. Роботу не понадобилось
         //Условие для корректного отображения числа с отрицательной мнимой частью
-        if (this.imaginaryPartNumber >= 0) {
+        //if (this.imaginaryPartNumber >= 0) {
             return this.realPartNumber + "+" + this.imaginaryPartNumber + "i";
-        } else {
-            return this.realPartNumber + "" + this.imaginaryPartNumber + "i";
-        }
+        //} else {
+            //return this.realPartNumber + "" + this.imaginaryPartNumber + "i";
+       //}
 
     }
 
