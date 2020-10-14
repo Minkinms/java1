@@ -15,6 +15,7 @@ public class CalculateFibonacci {
         clearLastFibo();                    //Использование метода для работы с переменной вложенного класса
         System.out.println(getLastFibo());
         //System.out.println(" ");
+        System.out.println(fiboNumber(6));
 
     }
 
@@ -35,7 +36,12 @@ public class CalculateFibonacci {
 
     //Метод для очистки переменной вложенного класса
     public static void clearLastFibo(){
-        lastFibo = null;
+        //lastFibo = null;  //Здесь ругается робот на проверке.
+        // Вероятно потому, что при реализации другого экземпляра обращается к ней, а ее нет, она null
+        lastFibo.n = 0;
+        lastFibo.fibo = 0;
+
+
     }
 
 
