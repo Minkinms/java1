@@ -104,12 +104,19 @@ public class Animal implements FoodCompare, CompareWeight {
         //Сравниваю значения веса вызывающего метод и вызываемого методом
         //Синтаксис откорректировался по предложению idea
         //Это Валерий пытался показать на вебинаре
-        return switch (Double.compare(getWeight(), smthAnimal.weight)) {
+        /*return switch (Double.compare(getWeight(), smthAnimal.weight)) {
             case 1 -> CompareResult.GREATER;
             case -1 -> CompareResult.LESS;
             case 0 -> CompareResult.EQUAL;
             default -> null;
         };
+         */
+        switch (Double.compare(getWeight(), smthAnimal.weight)) {
+            case 1:  return CompareResult.GREATER;
+            case -1: return CompareResult.LESS;
+            case 0:  return CompareResult.EQUAL;
+            default: return null;
+        }
     }
 
 
