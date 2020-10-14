@@ -20,7 +20,8 @@ public class CalculateFibonacci {
     }
 
     //Переменные класса
-    private static CacheInfo lastFibo = new CacheInfo();    //Заработало именно с конструктором new
+    //private static CacheInfo lastFibo = new CacheInfo();    //Заработало именно с конструктором new
+    private static CacheInfo lastFibo;
 
     //Вложенный класс
     public static class CacheInfo {
@@ -36,18 +37,21 @@ public class CalculateFibonacci {
 
     //Метод для очистки переменной вложенного класса
     public static void clearLastFibo(){
-        //lastFibo = null;  //Здесь ругается робот на проверке.
+        lastFibo = null;
+        //Робот ругался при проверке. Ниже рассуждения, но оказались не верны
         // Вероятно потому, что при реализации другого экземпляра обращается к ней, а ее нет, она null
-        lastFibo.n = 0;
-        lastFibo.fibo = 0;
-
-
+        //lastFibo.n = 0;
+        //lastFibo.fibo = 0;
     }
 
 
 
     //Функция определения n-го числа в последовательности Фибоначчи
     public static int fiboNumber(int n){
+        if (lastFibo == null){
+            lastFibo = new CacheInfo();
+        }
+
         if (lastFibo.n == n){           //Проверяю, рассчитывалось ли для для этого числа
             return lastFibo.fibo;       //Если расчитывали, то возвращаю последнее значение
         } else {
