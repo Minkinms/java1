@@ -44,7 +44,7 @@ public class Animal implements FoodCompare, CompareWeight {
         //System.out.println(duck.compareWeight(cat(2.0)));
 
          */
-
+/*
         CompareWeight[] array = new Animal[3];
         array[0] = new Animal(3.0);
         array[1] = new Animal(1.0);
@@ -52,7 +52,7 @@ public class Animal implements FoodCompare, CompareWeight {
         System.out.println(array[0] + " : " + array[1] + " : " + array[2]);
         CompareWeight.sort(array);
         System.out.println(array[0] + " : " + array[1] + " : " + array[2]);
-
+*/
     }
 
     //Переменные класса
