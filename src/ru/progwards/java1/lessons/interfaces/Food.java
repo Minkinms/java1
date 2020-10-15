@@ -27,11 +27,11 @@ public class Food implements CompareWeight {
     @Override
     public CompareResult compareWeight(CompareWeight smthHasWeight) {
         Food smthFood = (Food) smthHasWeight;
-        return switch (Double.compare(getWeight(), smthFood.weight)) {
-            case 1 -> CompareResult.GREATER;
-            case -1 -> CompareResult.LESS;
-            case 0 -> CompareResult.EQUAL;
-            default -> null;
-        };
+         switch (Double.compare(getWeight(), smthFood.weight)) {
+             case 1: return CompareResult.GREATER;
+             case -1: return CompareResult.LESS;
+             case 0: return CompareResult.EQUAL;
+             default: return null;
+        }
     }
 }
