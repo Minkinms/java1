@@ -13,7 +13,7 @@ public interface CompareWeight {
     public CompareResult compareWeight(CompareWeight smthHasWeight);
 
     //Сортировка
-
+/*
     public static void sort(CompareWeight[] a){
         CompareResult result; //вспомогательная переменная для наглядности
 
@@ -34,9 +34,6 @@ public interface CompareWeight {
                 }
             }
         }
-
-
-
     }
-
+*/
 }
