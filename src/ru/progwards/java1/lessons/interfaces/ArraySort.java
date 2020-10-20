@@ -16,7 +16,8 @@ public class ArraySort {
         CompareWeight.CompareResult result; //вспомогательная переменная для наглядности
 
         //Вспомогательный массив для хранения промежуточного значения
-        CompareWeight[] helpArray = new CompareWeight[1];
+        CompareWeight[] helpArray = new CompareWeight[1];    //Правильнее использовать пременную
+
 
         //Цикл сортировки из ArraySort
         for (int i = 0; i < a.length; i++) {

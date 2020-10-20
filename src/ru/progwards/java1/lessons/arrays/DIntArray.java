@@ -3,6 +3,7 @@ package ru.progwards.java1.lessons.arrays;
 import java.util.Arrays;
 
 public class DIntArray {
+    /*
     public static void main(String[] args) {
         DIntArray testObjArray = new DIntArray();
 
@@ -34,9 +35,11 @@ public class DIntArray {
         System.out.println(testObjArray.at(15));
     }
 
+     */
+
     //Переменные класса
     private int[] array;
-
+    //public int[] array;
     //Конструктор класса
         public DIntArray(){
           array = new int[0];    //Определяю исходный массив размером 0
@@ -98,6 +101,10 @@ public class DIntArray {
             System.out.println("Такого индекса нет в массиве. Длина массива ");
             return this.array.length;
         }
+    }
+
+    public int getArrayLength(){
+         return this.array.length;
     }
 
     @Override
