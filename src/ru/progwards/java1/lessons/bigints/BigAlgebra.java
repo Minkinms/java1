@@ -8,6 +8,7 @@ import java.math.BigInteger;
 
 public class BigAlgebra {
     public static void main(String[] args) {
+        /*
         //BigAlgebra bigAlgebra1 = new BigAlgebra();
         BigDecimal num1 = new BigDecimal("2");
         int pow1 = 8;
@@ -22,6 +23,12 @@ public class BigAlgebra {
         System.out.println("Число: " + num3 + " в степени: " + pow3 + " Ответ: " + fastPow(num3, pow3));
         pow3 = 1;
         System.out.println("Число: " + num3 + " в степени: " + pow3 + " Ответ: " + fastPow(num3, pow3));
+
+         */
+        //for (int i = 1; i <= 10; i++){
+            //System.out.println(fibonacci(i));
+        //}
+
 
     }
 
@@ -41,9 +48,26 @@ public class BigAlgebra {
 
     }
 
-    //Последовательность Фибоначчи в BigInteger
-    static public BigInteger fibonacci(int i){
-        return null;
+    //Функция определения n-го числа в последовательности Фибоначчи в BigInteger
+    static public BigInteger fibonacci(int n){
+            //вспомогательные переменные для реализации формулы Fn = F(n-2) + F(n-1)
+            BigInteger number1 = new BigInteger("0");
+            BigInteger number2 = new BigInteger("1");
+            BigInteger fiboNumberN = new BigInteger("1"); //Начальное значение 1, т.к. последовательность начинается с "1 1 ..."
+
+            //Цикл для формирования последовательности Фибоначчи до n-го числа
+            for (int i = 1; i <= n; i++) {
+                if (i == 1){                      //исключение для первого числа, т.к. последовательность начинается с 1 1
+                    //System.out.println(fiboNumberN);
+                } else {
+                    fiboNumberN = number1.add(number2);     //реализация формулы Fn = F(n-2) + F(n-1)
+                    number1 = number2;                      //обновление значения F(n-2)
+                    number2 = fiboNumberN;                  //обновление значения F(n-1)
+                }
+            }
+
+        return fiboNumberN;
+
     }
 
     //Класс для перевода десятичного числа степени в массив битов и быстрого возведения числа в степень
