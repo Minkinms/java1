@@ -3,6 +3,7 @@ package ru.progwards.java1.lessons.bigints;
 //import ru.progwards.java1.lessons.arrays.DIntArray;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 
 public class BigAlgebra {
@@ -38,6 +39,11 @@ public class BigAlgebra {
         }
 
 
+    }
+
+    //Последовательность Фибоначчи в BigInteger
+    static public BigInteger fibonacci(int i){
+        return null;
     }
 
     //Класс для перевода десятичного числа степени в массив битов и быстрого возведения числа в степень
