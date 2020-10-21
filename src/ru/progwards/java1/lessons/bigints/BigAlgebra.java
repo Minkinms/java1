@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.bigints;
 
-import ru.progwards.java1.lessons.arrays.DIntArray;
+//import ru.progwards.java1.lessons.arrays.DIntArray;
 
 import java.math.BigDecimal;
 
