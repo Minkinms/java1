@@ -30,13 +30,26 @@ public class AbsInteger {
 
     //Статический метод вычисления суммы потомков
     static AbsInteger add(AbsInteger num1, AbsInteger num2){
-       return num1.addNumbers(num2);
+       if (num1.equals(num2)){
+           return num1.addNumbers(num2);
+       } else
+           System.out.println("Объекты НЕ равны по классу");
+            return null;
+
+
+
     }
 
     //Ввожу метод для связи всех потомков и возможности его переопределения потомками
     // для выполнения операций с разными типами переменных
     AbsInteger addNumbers(AbsInteger addedNumber){
         return null;
+    }
+
+    //Если сравиниваемый объект не пустой и того же класса, то true
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null && getClass() == obj.getClass();
     }
 
     //Вероятно стоит добавить проверку складываемых чисел на попадание в диапазон переменных
