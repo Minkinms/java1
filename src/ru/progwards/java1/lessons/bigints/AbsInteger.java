@@ -33,8 +33,8 @@ public class AbsInteger {
        if (num1.equals(num2)){
            return num1.addNumbers(num2);
        } else
-           System.out.println("Объекты НЕ равны по классу");
-            return null;
+           //System.out.println("Объекты НЕ равны по классу");
+            return num1;
 
 
 
