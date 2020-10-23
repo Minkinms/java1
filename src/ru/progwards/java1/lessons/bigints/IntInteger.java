@@ -6,8 +6,11 @@ package ru.progwards.java1.lessons.bigints;
 
     //Конструктор класса
     IntInteger(int mIntNumber) {
+
+        //super(mIntNumber);
         this.mIntNumber = mIntNumber;
     }
+
 
     //Переопределяю метод родителя
     @Override
@@ -20,7 +23,7 @@ package ru.progwards.java1.lessons.bigints;
             //Возвращаю новый объект-потомок AbsInteger.
             // В качестве аргумента число, приведенное к byte, которое является суммой
             //переменной класса "this.mByteNumber" и такой же переменной из addedNumber, приведенного к ShortInteger
-            return new IntInteger ((short) (this.mIntNumber + ((IntInteger) addedNumber).mIntNumber));
+            return new IntInteger ((int) this.mIntNumber + (int) addedNumber.getValue());
         //} else{
             //System.out.println("Объекты НЕ равны по классу");
             //return null;
@@ -41,4 +44,14 @@ package ru.progwards.java1.lessons.bigints;
     public String toString() {
         return Integer.toString(mIntNumber);
     }
+
+     @Override
+     int getMaxValue() {
+         return Integer.MAX_VALUE;
+     }
+
+     @Override
+     long getValue() {
+         return mIntNumber;
+     }
 }

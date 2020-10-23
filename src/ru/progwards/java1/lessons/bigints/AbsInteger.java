@@ -28,22 +28,42 @@ public class AbsInteger {
 
     }
 
+   // int defualtVar;
+
+    //AbsInteger(int defualtVar){
+    //    this.defualtVar = defualtVar;
+    //}
+
+    //AbsInteger(int defualtVar){
+        //this.defualtVar = defualtVar;
+    //}
+
     //Статический метод вычисления суммы потомков
     static AbsInteger add(AbsInteger num1, AbsInteger num2){
        if (num1.equals(num2)){
            return num1.addNumbers(num2);
        } else
            //System.out.println("Объекты НЕ равны по классу");
-            return num1;
-
-
-
+           if (num1.getMaxValue() > num2.getMaxValue()){
+               return num1.addNumbers(num2);
+           }else {
+               return num2.addNumbers(num1);
+           }
+           //return num1;
     }
 
     //Ввожу метод для связи всех потомков и возможности его переопределения потомками
     // для выполнения операций с разными типами переменных
     AbsInteger addNumbers(AbsInteger addedNumber){
         return null;
+    }
+
+    int getMaxValue(){
+        return 0;
+    }
+
+     long getValue(){
+        return 0;
     }
 
     //Если сравиниваемый объект не пустой и того же класса, то true

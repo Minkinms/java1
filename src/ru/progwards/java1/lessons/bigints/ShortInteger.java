@@ -6,6 +6,7 @@ package ru.progwards.java1.lessons.bigints;
 
     //Конструктор класса
     ShortInteger(short mShortNumber){
+        //super(mShortNumber);
         this.mShortNumber = mShortNumber;
     }
 
@@ -20,7 +21,9 @@ package ru.progwards.java1.lessons.bigints;
             //Возвращаю новый объект-потомок AbsInteger.
             // В качестве аргумента число, приведенное к byte, которое является суммой
             //переменной класса "this.mByteNumber" и такой же переменной из addedNumber, приведенного к ShortInteger
-            return new ShortInteger ((short) (this.mShortNumber + ((ShortInteger) addedNumber).mShortNumber));
+            //mShortNumber = (short) addedNumber.getValue();
+        return new ShortInteger ((short) (this.mShortNumber + (short) addedNumber.getValue()));
+
         //} else{
             //System.out.println("Объекты НЕ равны по классу");
             //return null;
@@ -41,4 +44,14 @@ package ru.progwards.java1.lessons.bigints;
     public String toString() {
         return Short.toString(mShortNumber);
     }
+
+     @Override
+     int getMaxValue() {
+         return Short.MAX_VALUE;
+     }
+
+     @Override
+     long getValue() {
+         return mShortNumber;
+     }
 }
