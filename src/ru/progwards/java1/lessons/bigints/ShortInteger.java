@@ -6,39 +6,21 @@ package ru.progwards.java1.lessons.bigints;
 
     //Конструктор класса
     ShortInteger(short mShortNumber){
-        //super(mShortNumber);
         this.mShortNumber = mShortNumber;
     }
 
     //Переопределяю метод родителя
     @Override
     AbsInteger addNumbers(AbsInteger addedNumber) {
+            /*Возвращаю новый объект-потомок AbsInteger.
+            В качестве аргумента число, приведенное к short, которое является суммой
+            переменной класса "this.mByteNumber" и значения, полученного из addedNumber методом getValue().
+            Значение из getValue() возвращается long, но т.к. по условию нужно вернуть значение более подходящего типа,
+            то long приводим в данном случае к short.
 
-        //Проверка складываемых объектов на соответствие классов с помощью equals и вывод результата
-        //if (equals(addedNumber)){
-            //System.out.println("Объекты равны по классу");
-
-            //Возвращаю новый объект-потомок AbsInteger.
-            // В качестве аргумента число, приведенное к byte, которое является суммой
-            //переменной класса "this.mByteNumber" и такой же переменной из addedNumber, приведенного к ShortInteger
-            //mShortNumber = (short) addedNumber.getValue();
+             */
         return new ShortInteger ((short) (this.mShortNumber + (short) addedNumber.getValue()));
-
-        //} else{
-            //System.out.println("Объекты НЕ равны по классу");
-            //return null;
-        //}
-
     }
-
-    /*
-    //Если сравиниваемый объект не пустой и того же класса, то true
-    @Override
-    public boolean equals(Object obj) {
-        return obj != null && getClass() == obj.getClass();
-    }
-
-     */
 
     @Override
     public String toString() {
@@ -48,10 +30,10 @@ package ru.progwards.java1.lessons.bigints;
      @Override
      int getMaxValue() {
          return Short.MAX_VALUE;
-     }
+     } //Возвращаю максимальное значение хранимого типа данных
 
      @Override
      long getValue() {
          return mShortNumber;
-     }
+     } //Возвращаю значение переменной класса потомка.
 }

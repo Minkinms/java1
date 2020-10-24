@@ -28,28 +28,23 @@ public class AbsInteger {
 
     }
 
-   // int defualtVar;
-
-    //AbsInteger(int defualtVar){
-    //    this.defualtVar = defualtVar;
-    //}
-
-    //AbsInteger(int defualtVar){
-        //this.defualtVar = defualtVar;
-    //}
-
     //Статический метод вычисления суммы потомков
     static AbsInteger add(AbsInteger num1, AbsInteger num2){
-       if (num1.equals(num2)){
-           return num1.addNumbers(num2);
-       } else
-           //System.out.println("Объекты НЕ равны по классу");
-           if (num1.getMaxValue() > num2.getMaxValue()){
-               return num1.addNumbers(num2);
-           }else {
-               return num2.addNumbers(num1);
-           }
-           //return num1;
+    /* Для реализации метода ввел в класс родителя 3 метода, которые призваны объединить потомков:
+    AbsInteger addNumbers(AbsInteger addedNumber), int getMaxValue() и long getValue().
+        Метод addNumbers() переопределяется в каждом классе потомке для работы с числами определенных типов.
+        С помощью getMaxValue() определяю какая из складываемых переменных относится к типу с большим диапазоном.
+        Это необходимо для корректного использования addNumbers().
+        (Работа ведется только с целыми числами).
+        long getValue() используется в классах потомках для получения значений складываемых чисел.
+        Использую long как наибольшее хранилище. Далее см. в ByteInteger.
+
+     */
+        if (num1.getMaxValue() >= num2.getMaxValue()){
+            return num1.addNumbers(num2);
+        }else {
+            return num2.addNumbers(num1);
+        }
     }
 
     //Ввожу метод для связи всех потомков и возможности его переопределения потомками
@@ -62,17 +57,19 @@ public class AbsInteger {
         return 0;
     }
 
-     long getValue(){
+    //Метод для возвращения значения переменной класса потомка.
+    //Т.к синтаксис требует указать тип данных, указываю long, как максимальный для целых чисел.
+    long getValue(){
         return 0;
     }
 
+    //В одном из вариантов при поиске решения использовал equals, но т.к. складывать подразумевается числа разных типов, от использования отказался
     //Если сравиниваемый объект не пустой и того же класса, то true
-    @Override
+    /*@Override
     public boolean equals(Object obj) {
         return obj != null && getClass() == obj.getClass();
     }
 
-    //Вероятно стоит добавить проверку складываемых чисел на попадание в диапазон переменных
-    //Судя по всему будем изучать exception и делать это дальше
+     */
 
 }
