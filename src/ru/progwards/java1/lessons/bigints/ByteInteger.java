@@ -4,6 +4,7 @@ public class ByteInteger extends AbsInteger {
     public static void main(String[] args) {
         ByteInteger bi = new ByteInteger((byte) 2);
         System.out.println(bi.getMaxValue());
+        System.out.println(bi.toString());
     }
 
     //Переменные класса
@@ -20,8 +21,8 @@ public class ByteInteger extends AbsInteger {
             /*Возвращаю новый объект-потомок AbsInteger.
             В качестве аргумента число, приведенное к byte, которое является суммой
             переменной класса "this.mByteNumber" и значения, полученного из addedNumber методом getValue().
-            Значение из getValue() возвращается long, но т.к. по условию нужно вернуть значение более подходящего типа,
-            то long приводим к byte.
+            Значение из getValue() возвращается int, но т.к. по условию нужно вернуть значение более подходящего типа,
+            то int приводим к byte.
 
              */
             return new ByteInteger((byte) (this.mByteNumber + (byte) addedNumber.getValue()));
@@ -29,7 +30,8 @@ public class ByteInteger extends AbsInteger {
 
     @Override
     public String toString() {
-        return Byte.toString(mByteNumber);
+        //return Byte.toString(mByteNumber);
+        return Byte.TYPE.toString();
     }
 
     @Override
@@ -38,7 +40,7 @@ public class ByteInteger extends AbsInteger {
     }
 
     @Override
-    long getValue() {
+    int getValue() {
         return mByteNumber; //Возвращаю значение переменной класса потомка.
 
     }

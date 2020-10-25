@@ -16,11 +16,11 @@ package ru.progwards.java1.lessons.bigints;
             /*Возвращаю новый объект-потомок AbsInteger.
             В качестве аргумента число, приведенное к int, которое является суммой
             переменной класса "this.mByteNumber" и значения, полученного из addedNumber методом getValue().
-            Значение из getValue() возвращается long, но т.к. по условию нужно вернуть значение более подходящего типа,
-            то long приводим в данном случае к int.
+            Значение из getValue() возвращается int, но т.к. по условию нужно вернуть значение более подходящего типа,
+            то int приводим в данном случае к int, а точнее использум как есть.
 
              */
-            return new IntInteger ((int) this.mIntNumber + (int) addedNumber.getValue());
+            return new IntInteger (this.mIntNumber + addedNumber.getValue());
     }
 
     @Override
@@ -34,7 +34,7 @@ package ru.progwards.java1.lessons.bigints;
      } //Возвращаю максимальное значение хранимого типа данных
 
      @Override
-     long getValue() {
+     int getValue() {
          return mIntNumber;
      } //Возвращаю значение переменной класса потомка.
 }

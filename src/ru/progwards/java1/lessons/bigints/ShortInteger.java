@@ -15,8 +15,8 @@ package ru.progwards.java1.lessons.bigints;
             /*Возвращаю новый объект-потомок AbsInteger.
             В качестве аргумента число, приведенное к short, которое является суммой
             переменной класса "this.mByteNumber" и значения, полученного из addedNumber методом getValue().
-            Значение из getValue() возвращается long, но т.к. по условию нужно вернуть значение более подходящего типа,
-            то long приводим в данном случае к short.
+            Значение из getValue() возвращается int, но т.к. по условию нужно вернуть значение более подходящего типа,
+            то int приводим в данном случае к short.
 
              */
         return new ShortInteger ((short) (this.mShortNumber + (short) addedNumber.getValue()));
@@ -33,7 +33,7 @@ package ru.progwards.java1.lessons.bigints;
      } //Возвращаю максимальное значение хранимого типа данных
 
      @Override
-     long getValue() {
+     int getValue() {
          return mShortNumber;
      } //Возвращаю значение переменной класса потомка.
 }
