@@ -51,7 +51,7 @@ public class ArrayInteger {
 
     boolean add(ArrayInteger num){
         if (this.digits.length >= num.digits.length){
-            for (int i = 0; i < this.digits.length; i++){
+            for (int i = 0; i < num.digits.length; i++){
                 if ((this.digits[i] + num.digits[i]) < 10){
                     this.digits[i] += num.digits[i];
                 }else {
