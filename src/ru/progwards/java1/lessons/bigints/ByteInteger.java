@@ -30,8 +30,7 @@ public class ByteInteger extends AbsInteger {
 
     @Override
     public String toString() {
-        //return Byte.toString(mByteNumber);
-        return Byte.TYPE.toString();
+        return Byte.toString(mByteNumber);
     }
 
     @Override
