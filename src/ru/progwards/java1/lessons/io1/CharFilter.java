@@ -18,23 +18,21 @@ public class CharFilter {
 
     //Метод для исключения из файла символов
     public static void filterFile(String inFileName, String outFileName, String filter) throws IOException {
-        boolean write = true;
-        //Поток для чтения файла
-        FileReader reader = new FileReader(inFileName);
+        boolean write = true;   //Вспомогательная переменная
+        FileReader reader = new FileReader(inFileName); //Поток для чтения файла
         Scanner scanner = new Scanner(reader);
-        //Поток для записи в файл
-        FileWriter writer = new FileWriter(outFileName, true);
+        FileWriter writer = new FileWriter(outFileName, true);  //Поток для записи в файл
         try {
             while (scanner.hasNextLine()) {
-                String strFromFile = scanner.nextLine();
-                if (!(filter.isEmpty())){
-                    for (int i = 0; i < strFromFile.length(); i++){
-                        for (int c = 0; c < filter.length(); c++){
+                String strFromFile = scanner.nextLine();    //Считываю строку
+                if (!(filter.isEmpty())){   //Проверяю на всякий не пустая ли переменная
+                    for (int i = 0; i < strFromFile.length(); i++){ //Перебираю символы считанной строки
+                        for (int c = 0; c < filter.length(); c++){  //и сравниваю с фильтруемыми
                             if (strFromFile.charAt(i) == filter.charAt(c)){
                                 write = false;
                                 break;
                             } else {
-                                write = true;
+                                write = true;   //Если совпадений нет, записываю символ в выходной файл
                             }
                         }
                         if (write){

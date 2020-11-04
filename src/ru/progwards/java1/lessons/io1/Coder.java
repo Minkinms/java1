@@ -48,7 +48,7 @@ public class Coder {
             }finally {
                 writeToLog.close();
             }
-        }catch (IOException ignored){
+        }catch (IOException ignored){   //Подразумеваю, что с этим файлом проблем не будет
 
         }
     }
@@ -56,15 +56,12 @@ public class Coder {
     //Метод для кодировки файла
     public static void codeFile (String inFileName, String outFileName, char[] code, String logName) {
         byte[] arrayBytesFromFile;
-
             try {
-                FileInputStream bytesFromFile = new FileInputStream(inFileName);
-                //FileOutputStream bytesToFile = new FileOutputStream(outFileName);
-                FileWriter writeToFile = new FileWriter(outFileName);
-
+                FileInputStream bytesFromFile = new FileInputStream(inFileName);    //Байтовый поток для чтения
+                FileWriter writeToFile = new FileWriter(outFileName);   //Символьный поток для записи
                 try{
                     arrayBytesFromFile = bytesFromFile.readAllBytes();
-                    System.out.println("Байты из файла:" + Arrays.toString(arrayBytesFromFile));
+                    //System.out.println("Байты из файла:" + Arrays.toString(arrayBytesFromFile));
                     //System.out.print("Символы файла в шестнадцатиричном формате: ");
                     for (byte b : arrayBytesFromFile){
                         //System.out.printf("%x ", b);
@@ -76,10 +73,11 @@ public class Coder {
                 //}
                 finally {
                     bytesFromFile.close();
-                    //bytesToFile.close();
                     writeToFile.close();
                 }
-            }catch (IOException | RuntimeException exception){                       //TODO:Записать в log
+            //Обрабатываю исключения по вводу и возможные проблемы в процессе исполнения
+            //Как пример использовал недостаточную емкость массива code
+            }catch (IOException | RuntimeException exception){
                 //System.out.println(ioe.getMessage());
                 msgToLog(logName, exception.getMessage());
             }
