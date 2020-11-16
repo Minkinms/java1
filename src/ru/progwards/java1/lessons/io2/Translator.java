@@ -109,14 +109,19 @@ public class Translator {
         }
 
         //Метод для перевода в нижний регистр заглавной буквы
-        public void capLetterToLowerCase(){
-            if (Character.isAlphabetic(wordChars[0]) &&                 //Буква?
-                    !Character.isDigit(wordChars[0]) &&                 //не цифра?
+        public void capLetterToLowerCase() throws Exception{
+            try{
+                if (Character.isAlphabetic(wordChars[0]) &&                 //Буква?
+                        !Character.isDigit(wordChars[0]) &&                 //не цифра?
                         Character.isUpperCase(wordChars[0])){           //верхний регистр?
 
-                wordChars[0] = Character.toLowerCase(wordChars[0]);
-                isCapitalLetter = true;
+                    wordChars[0] = Character.toLowerCase(wordChars[0]);
+                    isCapitalLetter = true;
+                }
+            }catch (Exception e){
+                throw new Exception("Ошибка символа");
             }
+
 
         }
 
@@ -136,15 +141,20 @@ public class Translator {
 
         //Метод для проверки наличия пунктуации в конце слова.
         //При наличии - удаляется из массива символов wordChars и запоминается в punctSymbol
-        public void cutPunctuation(){
-            if (!Character.isAlphabetic(wordChars[wordChars.length - 1]) &&     //(не буква и не цифра)?
-                    !Character.isDigit(wordChars[wordChars.length - 1])){
-                isPunctuation = true;
-                punctSymbol = wordChars[wordChars.length - 1];                  //Сохранение символа
-                wordChars = Arrays.copyOf(wordChars, wordChars.length - 1);  //Пересобираю слово без знака пунктуации в конце
-            } else{
-                isPunctuation = false;
+        public void cutPunctuation() throws Exception{
+            try{
+                if (!Character.isAlphabetic(wordChars[wordChars.length - 1]) &&     //(не буква и не цифра)?
+                        !Character.isDigit(wordChars[wordChars.length - 1])){
+                    isPunctuation = true;
+                    punctSymbol = wordChars[wordChars.length - 1];                  //Сохранение символа
+                    wordChars = Arrays.copyOf(wordChars, wordChars.length - 1);  //Пересобираю слово без знака пунктуации в конце
+                } else{
+                    isPunctuation = false;
+                }
+            }catch (Exception e){
+                throw new Exception("Ошибка символа");
             }
+
         }
 
         //Метод для восстановления пунктуации
