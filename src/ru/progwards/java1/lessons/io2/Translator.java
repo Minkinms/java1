@@ -48,41 +48,44 @@ public class Translator {
     public String translate(String sentence) throws Exception {
         StringBuilder tranSent = new StringBuilder();   //Переведенное предложение
 
-        if (sentence != null) { //Проверка
+//        if (sentence != null) { //Проверка
+        try {
             String[] arrayFromSentence = sentence.split(" ");     //Массив слов из предложения, разделитель пробел
 
-            for (String word: arrayFromSentence){                //Перебор слов
+            for (String word : arrayFromSentence) {                //Перебор слов
                 Word nextWord = new Word(word);
                 nextWord.capLetterToLowerCase();            //Определение регистра первой буквы слова
                 nextWord.cutPunctuation();                  //Определение наличия пунктуации
 
                 //Поиск слова в словаре и его замена
-                for (int i = 0; i < inLang.length; i++){
-                    if (nextWord.toString().equals(inLang[i])){
+                for (int i = 0; i < inLang.length; i++) {
+                    if (nextWord.toString().equals(inLang[i])) {
                         //System.out.println("Нашлось в словаре");
                         char[] charsOut = outLang[i].toCharArray();     //Вспомогательный массив
                         charsOut[0] = nextWord.capLetterToUpperCase(charsOut[0]);
                         charsOut = nextWord.addPunctuation(charsOut);
                         tranSent.append(charsOut, 0, charsOut.length);
 
-                        if (!word.equals(arrayFromSentence[arrayFromSentence.length - 1])){ //Добавление пробела между словами
+                        if (!word.equals(arrayFromSentence[arrayFromSentence.length - 1])) { //Добавление пробела между словами
                             tranSent.append(" ");
                         }
                         break;
                     }
 
-                    if (i == inLang.length - 1){
-                            //throw  new Exception("Слово отсутствует в словаре");
+                    if (i == inLang.length - 1) {
+                        //throw  new Exception("Слово отсутствует в словаре");
                     }
 
                 }
 
             }
-
-        } else {
-            //throw  new Exception("Ошибка ввода!");
-            //tranSent.append("Ошибка ввода!");
+        }catch (Exception exception){
+            throw  new Exception("Ошибка ввода!");
         }
+//        } else {
+//            //throw  new Exception("Ошибка ввода!");
+//            //tranSent.append("Ошибка ввода!");
+//        }
 
         return tranSent.toString();
     }
