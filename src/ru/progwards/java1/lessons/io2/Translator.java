@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 
 //Простой переводчик
-public class Translator  {
+public class Translator {
     public static void main(String[] args) throws Exception {
         String[] eng = {"hello", "world", "no", "i", "eat", "yes", "do", "it", "yourself" }; //9 слов
         String[] rus = {"привет", "мир", "нет", "я", "ем", "да", "делай", "это", "сам"};   //9 слов
@@ -35,7 +35,7 @@ public class Translator  {
              this.inLang = Arrays.copyOf(inLang, inLang.length);
              this.outLang = Arrays.copyOf(outLang, outLang.length);
          } else {
-             throw new IOException("Словари пусты или не соответствуют друг другу");
+             throw new Exception("Словари пусты или не соответствуют друг другу");
          }
 
     }
