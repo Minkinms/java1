@@ -121,11 +121,17 @@ public class Translator {
         }
 
         //Метод для перевода в верхний регистр заглавной буквы
-        public char capLetterToUpperCase(char symbol){
-            if (isCapitalLetter){
-                symbol = Character.toUpperCase(symbol);
+        public char capLetterToUpperCase(char symbol) throws Exception{
+            try {
+                if (isCapitalLetter){
+                    symbol = Character.toUpperCase(symbol);
+                }
+                return symbol;
+            }catch (Exception e){
+                throw new Exception("Ошибка символа");
             }
-            return symbol;
+
+
         }
 
         //Метод для проверки наличия пунктуации в конце слова.
@@ -142,12 +148,17 @@ public class Translator {
         }
 
         //Метод для восстановления пунктуации
-        public char[] addPunctuation(char[] array){
-            if (isPunctuation){
-                array = Arrays.copyOf(array, array.length + 1);
-                array[array.length - 1] = punctSymbol;
+        public char[] addPunctuation(char[] array) throws Exception {
+            try{
+                if (isPunctuation){
+                    array = Arrays.copyOf(array, array.length + 1);
+                    array[array.length - 1] = punctSymbol;
+                }
+                return array;
+            }catch (Exception e){
+                throw new Exception("Ошибка массива");
             }
-            return array;
+
         }
 
        @Override
