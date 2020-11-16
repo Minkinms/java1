@@ -35,7 +35,7 @@ public class Translator {
              this.inLang = Arrays.copyOf(inLang, inLang.length);
              this.outLang = Arrays.copyOf(outLang, outLang.length);
          } else {
-             throw new Exception("Словари пусты или не соответствуют друг другу");
+             //throw new Exception("Словари пусты или не соответствуют друг другу");
          }
 
     }
