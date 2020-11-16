@@ -33,8 +33,8 @@ public class PhoneNumber {
             throw new IOException("Неверный формат номера");    //Допустимое кол-во цифр 10 или 11, в противном случае кидаю исключение
         }
         if (stringBuilder.length() == 11) {     //если цифр 11, убираю первую. Предполагаю, что это 8 или опечатка (введена случайная лишняя цифра)
-            if (stringBuilder.charAt(0) == 56 || stringBuilder.charAt(0) == 55){ //Проверяю не стоит ли 8 в начале.
-                stringBuilder.deleteCharAt(0);  //Если да, то отсекаю её, чтобы заменить на +7
+            if (stringBuilder.charAt(0) == 56 || stringBuilder.charAt(0) == 55){ //Проверяю не стоит ли 8 или 7 в начале.
+                stringBuilder.deleteCharAt(0);  //Если да, то отсекаю их, чтобы заменить на +7 в выходном форматировлании
             } else stringBuilder.deleteCharAt(10);  //Если нет, то возможно вводился код и корректнее отсечь последнюю
 
         }
