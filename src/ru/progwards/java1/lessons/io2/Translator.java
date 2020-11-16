@@ -31,12 +31,16 @@ public class Translator {
 
     //Конструктор класса
      public Translator(String[] inLang, String[] outLang) throws Exception {
-         if (inLang != null && outLang != null && (inLang.length == outLang.length)){
-             this.inLang = Arrays.copyOf(inLang, inLang.length);
-             this.outLang = Arrays.copyOf(outLang, outLang.length);
-         } else {
+//         if (inLang != null && outLang != null && (inLang.length == outLang.length)){
+            try {
+                this.inLang = Arrays.copyOf(inLang, inLang.length);
+                this.outLang = Arrays.copyOf(outLang, outLang.length);
+            } catch (Exception e){
+                throw new Exception("Словари пусты или не соответствуют друг другу");
+            }
+//         } else {
              //throw new Exception("Словари пусты или не соответствуют друг другу");
-         }
+//         }
 
     }
 
