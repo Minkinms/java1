@@ -76,7 +76,7 @@ public class Translator {
             }
 
         } else {
-            throw  new Exception("Ошибка ввода!");
+            //throw  new Exception("Ошибка ввода!");
             //tranSent.append("Ошибка ввода!");
         }
 
