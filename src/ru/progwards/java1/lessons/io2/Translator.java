@@ -104,11 +104,16 @@ public class Translator {
 
         //Конструктор класса
         public Word(String word) throws Exception {
-            if (word != null) {
+//            if (word != null) {
+            try{
                 wordChars = word.toCharArray();
-            }else {
+            }catch (Exception e){
                 throw new Exception("Word == null");
             }
+
+//            }else {
+
+//            }
         }
 
         //Метод для перевода в нижний регистр заглавной буквы
