@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.io2;
 
-import java.io.IOException;
+//import java.io.IOException;
 import java.util.Arrays;
 
 
@@ -30,14 +30,14 @@ public class Translator {
     private String[] outLang;
 
     //Конструктор класса
-     public Translator(String[] inLang, String[] outLang) throws Exception {
+     public Translator(String[] inLang, String[] outLang)  {
 //         if (inLang != null && outLang != null && (inLang.length == outLang.length)){
-            try {
+//            try {
                 this.inLang = Arrays.copyOf(inLang, inLang.length);
                 this.outLang = Arrays.copyOf(outLang, outLang.length);
-            } catch (Exception e){
-                throw new Exception("Словари пусты или не соответствуют друг другу");
-            }
+//            } catch (Exception e){
+//                throw new Exception("Словари пусты или не соответствуют друг другу");
+//            }
 //         } else {
              //throw new Exception("Словари пусты или не соответствуют друг другу");
 //         }
@@ -45,11 +45,11 @@ public class Translator {
     }
 
     //Переводик
-    public String translate(String sentence) throws Exception {
+    public String translate(String sentence) {
         StringBuilder tranSent = new StringBuilder();   //Переведенное предложение
 
 //        if (sentence != null) { //Проверка
-        try {
+//        try {
             String[] arrayFromSentence = sentence.split(" ");     //Массив слов из предложения, разделитель пробел
 
             for (String word : arrayFromSentence) {                //Перебор слов
@@ -73,7 +73,7 @@ public class Translator {
                     }
 
                     if (i == inLang.length - 1) {
-                        throw  new Exception("Слово отсутствует в словаре");
+//                        throw  new Exception("Слово отсутствует в словаре");
                     }
 
                 }
@@ -82,9 +82,9 @@ public class Translator {
 
             return tranSent.toString();
 
-        }catch (Exception exception){
-            throw  new Exception("Ошибка ввода!");
-        }
+//        }catch (Exception exception){
+//            throw  new Exception("Ошибка ввода!");
+//        }
 //        } else {
 //            //throw  new Exception("Ошибка ввода!");
 //            //tranSent.append("Ошибка ввода!");
@@ -103,13 +103,14 @@ public class Translator {
         char    punctSymbol;                    //Символ пунктуации
 
         //Конструктор класса
-        public Word(String word) throws Exception {
+//        public Word(String word) throws Exception {
+            public Word(String word) {
 //            if (word != null) {
-            try{
+//            try{
                 wordChars = word.toCharArray();
-            }catch (Exception e){
-                throw new Exception("Word == null");
-            }
+//            }catch (Exception e){
+//                throw new Exception("Word == null");
+//            }
 
 //            }else {
 
@@ -117,8 +118,9 @@ public class Translator {
         }
 
         //Метод для перевода в нижний регистр заглавной буквы
-        public void capLetterToLowerCase() throws Exception{
-            try{
+//        public void capLetterToLowerCase() throws Exception{
+            public void capLetterToLowerCase() {
+//            try{
                 if (Character.isAlphabetic(wordChars[0]) &&                 //Буква?
                         !Character.isDigit(wordChars[0]) &&                 //не цифра?
                         Character.isUpperCase(wordChars[0])){           //верхний регистр?
@@ -126,31 +128,33 @@ public class Translator {
                     wordChars[0] = Character.toLowerCase(wordChars[0]);
                     isCapitalLetter = true;
                 }
-            }catch (Exception e){
-                throw new Exception("Ошибка символа");
-            }
+//            }catch (Exception e){
+//                throw new Exception("Ошибка символа");
+//            }
 
 
         }
 
         //Метод для перевода в верхний регистр заглавной буквы
-        public char capLetterToUpperCase(char symbol) throws Exception{
-            try {
+//        public char capLetterToUpperCase(char symbol) throws Exception{
+            public char capLetterToUpperCase(char symbol) {
+//            try {
                 if (isCapitalLetter){
                     symbol = Character.toUpperCase(symbol);
                 }
                 return symbol;
-            }catch (Exception e){
-                throw new Exception("Ошибка символа");
-            }
+//            }catch (Exception e){
+//                throw new Exception("Ошибка символа");
+//            }
 
 
         }
 
         //Метод для проверки наличия пунктуации в конце слова.
         //При наличии - удаляется из массива символов wordChars и запоминается в punctSymbol
-        public void cutPunctuation() throws Exception{
-            try{
+//        public void cutPunctuation() throws Exception{
+            public void cutPunctuation() {
+//            try{
                 if (!Character.isAlphabetic(wordChars[wordChars.length - 1]) &&     //(не буква и не цифра)?
                         !Character.isDigit(wordChars[wordChars.length - 1])){
                     isPunctuation = true;
@@ -159,23 +163,24 @@ public class Translator {
                 } else{
                     isPunctuation = false;
                 }
-            }catch (Exception e){
-                throw new Exception("Ошибка символа");
-            }
+//            }catch (Exception e){
+//                throw new Exception("Ошибка символа");
+//            }
 
         }
 
         //Метод для восстановления пунктуации
-        public char[] addPunctuation(char[] array) throws Exception {
-            try{
+//        public char[] addPunctuation(char[] array) throws Exception {
+            public char[] addPunctuation(char[] array) {
+//            try{
                 if (isPunctuation){
                     array = Arrays.copyOf(array, array.length + 1);
                     array[array.length - 1] = punctSymbol;
                 }
                 return array;
-            }catch (Exception e){
-                throw new Exception("Ошибка массива");
-            }
+//            }catch (Exception e){
+//                throw new Exception("Ошибка массива");
+//            }
 
         }
 
