@@ -79,6 +79,9 @@ public class Translator {
                 }
 
             }
+
+            return tranSent.toString();
+
         }catch (Exception exception){
             throw  new Exception("Ошибка ввода!");
         }
@@ -87,7 +90,7 @@ public class Translator {
 //            //tranSent.append("Ошибка ввода!");
 //        }
 
-        return tranSent.toString();
+
     }
 
 /*---------------------------------------------------------------------------*/
