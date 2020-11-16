@@ -100,8 +100,12 @@ public class Translator {
         char    punctSymbol;                    //Символ пунктуации
 
         //Конструктор класса
-        public Word(String word){
-            wordChars = word.toCharArray();
+        public Word(String word) throws Exception {
+            if (word != null) {
+                wordChars = word.toCharArray();
+            }else {
+                throw new Exception("Word == null");
+            }
         }
 
         //Метод для перевода в нижний регистр заглавной буквы
