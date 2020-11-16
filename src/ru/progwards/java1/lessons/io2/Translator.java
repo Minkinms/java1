@@ -73,7 +73,7 @@ public class Translator {
                     }
 
                     if (i == inLang.length - 1) {
-                        //throw  new Exception("Слово отсутствует в словаре");
+                        throw  new Exception("Слово отсутствует в словаре");
                     }
 
                 }
