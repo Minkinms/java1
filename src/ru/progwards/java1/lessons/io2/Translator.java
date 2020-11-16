@@ -7,15 +7,15 @@ import java.util.Arrays;
 
 //Простой переводчик
 public class Translator {
-    public static void main(String[] args) throws Exception {
+/*    public static void main(String[] args) throws Exception {
         String[] eng = {"hello", "world", "no", "i", "eat", "yes", "do", "it", "yourself" }; //9 слов
         String[] rus = {"привет", "мир", "нет", "я", "ем", "да", "делай", "это", "сам"};   //9 слов
         String var = null;
-/*        String text = "Hello!";
+*//*        String text = "Hello!";
 //        String s = text.toUpperCase();
         System.out.println(text.toUpperCase());
 //        text = s.toLowerCase();
-        System.out.println(text.toLowerCase());*/
+        System.out.println(text.toLowerCase());*//*
 
         Translator translator = new Translator(eng, rus);   //Перевод с eng на rus
         System.out.println(translator.translate("Hello world!"));
@@ -23,7 +23,7 @@ public class Translator {
         System.out.println(translator.translate("Yes, do it Yourself."));
 //        System.out.println(translator.translate(var));
 
-    }
+    }*/
 
     //Переменные класса
     private String[] inLang;
