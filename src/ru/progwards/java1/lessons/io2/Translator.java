@@ -31,14 +31,21 @@ public class Translator {
 
     //Конструктор класса
      public Translator(String[] inLang, String[] outLang)  {
-                this.inLang = Arrays.copyOf(inLang, inLang.length);
-                this.outLang = Arrays.copyOf(outLang, outLang.length);
+         if (inLang != null && outLang != null &&
+                    inLang.length == outLang.length){
+             this.inLang = Arrays.copyOf(inLang, inLang.length);
+             this.outLang = Arrays.copyOf(outLang, outLang.length);
+         }else{
+             System.out.println("Словари пусты или не соответствуют по размеру");
+         }
+
     }
 
     //Переводик
     public String translate(String sentence) {
         StringBuilder tranSent = new StringBuilder();   //Переведенное предложение
-        String[] arrayFromSentence = sentence.split(" ");     //Массив слов из предложения, разделитель пробел
+        if (!sentence.equals("")) {
+            String[] arrayFromSentence = sentence.split(" ");     //Массив слов из предложения, разделитель пробел
 
             for (String word : arrayFromSentence) {                //Перебор слов
                 Word nextWord = new Word(word);
@@ -47,36 +54,35 @@ public class Translator {
                     if (!word.equals(arrayFromSentence[arrayFromSentence.length - 1])) { //Добавление пробела между словами
                         tranSent.append(" ");
                     }
-                }else{
-                       nextWord.capLetterToLowerCase();            //Определение регистра первой буквы слова
-                       nextWord.cutPunctuation();                  //Определение наличия пунктуации
-                        //Поиск слова в словаре и его замена
-                        for (int i = 0; i < inLang.length; i++) {
-                            if (nextWord.toString().equals(inLang[i])) {
-                                //System.out.println("Нашлось в словаре");
-                                char[] charsOut = outLang[i].toCharArray();     //Вспомогательный массив
-                                charsOut[0] = nextWord.capLetterToUpperCase(charsOut[0]);
-                                charsOut = nextWord.addPunctuation(charsOut);
-                                tranSent.append(charsOut, 0, charsOut.length);
+                } else {
+                    nextWord.capLetterToLowerCase();            //Определение регистра первой буквы слова
+                    nextWord.cutPunctuation();                  //Определение наличия пунктуации
+                    //Поиск слова в словаре и его замена
+                    for (int i = 0; i < inLang.length; i++) {
+                        if (nextWord.toString().equals(inLang[i])) {
+                            //System.out.println("Нашлось в словаре");
+                            char[] charsOut = outLang[i].toCharArray();     //Вспомогательный массив
+                            charsOut[0] = nextWord.capLetterToUpperCase(charsOut[0]);
+                            charsOut = nextWord.addPunctuation(charsOut);
+                            tranSent.append(charsOut, 0, charsOut.length);
 
-                                if (!word.equals(arrayFromSentence[arrayFromSentence.length - 1])) { //Добавление пробела между словами
-                                    tranSent.append(" ");
-                                }
-                                break;
+                            if (!word.equals(arrayFromSentence[arrayFromSentence.length - 1])) { //Добавление пробела между словами
+                                tranSent.append(" ");
                             }
-
-                            if (i == inLang.length - 1) {
-//                        throw  new Exception("Слово отсутствует в словаре");
-                            }
-
+                            break;
                         }
+
+                        if (i == inLang.length - 1) {
+                            System.out.println("Слово не нашлось в словаре");
+                        }
+
+                    }
                 }
 
-
-
-
-
             }
+        }else{
+            System.out.println("Предложение не содержит слов");
+        }
             return tranSent.toString();
     }
 
@@ -94,58 +100,60 @@ public class Translator {
                 wordChars = word.toCharArray();
         }
 
-        //
+        //Метод для определения понятия "слово"
+        //Если длина 1 символ, это не буква и не цифра, то это символ пунктуации (тире)
         public boolean isNotWord(){
-                if (wordChars.length == 1 &&
-                        !Character.isAlphabetic(wordChars[0]) &&
-                        !Character.isDigit(wordChars[0])){
-                    return true;
-                }else {
-                    return false;
-                }
+            return wordChars.length == 1 &&
+                    !Character.isAlphabetic(wordChars[0]) &&
+                        !Character.isDigit(wordChars[0]);
         }
 
         //Метод для перевода в нижний регистр заглавной буквы
-//        public void capLetterToLowerCase() throws Exception{
-            public void capLetterToLowerCase() {
-                if (Character.isAlphabetic(wordChars[0]) &&                 //Буква?
-                        !Character.isDigit(wordChars[0]) &&                 //не цифра?
+        public void capLetterToLowerCase() {
+            if (Character.isAlphabetic(wordChars[0]) &&                 //Буква?
+                    !Character.isDigit(wordChars[0]) &&                 //не цифра?
                         Character.isUpperCase(wordChars[0])){           //верхний регистр?
-
-                    wordChars[0] = Character.toLowerCase(wordChars[0]);
-                    isCapitalLetter = true;
-                }
+                wordChars[0] = Character.toLowerCase(wordChars[0]);
+                isCapitalLetter = true;
+            }
         }
 
         //Метод для перевода в верхний регистр заглавной буквы
-//        public char capLetterToUpperCase(char symbol) throws Exception{
-            public char capLetterToUpperCase(char symbol) {
+        public char capLetterToUpperCase(char symbol) {
+            if (symbol != 0){
                 if (isCapitalLetter){
                     symbol = Character.toUpperCase(symbol);
                 }
-                return symbol;
+            }else {
+                System.out.println("Символ не задан");
+            }
+            return symbol;
         }
 
         //Метод для проверки наличия пунктуации в конце слова.
         //При наличии - удаляется из массива символов wordChars и запоминается в punctSymbol
-            public void cutPunctuation() {
-                if (!Character.isAlphabetic(wordChars[wordChars.length - 1]) &&     //(не буква и не цифра)?
+        public void cutPunctuation() {
+            if (!Character.isAlphabetic(wordChars[wordChars.length - 1]) &&     //(не буква и не цифра)?
                         !Character.isDigit(wordChars[wordChars.length - 1])){
                     isPunctuation = true;
                     punctSymbol = wordChars[wordChars.length - 1];                  //Сохранение символа
                     wordChars = Arrays.copyOf(wordChars, wordChars.length - 1);  //Пересобираю слово без знака пунктуации в конце
-                } else{
-                    isPunctuation = false;
-                }
+            } else{
+                isPunctuation = false;
+            }
         }
 
         //Метод для восстановления пунктуации
-            public char[] addPunctuation(char[] array) {
-                if (isPunctuation){
-                    array = Arrays.copyOf(array, array.length + 1);
-                    array[array.length - 1] = punctSymbol;
+        public char[] addPunctuation(char[] array) {
+                if (array != null){
+                    if (isPunctuation){
+                        array = Arrays.copyOf(array, array.length + 1);
+                        array[array.length - 1] = punctSymbol;
+                    }
+                }else {
+                    System.out.println("Массив не задан");
                 }
-                return array;
+            return array;
         }
 
        @Override
