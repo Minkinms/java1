@@ -37,8 +37,8 @@ public class Censor {
             //подтвердилось подозрение, связанное с количеством байт занимаемых разными символами.
 
 
-        }catch (IOException ioExc){
-            throw new CensorException(inoutFileName, ioExc.getMessage());
+        }catch (Exception exc){
+            throw new CensorException(inoutFileName, exc.getMessage());
         }
 
     }
