@@ -7,23 +7,21 @@ import java.util.List;
 public class Creator {
     public static void main(String[] args) {
         //Creator test = new Creator();
-        fillEven(10);
+//        fillEven(10);
 //        fillOdd(10);
-//        fill3(5);
+        fill3(5);
     }
 
     //Метод для заполнения коллекции четными числами
     public static Collection<Integer> fillEven(int n){
         Collection<Integer> evenNumberCollection = new ArrayList<>();
         int i = 2;
-            while (evenNumberCollection.size() <= n - 1) {
-
-                if (i % 2 == 0) {
-                    evenNumberCollection.add(i);
-                }
-                i++;
+        while (evenNumberCollection.size() <= n - 1) {
+            if (i % 2 == 0) {
+                evenNumberCollection.add(i);
             }
-
+            i++;
+        }
         return evenNumberCollection;
     }
 
@@ -32,11 +30,15 @@ public class Creator {
     //Метод для заполнения коллекции нечетными числами
     public static Collection<Integer> fillOdd(int n){
         Collection<Integer> oddNumberCollection = new ArrayList<>();
-        for (int i = n; i >= 1; i--){
+        int i = n * 2;
+        while (oddNumberCollection.size() <= n - 1) {
             if (i % 2 != 0){
                 oddNumberCollection.add(i);
             }
+            i--;
         }
+
+
         return oddNumberCollection;
     }
 
@@ -50,7 +52,7 @@ public class Creator {
         List<Integer> one3Collection = new ArrayList<>();   //Вспомогательная коллекция
         List<Integer> fill3Collection = new ArrayList<>();
 
-        for (int i = 0; i <= n; i++){
+        for (int i = 0; i <= n * 3; i += 3){
             one3Collection.add(i);
             one3Collection.add(i*i);
             one3Collection.add(i*i*i);
