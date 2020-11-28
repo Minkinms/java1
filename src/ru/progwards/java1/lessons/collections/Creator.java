@@ -9,7 +9,7 @@ public class Creator {
         //Creator test = new Creator();
 //        fillEven(10);
 //        fillOdd(10);
-        fill3(5);
+        fill3(3);
     }
 
     //Метод для заполнения коллекции четными числами
@@ -52,7 +52,7 @@ public class Creator {
         List<Integer> one3Collection = new ArrayList<>();   //Вспомогательная коллекция
         List<Integer> fill3Collection = new ArrayList<>();
 
-        for (int i = 0; i <= n * 3; i += 3){
+        for (int i = 0; i <= ((n -1) * 3); i += 3){
             one3Collection.add(i);
             one3Collection.add(i*i);
             one3Collection.add(i*i*i);
