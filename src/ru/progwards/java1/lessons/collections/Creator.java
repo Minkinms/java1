@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Creator {
     public static void main(String[] args) {
-        //Creator test = new Creator();
+//        int n = Integer.parseInt(null);
 //        fillEven(10);
 //        fillOdd(10);
-        fill3(3);
+//        fill3(3);
     }
 
     //Метод для заполнения коллекции четными числами
