@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Finder {
     public static void main(String[] args) {
-        Collection<Integer> numbers = new ArrayList<>();
+/*        Collection<Integer> numbers = new ArrayList<>();
         numbers.add(3); //index 0
         numbers.add(4); //index 1
         numbers.add(2); //index 2
@@ -29,13 +29,13 @@ public class Finder {
         names.add(new String("Надежда"));      //index 5
         names.add(new String("Надежда"));    //index 6
         names.add(new String("Надежда"));    //index 7
-//        names.add(new String("Надежда"));    //index 8
+//        names.add(new String("Надежда"));    //index 8*/
 
 
 //        findMinSumPair(numbers);
 //        findLocalMax(numbers);
 //        System.out.println(findSequence(numbers1));
-        System.out.println(findSimilar(names));
+//        System.out.println(findSimilar(names));
 
     }
 
@@ -79,34 +79,41 @@ public class Finder {
 
     //Задача 12.2.3
     public static boolean findSequence(Collection<Integer> numbers){
-        ArrayList<Integer> inCollection = new ArrayList<>(numbers);      //Вспомогательная коллекция, т.к. класс входного объекта не известен
-        for (int i = 1; i <= inCollection.size(); i++){
-            if (!inCollection.contains(i)){
-                return false;
+        if (numbers != null){
+            ArrayList<Integer> inCollection = new ArrayList<>(numbers);      //Вспомогательная коллекция, т.к. класс входного объекта не известен
+            for (int i = 1; i <= inCollection.size(); i++){
+                if (!inCollection.contains(i)){
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     //Задача 12.2.4
     public static String findSimilar(Collection<String> names){
-        ArrayList<String> inCollection = new ArrayList<>(names);    //Вспомогательная коллекция, т.к. класс входного объекта не известен
         int count = 0;                      //счетчик совпадений
         int max = 0;                        //максимум совпадений
         String outLine = "";                //Строка возвращаемого ответа
-        for (String name1:inCollection){            //Цикл проверки
-            for (String name2:inCollection){
-                if (name1.equals(name2)){
-                    count++;
-                }else{
-                    if (count > max){
-                        max = count;
-                        outLine = name1 + ":" + count;
+
+        if (names != null){
+            ArrayList<String> inCollection = new ArrayList<>(names);    //Вспомогательная коллекция, т.к. класс входного объекта не известен
+            for (String name1:inCollection){            //Цикл проверки
+                for (String name2:inCollection){
+                    if (name1.equals(name2)){
+                        count++;
+                    }else{
+                        if (count > max){
+                            max = count;
+                            outLine = name1 + ":" + count;
+                        }
+                        count = 0;
                     }
-                    count = 0;
                 }
             }
         }
+
         return outLine;
     }
 
