@@ -37,7 +37,7 @@ public class ArrayIterator<T>  implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return index <= this.array.length - 1;
+        return index < this.array.length;
     }
 
     @Override
