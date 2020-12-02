@@ -47,8 +47,8 @@ public class Finder {
 
         if (numbers != null && numbers.size() >= 2){
             ArrayList<Integer> inCollection = new ArrayList<>(numbers);      //Вспомогательная коллекция, т.к. класс входного объекта не известен
-            outCollection.add(0, 0);              //Ввожу два элемента, изначально нули,
-            outCollection.add(1, 0);              //чтобы в дальнейшем их перезаписывать
+            outCollection.add(0, inCollection.get(0));              //Ввожу два элемента, изначально get(0) и get(1),
+            outCollection.add(1, inCollection.get(1));              //чтобы в дальнейшем их перезаписывать
             int minSumm = inCollection.get(0) + inCollection.get(1);    //Исходное значение минимальной суммы
             for (int i = 1; i < inCollection.size() - 1; i++){          //Цикл перебора сумм
                 int num1 = inCollection.get(i) + inCollection.get(i+1);
