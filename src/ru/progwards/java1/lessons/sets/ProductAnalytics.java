@@ -54,15 +54,15 @@ public class ProductAnalytics {
 //    ArrayList<Shop> shopArrayList;
 //    ArrayList<Product> productArrayList;
 
-    //2.12 Создать конструктор
-    public ProductAnalytics(List<Shop> shops, List<Product> products) {
-//        this.shops = shops;
-//        this.products = products;
-//            if (this.shops != null && this.products != null) {
-//        shopArrayList = new ArrayList<>(shops);
-//        productArrayList = new ArrayList<>(products);
-//            }
-    }
+//    //2.12 Создать конструктор
+//    public ProductAnalytics(List<Shop> shops, List<Product> products) {
+////        this.shops = shops;
+////        this.products = products;
+////            if (this.shops != null && this.products != null) {
+////        shopArrayList = new ArrayList<>(shops);
+////        productArrayList = new ArrayList<>(products);
+////            }
+//    }
 
     /*public class Find {
 //            List<Shop> shops;

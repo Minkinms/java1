@@ -23,12 +23,9 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product)){
-            return false;
-        }else return true;
-//        Product product = (Product) o;
-//        return code.equals(product.getCode());
-
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return code.equals(product.getCode());
     }
 
     @Override
