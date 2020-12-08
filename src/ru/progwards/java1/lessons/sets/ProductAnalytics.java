@@ -113,7 +113,7 @@ public class ProductAnalytics {
     }*/
 
     //2.13 Товары из products, которые имеются во всех магазинах
-    public Set<Product> existInAll() {
+    /*public Set<Product> existInAll() {
         Set<Product> resultSet;
         if (shopArrayList.size() > 0) {
             resultSet = new HashSet<>(shopArrayList.get(0).getProducts());
@@ -128,7 +128,7 @@ public class ProductAnalytics {
         }
 
         return resultSet;
-    }
+    }*/
 
     //2.14 Товары из products, которые имеются хотя бы в одном магазине
     /*public Set<Product> existAtListInOne() {
