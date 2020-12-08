@@ -45,8 +45,8 @@ public class ProductAnalytics {
         System.out.println("Товары, которые есть только в одном магазине: \n" + productAnalytics.existOnlyInOne());
     }*/
 
-    List<Shop> shops;           //2.10 Создать private List<Shop> shops - список магазинов
-    List<Product> products;     //2.11 Создать private List<Product> products -
+//    List<Shop> shops;           //2.10 Создать private List<Shop> shops - список магазинов
+//    List<Product> products;     //2.11 Создать private List<Product> products -
     // список всех имеющихся в ассортименте товаров.
     // Все товары, присутствующие в магазинах, обязательно присутствуют в products,
     // но так же тут могут быть и товары, которых нет в магазинах.
