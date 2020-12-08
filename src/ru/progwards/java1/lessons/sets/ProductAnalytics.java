@@ -51,16 +51,16 @@ public class ProductAnalytics {
     // Все товары, присутствующие в магазинах, обязательно присутствуют в products,
     // но так же тут могут быть и товары, которых нет в магазинах.
 
-    ArrayList<Shop> shopArrayList;
-    ArrayList<Product> productArrayList;
+//    ArrayList<Shop> shopArrayList;
+//    ArrayList<Product> productArrayList;
 
     //2.12 Создать конструктор
     public ProductAnalytics(List<Shop> shops, List<Product> products) {
-//        this.shops = shops;
-//        this.products = products;
+        this.shops = shops;
+        this.products = products;
 //            if (this.shops != null && this.products != null) {
-        shopArrayList = new ArrayList<>(shops);
-        productArrayList = new ArrayList<>(products);
+//        shopArrayList = new ArrayList<>(shops);
+//        productArrayList = new ArrayList<>(products);
 //            }
     }
 
