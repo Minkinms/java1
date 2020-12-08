@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.sets;
 
-import java.util.List;
+import java.util.*;
 
 public class ProductAnalytics {
     /*public static void main(String[] args) {
@@ -51,15 +51,15 @@ public class ProductAnalytics {
     // Все товары, присутствующие в магазинах, обязательно присутствуют в products,
     // но так же тут могут быть и товары, которых нет в магазинах.
 
-//    ArrayList<Shop> shopArrayList;
-//    ArrayList<Product> productArrayList;
+    ArrayList<Shop> shopArrayList;
+    ArrayList<Product> productArrayList;
 
 //    //2.12 Создать конструктор
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
-////        this.shops = shops;
-////        this.products = products;
-////        shopArrayList = new ArrayList<>(shops);
-////        productArrayList = new ArrayList<>(products);
+        this.shops = shops;
+        this.products = products;
+        shopArrayList = new ArrayList<>(this.shops);
+        productArrayList = new ArrayList<>(this.products);
     }
 
     /*public class Find {
@@ -111,7 +111,7 @@ public class ProductAnalytics {
     }*/
 
     //2.13 Товары из products, которые имеются во всех магазинах
-    /*public Set<Product> existInAll() {
+    public Set<Product> existInAll() {
         Set<Product> resultSet;
         if (shopArrayList.size() > 0) {
             resultSet = new HashSet<>(shopArrayList.get(0).getProducts());
@@ -126,10 +126,10 @@ public class ProductAnalytics {
         }
 
         return resultSet;
-    }*/
+    }
 
     //2.14 Товары из products, которые имеются хотя бы в одном магазине
-    /*public Set<Product> existAtListInOne() {
+    public Set<Product> existAtListInOne() {
         Set<Product> resultSet = new HashSet<>();
         for (Product product : productArrayList) {
             for (Shop shop : shopArrayList) {
@@ -140,19 +140,19 @@ public class ProductAnalytics {
             }
         }
         return resultSet;
-    }*/
+    }
 
     //2.15 Товары из products, которых нет ни в одном магазине
-    /*public Set<Product> notExistInShops() {
+    public Set<Product> notExistInShops() {
         Set<Product> resultSet = new HashSet<>(productArrayList);
         for (Shop shop : shopArrayList) {
             resultSet.removeAll(new ArrayList<>(shop.getProducts()));
         }
         return resultSet;
-    }*/
+    }
 
     //2.16 Товары из products, которые есть только в одном магазине
-    /*public Set<Product> existOnlyInOne() {
+    public Set<Product> existOnlyInOne() {
         Set<Product> resultSet = new HashSet<>(existAtListInOne());
         resultSet.removeAll(existInAll());
         for (int i = 0; i < shopArrayList.size() - 1; i++) {
@@ -162,7 +162,7 @@ public class ProductAnalytics {
         }
 
         return resultSet;
-    }*/
+    }
 
 
     //2.1 Создать класс Product - товар,
