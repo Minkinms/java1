@@ -55,7 +55,7 @@ public class ProductAnalytics {
 //    ArrayList<Product> productArrayList;
 
 //    //2.12 Создать конструктор
-    public ProductAnalytics(List<Shop> shops, List<Product> products) {
+    public ProductAnalytics(List<Product> products, List<Shop> shops) {
 ////        this.shops = shops;
 ////        this.products = products;
 ////        shopArrayList = new ArrayList<>(shops);
