@@ -64,7 +64,7 @@ public class ProductAnalytics {
 //            }
     }
 
-    public class Find {
+    /*public class Find {
 //            List<Shop> shops;
 //            List<Product> products;
 //            public Find(List<Shop> shops, List<Product> products){
@@ -110,7 +110,7 @@ public class ProductAnalytics {
 //                                }
 //                        }
 
-    }
+    }*/
 
     //2.13 Товары из products, которые имеются во всех магазинах
     public Set<Product> existInAll() {
@@ -169,7 +169,7 @@ public class ProductAnalytics {
 
     //2.1 Создать класс Product - товар,
     //2.2. Создать private String code - уникальный артикул товара
-    public static class Product {
+/*    public static class Product {
         private String code;
 
         //2.3 Создать конструктор public Product(String code)
@@ -199,11 +199,11 @@ public class ProductAnalytics {
         public int hashCode() {
             return Objects.hash(code);
         }
-    }
+    }*/
 
     //2.5 Создать класс Shop - магазин
     //2.6 Создать private List<Product> products - товары имеющиеся в магазине
-    public static class Shop {
+/*    public static class Shop {
         List<Product> products;
 
         //2.7 Создать конструктор public Shop(List<Product> products)
@@ -215,7 +215,7 @@ public class ProductAnalytics {
         public List<Product> getProducts() {
             return products;
         }
-    }
+    }*/
 
 
 }
