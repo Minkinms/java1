@@ -59,8 +59,8 @@ public class ProductAnalytics {
         this.shops = shops;
         this.products = products;
 //            if (this.shops != null && this.products != null) {
-        shopArrayList = new ArrayList<>(this.shops);
-        productArrayList = new ArrayList<>(this.products);
+        shopArrayList = new ArrayList<>(shops);
+        productArrayList = new ArrayList<>(products);
 //            }
     }
 
