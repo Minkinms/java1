@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.sets;
 
-import java.util.*;
+import java.util.List;
 
 public class ProductAnalytics {
     /*public static void main(String[] args) {
