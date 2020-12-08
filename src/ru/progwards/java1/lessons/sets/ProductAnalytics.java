@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.sets;
 import java.util.*;
 
 public class ProductAnalytics {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String[] arrayFoodShop = {"Яблоко", "Хлеб", "Клейкая лента", "Пакет"};
         String[] arrayToolsShop = {"Гвозди", "Пакет", "Клейкая лента", "Молоток"};
         String[] arrayGoodsShop = {"Пакет", "Ведро", "Швабра", "Порошок"};
@@ -43,7 +43,7 @@ public class ProductAnalytics {
         System.out.println("Товары имеющиеся хотя бы в одном магазине: \n" + productAnalytics.existAtListInOne());
         System.out.println("Товары, которых нет ни в одном магазине: \n" + productAnalytics.notExistInShops());
         System.out.println("Товары, которые есть только в одном магазине: \n" + productAnalytics.existOnlyInOne());
-    }
+    }*/
 
     List<Shop> shops;           //2.10 Создать private List<Shop> shops - список магазинов
     List<Product> products;     //2.11 Создать private List<Product> products -
