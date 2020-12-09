@@ -182,12 +182,6 @@ public class ProductAnalytics {
                     resultSet.removeAll(helpSet);
                 }
             }
-
-            for(int i = shopArrayList.indexOf(shop1) - 1; i >=0; i--){
-                Set<Product> helpSet = new HashSet<>(shop1.getProducts());
-                helpSet.retainAll(shopArrayList.get(i).getProducts());
-                resultSet.removeAll(helpSet);
-            }
         }
 
         return resultSet;
