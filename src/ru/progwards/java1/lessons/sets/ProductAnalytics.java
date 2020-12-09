@@ -155,18 +155,32 @@ public class ProductAnalytics {
     public Set<Product> existOnlyInOne() {
         Set<Product> resultSet = new HashSet<>(existAtListInOne());
         resultSet.removeAll(existInAll());
-/*        for (int i = 0; i < shopArrayList.size() - 1; i++) {
-            Set<Product> helpSet = new HashSet<>(shopArrayList.get(i).getProducts());
-            helpSet.retainAll(shopArrayList.get(i + 1).getProducts());
-            resultSet.removeAll(helpSet);
-        }*/
 
-        for (Shop shop1 : shopArrayList){
-
+/*        for (Shop shop1 : shopArrayList){
+            //Цикл проверки совпадений товаров
             for (int i = shopArrayList.indexOf(shop1) + 1; i < shopArrayList.size(); i++){
                 Set<Product> helpSet = new HashSet<>(shop1.getProducts());
                 helpSet.retainAll(shopArrayList.get(i).getProducts());
                 resultSet.removeAll(helpSet);
+            }
+
+            for(int i = shopArrayList.indexOf(shop1) - 1; i >=0; i--){
+                Set<Product> helpSet = new HashSet<>(shop1.getProducts());
+                helpSet.retainAll(shopArrayList.get(i).getProducts());
+                resultSet.removeAll(helpSet);
+            }
+        }*/
+
+        for (Shop shop1 : shopArrayList){
+            //Цикл проверки совпадений товаров
+            for (Shop shop2 : shopArrayList){
+                if(shopArrayList.indexOf(shop1) == shopArrayList.indexOf(shop2)){
+                    continue;
+                }else {
+                    Set<Product> helpSet = new HashSet<>(shop1.getProducts());
+                    helpSet.retainAll(shop2.getProducts());
+                    resultSet.removeAll(helpSet);
+                }
             }
 
             for(int i = shopArrayList.indexOf(shop1) - 1; i >=0; i--){
