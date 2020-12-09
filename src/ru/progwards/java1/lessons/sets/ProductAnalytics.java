@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.sets;
 import java.util.*;
 
 public class ProductAnalytics {
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         String[] arrayFoodShop = {"Яблоко", "Хлеб", "Клейкая лента", "Пакет"};
         String[] arrayToolsShop = {"Гвозди", "Пакет", "Клейкая лента", "Молоток"};
         String[] arrayGoodsShop = {"Пакет", "Ведро", "Швабра", "Порошок"};
@@ -38,12 +38,12 @@ public class ProductAnalytics {
         shops.add(new Shop(toToolsShop));
         shops.add(new Shop(toGoodsShop));
 
-        ProductAnalytics productAnalytics = new ProductAnalytics(shops, products);
+        ProductAnalytics productAnalytics = new ProductAnalytics(products, shops);
         System.out.println("Товары имеющиеся во всех магазинах: \n" + productAnalytics.existInAll());
         System.out.println("Товары имеющиеся хотя бы в одном магазине: \n" + productAnalytics.existAtListInOne());
         System.out.println("Товары, которых нет ни в одном магазине: \n" + productAnalytics.notExistInShops());
         System.out.println("Товары, которые есть только в одном магазине: \n" + productAnalytics.existOnlyInOne());
-    }*/
+    }
 
    private List<Shop> shops;           //2.10 Создать private List<Shop> shops - список магазинов
    private List<Product> products;     //2.11 Создать private List<Product> products -
@@ -155,10 +155,25 @@ public class ProductAnalytics {
     public Set<Product> existOnlyInOne() {
         Set<Product> resultSet = new HashSet<>(existAtListInOne());
         resultSet.removeAll(existInAll());
-        for (int i = 0; i < shopArrayList.size() - 1; i++) {
+/*        for (int i = 0; i < shopArrayList.size() - 1; i++) {
             Set<Product> helpSet = new HashSet<>(shopArrayList.get(i).getProducts());
             helpSet.retainAll(shopArrayList.get(i + 1).getProducts());
             resultSet.removeAll(helpSet);
+        }*/
+
+        for (Shop shop1 : shopArrayList){
+
+            for (int i = shopArrayList.indexOf(shop1) + 1; i < shopArrayList.size(); i++){
+                Set<Product> helpSet = new HashSet<>(shop1.getProducts());
+                helpSet.retainAll(shopArrayList.get(i).getProducts());
+                resultSet.removeAll(helpSet);
+            }
+
+            for(int i = shopArrayList.indexOf(shop1) - 1; i >=0; i--){
+                Set<Product> helpSet = new HashSet<>(shop1.getProducts());
+                helpSet.retainAll(shopArrayList.get(i).getProducts());
+                resultSet.removeAll(helpSet);
+            }
         }
 
         return resultSet;
