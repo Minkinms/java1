@@ -51,78 +51,30 @@ public class ProductAnalytics {
     // Все товары, присутствующие в магазинах, обязательно присутствуют в products,
     // но так же тут могут быть и товары, которых нет в магазинах.
 
-    ArrayList<Shop> shopArrayList;
-    ArrayList<Product> productArrayList;
+    private ArrayList<Shop> shopArrayList;
+    private ArrayList<Product> productArrayList;
 
 //    //2.12 Создать конструктор
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
-        this.shops = shops;
+        this.shops = shops;         //Складывается впечатление, что эти две операции лишние в моем решении. Оставил как в задании.
         this.products = products;
-        shopArrayList = new ArrayList<>(this.shops);
-        productArrayList = new ArrayList<>(this.products);
+        shopArrayList = new ArrayList<>(this.shops);            //Коллекция со списком всех магазинов
+        productArrayList = new ArrayList<>(this.products);      //Коллекция со списком всех продуктов
     }
-
-    /*public class Find {
-//            List<Shop> shops;
-//            List<Product> products;
-//            public Find(List<Shop> shops, List<Product> products){
-//                shops = shops;
-//                this.products = products;
-//            ArrayList<Shop> shopArrayList = new ArrayList<>(shops);
-//            ArrayList<Product> productArrayList = new ArrayList<>(products);
-
-        public Set<Product> doFind() {
-            Set<Product> resultSet = new HashSet<>();
-
-
-            for (Product product : productArrayList) {
-                for (Shop shop : shopArrayList) {
-                    for (Product productFromShop : shop.getProducts()) {
-//                            if (product.getCode() == productFromShop.getCode()){          //Перекрыть Equals для Product
-                        if (product.equals(productFromShop)) {
-//                        ArrayList<Product> productFromShop = new ArrayList<>(shop.getProducts());
-//                        if (productFromShop.contains(product)){
-                            resultSet.add(product);
-                        }
-                    }
-
-
-                }
-            }
-
-            return resultSet;
-        }
-
-        //Куски кода из методов
-        //            Find find = new Find();
-//            HashSet<Product> resultSet = new HashSet<>(find.doFind());
-        //                for(Product product:productArrayList){
-//                    for(Shop shop:shopArrayList){
-//                        ArrayList<Product> productFromShop = new ArrayList<>(shop.getProducts());
-//
-//                    }
-//                }
-//                            for (Product productFromShop:shop.getProducts()){
-//                                if (product.equals(productFromShop)){
-//                                    resultSet.add(product);
-//                                }
-//                        }
-
-    }*/
 
     //2.13 Товары из products, которые имеются во всех магазинах
     public Set<Product> existInAll() {
         Set<Product> resultSet;
-        if (shopArrayList.size() > 0) {
-            resultSet = new HashSet<>(shopArrayList.get(0).getProducts());
+        if (shopArrayList.size() > 0) { //Проверка
+            resultSet = new HashSet<>(shopArrayList.get(0).getProducts());  //Инициализация первым объектом (магазином) для сравнения с дальнйешими
             for (int i = 1; i < shopArrayList.size(); i++) {
-                resultSet.retainAll(new ArrayList<>(shopArrayList.get(i).getProducts()));
+                resultSet.retainAll(new ArrayList<>(shopArrayList.get(i).getProducts()));   //Поиск общих товаров
             }
             if (!(productArrayList.containsAll(resultSet))) {     //Проверка наличия товаров в общем списке
                 resultSet.clear();
             }
         } else {
-            resultSet = new HashSet<>();
+            resultSet = new HashSet<>();    //Возвращаю пустую коллекцию
         }
 
         return resultSet;
@@ -134,7 +86,7 @@ public class ProductAnalytics {
         for (Product product : productArrayList) {
             for (Shop shop : shopArrayList) {
                 ArrayList<Product> productFromShop = new ArrayList<>(shop.getProducts());
-                if (productFromShop.contains(product)) {
+                if (productFromShop.contains(product)) {    //Если список товаров магазина содержит товар, добавляю в список
                     resultSet.add(product);
                 }
             }
@@ -146,98 +98,31 @@ public class ProductAnalytics {
     public Set<Product> notExistInShops() {
         Set<Product> resultSet = new HashSet<>(productArrayList);
         for (Shop shop : shopArrayList) {
-            resultSet.removeAll(new ArrayList<>(shop.getProducts()));
+            resultSet.removeAll(new ArrayList<>(shop.getProducts()));   //Из бщего списка вычитаю списки товаров магазинов
         }
         return resultSet;
     }
 
     //2.16 Товары из products, которые есть только в одном магазине
     public Set<Product> existOnlyInOne() {
-        Set<Product> resultSet = new HashSet<>(existAtListInOne());
-        resultSet.removeAll(existInAll());
-
-/*        for (Shop shop1 : shopArrayList){
-            //Цикл проверки совпадений товаров
-            for (int i = shopArrayList.indexOf(shop1) + 1; i < shopArrayList.size(); i++){
-                Set<Product> helpSet = new HashSet<>(shop1.getProducts());
-                helpSet.retainAll(shopArrayList.get(i).getProducts());
-                resultSet.removeAll(helpSet);
-            }
-
-            for(int i = shopArrayList.indexOf(shop1) - 1; i >=0; i--){
-                Set<Product> helpSet = new HashSet<>(shop1.getProducts());
-                helpSet.retainAll(shopArrayList.get(i).getProducts());
-                resultSet.removeAll(helpSet);
-            }
-        }*/
+        Set<Product> resultSet = new HashSet<>(existAtListInOne()); //Начальная коллекция на основе товаров, "которые имеются хотя бы в одном магазине"
+        resultSet.removeAll(existInAll());  //Исключаем товары, которые есть во всех магазинах (возможно лишняя операция, но уменьшает коллекцию)
 
         for (Shop shop1 : shopArrayList){
             //Цикл проверки совпадений товаров
             for (Shop shop2 : shopArrayList){
-                if(shopArrayList.indexOf(shop1) == shopArrayList.indexOf(shop2)){
-                    continue;
+                if(shopArrayList.indexOf(shop1) == shopArrayList.indexOf(shop2)){   //Пропускаю сравнение с самим собой
+                    continue;   //Idea предлагает убрать. Оставлю для наглядности
                 }else {
                     Set<Product> helpSet = new HashSet<>(shop1.getProducts());
-                    helpSet.retainAll(shop2.getProducts());
-                    resultSet.removeAll(helpSet);
+                    helpSet.retainAll(shop2.getProducts()); //выбираю общие
+                    resultSet.removeAll(helpSet);           //вычитаю результат
                 }
             }
         }
 
         return resultSet;
     }
-
-
-    //2.1 Создать класс Product - товар,
-    //2.2. Создать private String code - уникальный артикул товара
-/*    public static class Product {
-        private String code;
-
-        //2.3 Создать конструктор public Product(String code)
-        public Product(String code) {
-            this.code = code;
-        }
-
-        //2.4 Метод public String getCode()
-        public String getCode() {
-            return code;
-        }
-
-        @Override
-        public String toString() {
-            return code;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Product)) return false;
-            Product product = (Product) o;
-            return code.equals(product.code);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(code);
-        }
-    }*/
-
-    //2.5 Создать класс Shop - магазин
-    //2.6 Создать private List<Product> products - товары имеющиеся в магазине
-/*    public static class Shop {
-        List<Product> products;
-
-        //2.7 Создать конструктор public Shop(List<Product> products)
-        public Shop(List<Product> products) {
-            this.products = products;
-        }
-
-        //2.8 Создать метод public List<Product> getProducts()
-        public List<Product> getProducts() {
-            return products;
-        }
-    }*/
-
 
 }
 

@@ -14,6 +14,7 @@ public static String process(String fileName) - вернуть все буквы
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.TreeSet;
 
@@ -30,35 +31,33 @@ public class LettersInFile{
     }
 
     public static String process(String fileName) throws IOException {
-        try(RandomAccessFile rafCensor = new RandomAccessFile(fileName, "r")) {  //Поток для чтения и записи в файл
+        try(RandomAccessFile rafCensor = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
             byte[] bytes = new byte[(int) rafCensor.length()];      //Массив байт для чтения из файла
             rafCensor.read(bytes);                                  //Считывание массива байт из файла
             String textFromFile = new String(bytes);                //Создание строки для дальнейшей обработки
             char[] charsFromFile = textFromFile.toCharArray();
 
+            //Коллекция с компаратором. Компаратор сравнивает символы по коду таблицы UTF-8
             TreeSet<Character> charsTreeSet = new TreeSet<>(new Comparator<Character>(){
                 @Override
                 public int compare(Character o1, Character o2) {
                     return Character.compare(o1, o2);
                 }
             });
-
+            //Перебираю массив символов по признаку "это буква"
             for(Character characterFromArray:charsFromFile){
                 if(Character.isAlphabetic(characterFromArray)){
                     charsTreeSet.add(characterFromArray);
                 }
-
             }
-            System.out.println(charsTreeSet.toString());
-            StringBuilder stringBuilder = new StringBuilder();
+            //System.out.println(charsTreeSet.toString());
+            StringBuilder stringBuilder = new StringBuilder();  //Собираю выходную строку
             for (char symbol:charsTreeSet){
                 stringBuilder.append(symbol);
             }
-            System.out.println(stringBuilder);
+            //System.out.println(stringBuilder);
            return stringBuilder.toString();
         }
-
-        //return ;
     }
 
 
