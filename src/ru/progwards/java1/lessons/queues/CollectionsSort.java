@@ -89,7 +89,7 @@ public class CollectionsSort {
         long methodTime = new Date().getTime();
 
         //Создание тестовой коллекции
-        final int ELEMENTS_COUNT = 2500;
+        final int ELEMENTS_COUNT = 250;
         List<Integer> testCollection = new ArrayList();
         for (int i = 0; i < ELEMENTS_COUNT; i++) {
             testCollection.add(i);
