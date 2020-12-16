@@ -41,6 +41,7 @@ public class CollectionsSort {
     public static void mySort(Collection<Integer> data){
 //        System.out.println("До сортировки: " + data);
         List<Integer> resColl = new ArrayList<>(data);
+        data.clear();
         for (int i = 0; i < resColl.size(); i++) {
             for (int j = i + 1; j < resColl.size(); j++) {
                 if (resColl.get(i) > resColl.get(j)) {
@@ -48,6 +49,7 @@ public class CollectionsSort {
                 }
             }
         }
+        data.addAll(resColl);
 //        System.out.println("После сортировки mySort: " + resColl);
     }
 
@@ -60,13 +62,20 @@ public class CollectionsSort {
 - скопировать новую коллекцию в старую*/
     public static void minSort(Collection<Integer> data){
 //        System.out.println("До сортировки: " + data);
-        List<Integer> resColl = new ArrayList<>(data);
+/*        List<Integer> resColl = new ArrayList<>(data);
         List<Integer> helpColl = new ArrayList<>();
         while (!resColl.isEmpty()){
             helpColl.add(Collections.min(resColl));
             resColl.remove(Collections.min(resColl));
         }
-        resColl.addAll(helpColl);
+        resColl.addAll(helpColl);*/
+        List<Integer> helpColl = new ArrayList<>();
+        while (!data.isEmpty()){
+            helpColl.add(Collections.min(data));
+            data.remove(Collections.min(data));
+        }
+        data.addAll(helpColl);
+
 //        System.out.println("После сортировки minSort: " + resColl);
     }
 
@@ -76,6 +85,8 @@ public class CollectionsSort {
 //        System.out.println("До сортировки: " + data);
         List<Integer> resColl = new ArrayList<>(data);
         resColl.sort(null);
+        data.clear();
+        data.addAll(resColl);
 //        System.out.println("После сортировки collSort: " + resColl);
     }
 
