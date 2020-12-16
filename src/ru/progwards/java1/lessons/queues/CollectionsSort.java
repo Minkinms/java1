@@ -12,10 +12,10 @@ public class CollectionsSort {
         numbers.add(5); //index 3
         numbers.add(1); //index 4
 
-//        System.out.println("До сортировки, numbers: " + numbers);
-//        mySort(numbers);
-//        minSort(numbers);
-//        collSort(numbers);
+        System.out.println("До сортировки, numbers: " + numbers);
+        mySort(numbers);
+        minSort(numbers);
+        collSort(numbers);
         System.out.println(compareSort());
 
 
@@ -48,7 +48,7 @@ public class CollectionsSort {
                 }
             }
         }
-        System.out.println("После сортировки mySort: " + resColl);
+//        System.out.println("После сортировки mySort: " + resColl);
     }
 
 
@@ -67,16 +67,16 @@ public class CollectionsSort {
             resColl.remove(Collections.min(resColl));
         }
         resColl.addAll(helpColl);
-        System.out.println("После сортировки minSort: " + resColl);
+//        System.out.println("После сортировки minSort: " + resColl);
     }
 
 
 //1.3 Реализовать метод public static void collSort(Collection<Integer> data) используя метод sort из Collections
     public static void collSort(Collection<Integer> data){
-        System.out.println("До сортировки: " + data);
+//        System.out.println("До сортировки: " + data);
         List<Integer> resColl = new ArrayList<>(data);
         resColl.sort(null);
-        System.out.println("После сортировки collSort: " + resColl);
+//        System.out.println("После сортировки collSort: " + resColl);
     }
 
 
@@ -89,7 +89,7 @@ public class CollectionsSort {
         long methodTime = new Date().getTime();
 
         //Создание тестовой коллекции
-        final int ELEMENTS_COUNT = 150;
+        final int ELEMENTS_COUNT = 100;
         List<Integer> testCollection = new ArrayList();
         for (int i = 0; i < ELEMENTS_COUNT; i++) {
             testCollection.add(i);
