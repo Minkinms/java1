@@ -2,6 +2,8 @@ package ru.progwards.java1.lessons.queues;
 
 import java.util.*;
 
+import static java.lang.Math.abs;
+
 public class CollectionsSort {
     public static void main(String[] args) {
         Collection<Integer> data1 = new ArrayList<>();
@@ -76,7 +78,7 @@ public class CollectionsSort {
         }
         data.addAll(helpColl);
 
-//        System.out.println("После сортировки minSort: " + resColl);
+//        System.out.println("После сортировки minSort: " + data);
     }
 
 
@@ -97,7 +99,7 @@ public class CollectionsSort {
 // В случае равенства производительности каких-то методов, возвращать их названия в алфавитном порядке.
     public static Collection<String> compareSort(){
         var startTime = new Date().getTime();   //Переменные для учета времени
-        long methodTime = new Date().getTime();
+//        long methodTime = new Date().getTime();
 
         //Создание тестовой коллекции
         final int ELEMENTS_COUNT = 100;
@@ -106,43 +108,59 @@ public class CollectionsSort {
             testCollection.add(i);
         }
         Collections.shuffle(testCollection);
+        List<Integer> testCollection1 = new ArrayList(testCollection);
+        List<Integer> testCollection2 = new ArrayList(testCollection);
+        List<Integer> testCollection3 = new ArrayList(testCollection);
 
         //Вспомогательная коллекция для автосортировки
-        TreeSet<Method> resultTreeSet = new TreeSet<>(new Comparator<Method>() {
+        TreeSet<Method> resultTreeSet = new TreeSet<>(new Comparator<>() {
             @Override
             public int compare(Method o1, Method o2) {
-                return Long.compare(o1.time, o2.time);
+                if (o1.time != o2.time) {
+                    return Long.compare(o1.time, o2.time);
+                } else {
+                    int out = 0;
+                    int varLimit = o1.name.length() - (o1.name.length() - o2.name.length());
+                    for (int i = 0; i < varLimit; i++) {
+                        if (o1.name.charAt(i) != o2.name.charAt(i)) {
+                            out = Integer.compare(o1.name.charAt(i), o2.name.charAt(i));
+                            break;
+                        }
+                    }
+                    return out;
+//                    return Integer.compare(o1.name.charAt(0), o2.name.charAt(0));
+                }
             }
         });
 
         //Блок тестирования
         startTime = new Date().getTime();
-        mySort(testCollection);
-        methodTime = new Date().getTime() - startTime;
-        resultTreeSet.add(new Method(methodTime, "mySort"));
-//        System. out.println("Сортировка mySort: " + methodTime);
+        mySort(testCollection1);
+        long methodTime1 = new Date().getTime() - startTime;
+        resultTreeSet.add(new Method(methodTime1, "mySort"));
+//        System. out.println("Сортировка mySort: " + methodTime1);
 
         startTime = new Date().getTime();
-        minSort(testCollection);
-        methodTime = new Date().getTime() - startTime;
-        resultTreeSet.add(new Method(methodTime, "minSort"));
-//        System. out.println("Сортировка minSort: " + (new Date().getTime() - startTime));
+        minSort(testCollection2);
+        long methodTime2 = new Date().getTime() - startTime;
+        resultTreeSet.add(new Method(methodTime2, "minSort"));
+//        System. out.println("Сортировка minSort: " + methodTime2);
 
         startTime = new Date().getTime();
-        collSort(testCollection);
-        methodTime = new Date().getTime() - startTime;
-        resultTreeSet.add(new Method(methodTime, "collSort"));
-//        System. out.println("Сортировка collSort: " + (new Date().getTime() - startTime));
+        collSort(testCollection3);
+        long methodTime3 = new Date().getTime() - startTime;
+        resultTreeSet.add(new Method(methodTime3, "collSort"));
+//        System. out.println("Сортировка collSort: " + methodTime3);
 
         //Подготовка к выводу результата. Создаю коллекцию на основе объектов String
-        Collection<String> resColl = new ArrayList<String>();
+        Collection<String> resColl = new ArrayList<>();
         for (Method method : resultTreeSet) {
             resColl.add(new String(method.name));
         }
         return resColl;
     }
 
-    static class Method{
+    static class Method{ //implements Comparable{
         private long time = 0;
         private String name = "";
 
@@ -150,6 +168,7 @@ public class CollectionsSort {
             this.time = time;
             this.name = name;
         }
+
     }
 
 
