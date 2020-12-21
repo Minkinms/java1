@@ -54,7 +54,7 @@ public class OrderQueue {
     final double SUM_SIZE_2 = 20000;
 
     //Переменная для сквозной нумерации заказов
-    long orderNumber = 1;
+    int orderNumber = 1;
 
 /*    2.7 Создать метод, public void add(Order order),
 размещающий заказы в очередь с приоритетом, разбивая их по 3-м классам:
@@ -70,8 +70,8 @@ public class OrderQueue {
 
     //Метод для задания номера заказа
     public void setOrderNumber(Order order){
-        if(order.getOrderNumber() == 0) {
-            order.setOrderNumber(this.orderNumber);
+        if(order.getNum() == 0) {
+            order.setNum(this.orderNumber);
             this.orderNumber++;
         }
     }
@@ -109,7 +109,7 @@ public class OrderQueue {
         PriorityQueue orderNumberQueue = new PriorityQueue(new Comparator<Order>() {
             @Override
             public int compare(Order o1, Order o2) {
-                return Long.compare(o1.getOrderNumber(), o2.getOrderNumber());
+                return Integer.compare(o1.getNum(), o2.getNum());
             }
 
         });

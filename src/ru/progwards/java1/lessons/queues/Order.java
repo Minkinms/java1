@@ -15,7 +15,7 @@ public class Order {
     //Переменные класса
     private double sum; //сумма заказа
     private int priority = 0;
-    private long orderNumber = 0;  //номер заказа
+    private int num = 0;  //номер заказа
 
 
 
@@ -38,12 +38,12 @@ public class Order {
         this.priority = priority;
     }
 
-    public long getOrderNumber() {
-        return orderNumber;
+    public int getNum() {
+        return num;
     }
 
-    public void setOrderNumber(long orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setNum(int num) {
+        this.num = num;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Order {
         return "Order{" +
                 "sum=" + sum +
                 ", priority=" + priority +
-                ", number=" + orderNumber +
+                ", number=" + num +
                 '}';
     }
 }
