@@ -2,11 +2,11 @@ package ru.progwards.java1.lessons.queues;
 
 import java.util.*;
 
-import static java.lang.Math.abs;
+//import static java.lang.Math.abs;
 
 public class CollectionsSort {
     public static void main(String[] args) {
-        Collection<Integer> data1 = new ArrayList<>();
+//        Collection<Integer> data1 = new ArrayList<>();
         Collection<Integer> numbers = new ArrayDeque<>();
         numbers.add(3); //index 0
         numbers.add(4); //index 1
@@ -64,20 +64,12 @@ public class CollectionsSort {
 - скопировать новую коллекцию в старую*/
     public static void minSort(Collection<Integer> data){
 //        System.out.println("До сортировки: " + data);
-/*        List<Integer> resColl = new ArrayList<>(data);
-        List<Integer> helpColl = new ArrayList<>();
-        while (!resColl.isEmpty()){
-            helpColl.add(Collections.min(resColl));
-            resColl.remove(Collections.min(resColl));
-        }
-        resColl.addAll(helpColl);*/
         List<Integer> helpColl = new ArrayList<>();
         while (!data.isEmpty()){
             helpColl.add(Collections.min(data));
             data.remove(Collections.min(data));
         }
         data.addAll(helpColl);
-
 //        System.out.println("После сортировки minSort: " + data);
     }
 
@@ -155,14 +147,14 @@ public class CollectionsSort {
         //Подготовка к выводу результата. Создаю коллекцию на основе объектов String
         Collection<String> resColl = new ArrayList<>();
         for (Method method : resultTreeSet) {
-            resColl.add(new String(method.name));
+            resColl.add(method.name);
         }
         return resColl;
     }
 
     static class Method{ //implements Comparable{
-        private long time = 0;
-        private String name = "";
+        private long time;
+        private String name;
 
         public Method(long time, String name) {
             this.time = time;

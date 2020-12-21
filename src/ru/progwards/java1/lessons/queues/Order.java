@@ -14,19 +14,44 @@ public class Order {
 
     //Переменные класса
     private double sum; //сумма заказа
-    private int num = 0;  //номер заказа
+    private int priority = 0;
+    private long orderNumber = 0;  //номер заказа
+
+
+
 
     //Конструктор класса
     public Order(double sum) {
         this.sum = sum;
-        num++;
+//        num++;
     }
 
     public double getSum() {
         return sum;
     }
 
-    public int getNum() {
-        return num;
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public long getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(long orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "sum=" + sum +
+                ", priority=" + priority +
+                ", number=" + orderNumber +
+                '}';
     }
 }
