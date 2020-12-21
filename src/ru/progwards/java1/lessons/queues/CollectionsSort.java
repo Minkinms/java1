@@ -90,7 +90,7 @@ public class CollectionsSort {
 // отсортированные в порядке производительности, первый - самый быстрый.
 // В случае равенства производительности каких-то методов, возвращать их названия в алфавитном порядке.
     public static Collection<String> compareSort(){
-        var startTime = new Date().getTime();   //Переменные для учета времени
+        long startTime;   //Переменные для учета времени
 //        long methodTime = new Date().getTime();
 
         //Создание тестовой коллекции
