@@ -63,9 +63,9 @@ public class OrderQueue {
 1 - заказы от 20000 руб*/
 
     public void add(Order order){
-        priority(order);
-        setOrderNumber(order);
-        fullQueue.offer(order);
+        priority(order);            //Определение и присвоение заказу приориета
+        setOrderNumber(order);      //Присвоение номера заказа
+        fullQueue.offer(order);     //Добавление заказа в основную очередь
     }
 
     //Метод для задания номера заказа
@@ -105,7 +105,7 @@ public class OrderQueue {
  */
 
     public Order get(){
-        //Очередь заказов по нумерации в пределах приоритета
+        //Очередь заказов по нумерации в пределах приоритета заказа
         PriorityQueue orderNumberQueue = new PriorityQueue(new Comparator<Order>() {
             @Override
             public int compare(Order o1, Order o2) {
@@ -114,32 +114,27 @@ public class OrderQueue {
 
         });
 
-//        long hightPriority;
-
         if(!fullQueue.isEmpty()) {
-            Order firstOrder = (Order) fullQueue.peek();    //TODO:Добавить проверку на isEmpty
-            long hightPriority = firstOrder.getPriority();
+            Order firstOrder = (Order) fullQueue.peek();        //Определяю максимальный приоритет заказов в очереди
+            int hightPriority = firstOrder.getPriority();
 
-
-            while (!fullQueue.isEmpty()) {
-                Order nextOrder = (Order) fullQueue.peek();
+            while (!fullQueue.isEmpty()) {                      //Собираю заказы с таким приоритетом в отдельную очередь
+                Order nextOrder = (Order) fullQueue.peek();     //с приоритетом по номеру
                 if (nextOrder.getPriority() == hightPriority) {
                     orderNumberQueue.offer(fullQueue.poll());
                 } else break;
             }
         }
 
-        Order resultGetOrder = (Order) orderNumberQueue.poll();
+        Order resultGetOrder = (Order) orderNumberQueue.poll(); //Формирую заказ для возвращения результата
+        fullQueue.addAll(orderNumberQueue);                     //Остальные возвращаю в основную очередь.
 
-
-            fullQueue.addAll(orderNumberQueue);
-
-
+//Блок проверки
 /*        while (!orderNumberQueue.isEmpty()) {
             System.out.println(orderNumberQueue.poll());
-
         }
         System.out.println(" ");*/
+
         return resultGetOrder;
     }
 }
