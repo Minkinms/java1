@@ -126,21 +126,27 @@ public class CollectionsSort {
         });
 
         //Блок тестирования
-        startTime = new Date().getTime();
+//        startTime = new Date().getTime();
+        startTime = System.currentTimeMillis();
         mySort(testCollection1);
-        long methodTime1 = new Date().getTime() - startTime;
+//        long methodTime1 = new Date().getTime() - startTime;
+        long methodTime1 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime1, "mySort"));
 //        System. out.println("Сортировка mySort: " + methodTime1);
 
-        startTime = new Date().getTime();
+//        startTime = new Date().getTime();
+        startTime = System.currentTimeMillis();
         minSort(testCollection2);
-        long methodTime2 = new Date().getTime() - startTime;
+//        long methodTime2 = new Date().getTime() - startTime;
+        long methodTime2 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime2, "minSort"));
 //        System. out.println("Сортировка minSort: " + methodTime2);
 
-        startTime = new Date().getTime();
+//        startTime = new Date().getTime();
+        startTime = System.currentTimeMillis();
         collSort(testCollection3);
-        long methodTime3 = new Date().getTime() - startTime;
+//        long methodTime3 = new Date().getTime() - startTime;
+        long methodTime3 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime3, "collSort"));
 //        System. out.println("Сортировка collSort: " + methodTime3);
 
