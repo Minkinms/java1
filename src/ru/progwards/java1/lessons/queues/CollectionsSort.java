@@ -47,7 +47,7 @@ public class CollectionsSort {
         for (int i = 0; i < resColl.size(); i++) {
             for (int j = i + 1; j < resColl.size(); j++) {
                 if (resColl.get(i) > resColl.get(j)) {
-                    Collections.swap(resColl, i, j);//Замена чисел местами
+                    Collections.swap(resColl, i, j);        //Замена чисел местами
                 }
             }
         }
@@ -91,28 +91,27 @@ public class CollectionsSort {
 // В случае равенства производительности каких-то методов, возвращать их названия в алфавитном порядке.
     public static Collection<String> compareSort(){
         long startTime;   //Переменные для учета времени
-//        long methodTime = new Date().getTime();
 
         //Создание тестовой коллекции
-        final int ELEMENTS_COUNT = 100;
+        final int ELEMENTS_COUNT = 100;                 //Робот воспринимает только около 100 элементов.
         List<Integer> testCollection = new ArrayList();
         for (int i = 0; i < ELEMENTS_COUNT; i++) {
             testCollection.add(i);
         }
-        Collections.shuffle(testCollection);
-        List<Integer> testCollection1 = new ArrayList(testCollection);
+        Collections.shuffle(testCollection);            //Перемешиваю
+        List<Integer> testCollection1 = new ArrayList(testCollection);  //Делаю отдельные копии коллекций
         List<Integer> testCollection2 = new ArrayList(testCollection);
         List<Integer> testCollection3 = new ArrayList(testCollection);
 
-        //Вспомогательная коллекция для автосортировки
+        //Вспомогательная коллекция для автосортировки по результату сравнения
         TreeSet<Method> resultTreeSet = new TreeSet<>(new Comparator<>() {
             @Override
             public int compare(Method o1, Method o2) {
                 if (o1.time != o2.time) {
-                    return Long.compare(o1.time, o2.time);
-                } else {
+                    return Long.compare(o1.time, o2.time);      //сравниваю по времени
+                } else {                                        //Если время одинаковое, сравниваю по коду букв
                     int out = 0;
-                    int varLimit = o1.name.length() - (o1.name.length() - o2.name.length());
+                    int varLimit = o1.name.length() - (o1.name.length() - o2.name.length());    //Учитываю то, что слова могут быть разной длины
                     for (int i = 0; i < varLimit; i++) {
                         if (o1.name.charAt(i) != o2.name.charAt(i)) {
                             out = Integer.compare(o1.name.charAt(i), o2.name.charAt(i));
@@ -120,12 +119,12 @@ public class CollectionsSort {
                         }
                     }
                     return out;
-//                    return Integer.compare(o1.name.charAt(0), o2.name.charAt(0));
                 }
             }
         });
 
         //Блок тестирования
+        //Т.к. делаем тест ввожу отдельные переменные времени для наглядности и промежуточного контроля (при необходимости)
 //        startTime = new Date().getTime();
         startTime = System.currentTimeMillis();
         mySort(testCollection1);
@@ -158,7 +157,7 @@ public class CollectionsSort {
         return resColl;
     }
 
-    static class Method{ //implements Comparable{
+    static class Method{             //(implements Comparable{ ) Компаратор получился сложный, поэтому дя нагладности работы решил ввести его в свойства коллекции
         private long time;
         private String name;
 
