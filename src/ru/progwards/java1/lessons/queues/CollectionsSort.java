@@ -41,7 +41,7 @@ public class CollectionsSort {
     }
 }*/
     public static void mySort(Collection<Integer> data){
-        System.out.println("До сортировки: " + data);
+//        System.out.println("До сортировки: " + data);
         List<Integer> resColl = new ArrayList<>(data);
         data.clear();
         for (int i = 0; i < resColl.size(); i++) {
@@ -63,7 +63,7 @@ public class CollectionsSort {
 - делать так до тех пор, пока все элементы не окажутся в новой коллекции
 - скопировать новую коллекцию в старую*/
     public static void minSort(Collection<Integer> data){
-        System.out.println("До сортировки: " + data);
+//        System.out.println("До сортировки: " + data);
         List<Integer> helpColl = new ArrayList<>();
         while (!data.isEmpty()){
             helpColl.add(Collections.min(data));
@@ -76,7 +76,7 @@ public class CollectionsSort {
 
 //1.3 Реализовать метод public static void collSort(Collection<Integer> data) используя метод sort из Collections
     public static void collSort(Collection<Integer> data){
-        System.out.println("До сортировки: " + data);
+//        System.out.println("До сортировки: " + data);
         Collections.sort( (ArrayList<Integer>) data);
 //        Collections.sort( new ArrayList<Integer> (data));
 //        List<Integer> resColl = new ArrayList<>(data);
