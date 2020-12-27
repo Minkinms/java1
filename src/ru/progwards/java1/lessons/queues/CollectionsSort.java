@@ -6,8 +6,8 @@ import java.util.*;
 
 public class CollectionsSort {
     public static void main(String[] args) {
-//        Collection<Integer> data1 = new ArrayList<>();
-        Collection<Integer> numbers = new ArrayDeque<>();
+        Collection<Integer> numbers = new ArrayList<>();
+//        Collection<Integer> numbers = new ArrayDeque<>();
         numbers.add(3); //index 0
         numbers.add(4); //index 1
         numbers.add(2); //index 2
@@ -77,7 +77,8 @@ public class CollectionsSort {
 //1.3 Реализовать метод public static void collSort(Collection<Integer> data) используя метод sort из Collections
     public static void collSort(Collection<Integer> data){
         System.out.println("До сортировки: " + data);
-        Collections.sort( new ArrayList<Integer> (data));
+        Collections.sort( (ArrayList<Integer>) data);
+//        Collections.sort( new ArrayList<Integer> (data));
 //        List<Integer> resColl = new ArrayList<>(data);
 //        resColl.sort(null);
 //        data.clear();
