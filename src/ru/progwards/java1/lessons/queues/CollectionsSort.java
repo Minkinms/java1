@@ -52,7 +52,7 @@ public class CollectionsSort {
             }
         }
         data.addAll(resColl);
-        System.out.println("После сортировки mySort: " + resColl);
+//        System.out.println("После сортировки mySort: " + resColl);
     }
 
 
@@ -70,7 +70,7 @@ public class CollectionsSort {
             data.remove(Collections.min(data));
         }
         data.addAll(helpColl);
-        System.out.println("После сортировки minSort: " + data);
+//        System.out.println("После сортировки minSort: " + data);
     }
 
 
@@ -83,7 +83,7 @@ public class CollectionsSort {
 //        resColl.sort(null);
 //        data.clear();
 //        data.addAll(resColl);
-        System.out.println("После сортировки collSort: " + data);
+//        System.out.println("После сортировки collSort: " + data);
     }
 
 
@@ -95,7 +95,7 @@ public class CollectionsSort {
         long startTime;   //Переменные для учета времени
 
         //Создание тестовой коллекции
-        final int ELEMENTS_COUNT = 50;                 //Робот воспринимает только около 100 элементов.
+        final int ELEMENTS_COUNT = 100;                 //Робот воспринимает только около 100 элементов.
         List<Integer> testCollection = new ArrayList();
         for (int i = 0; i < ELEMENTS_COUNT; i++) {
             testCollection.add(i);
