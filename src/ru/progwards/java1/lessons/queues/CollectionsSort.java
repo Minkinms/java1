@@ -95,7 +95,7 @@ public class CollectionsSort {
         long startTime;   //Переменные для учета времени
 
         //Создание тестовой коллекции
-        final int ELEMENTS_COUNT = 100;                 //Робот воспринимает только около 100 элементов.
+        final int ELEMENTS_COUNT = 50;                 //Робот воспринимает только около 100 элементов.
         List<Integer> testCollection = new ArrayList();
         for (int i = 0; i < ELEMENTS_COUNT; i++) {
             testCollection.add(i);
