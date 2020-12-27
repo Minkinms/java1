@@ -41,10 +41,18 @@ public class OrderQueue {
 
     //Свойства класса
     //Основная очередь заказов
-    PriorityQueue fullQueue = new PriorityQueue(new Comparator<Order>() {
-        @Override
+    PriorityQueue fullQueue = new PriorityQueue<Order>(new Comparator<Order>() {
+//        @Override                                                         //Было
+//        public int compare(Order o1, Order o2) {
+//            return Integer.compare(o1.getPriority(), o2.getPriority());
+//        }
+          @Override
         public int compare(Order o1, Order o2) {
-            return Integer.compare(o1.getPriority(), o2.getPriority());
+              if(o1.getPriority() != o2.getPriority()){
+                  return Integer.compare(o1.getPriority(), o2.getPriority());
+              }else {
+                  return Integer.compare(o1.getNum(), o2.getNum());
+              }
         }
 
     });
@@ -105,8 +113,10 @@ public class OrderQueue {
  */
 
     public Order get(){
+       return (Order) fullQueue.poll();
+
         //Очередь заказов по нумерации в пределах приоритета заказа
-        PriorityQueue orderNumberQueue = new PriorityQueue(new Comparator<Order>() {
+/*        PriorityQueue orderNumberQueue = new PriorityQueue(new Comparator<Order>() {
             @Override
             public int compare(Order o1, Order o2) {
                 return Integer.compare(o1.getNum(), o2.getNum());
@@ -130,11 +140,11 @@ public class OrderQueue {
         fullQueue.addAll(orderNumberQueue);                     //Остальные возвращаю в основную очередь.
 
 //Блок проверки
-/*        while (!orderNumberQueue.isEmpty()) {
+*//*        while (!orderNumberQueue.isEmpty()) {
             System.out.println(orderNumberQueue.poll());
         }
-        System.out.println(" ");*/
+        System.out.println(" ");*//*
 
-        return resultGetOrder;
+        return resultGetOrder;*/
     }
 }
