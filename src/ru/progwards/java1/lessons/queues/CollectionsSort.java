@@ -77,10 +77,11 @@ public class CollectionsSort {
 //1.3 Реализовать метод public static void collSort(Collection<Integer> data) используя метод sort из Collections
     public static void collSort(Collection<Integer> data){
 //        System.out.println("До сортировки: " + data);
-        List<Integer> resColl = new ArrayList<>(data);
-        resColl.sort(null);
-        data.clear();
-        data.addAll(resColl);
+        Collections.sort( new ArrayList<Integer> (data));
+//        List<Integer> resColl = new ArrayList<>(data);
+//        resColl.sort(null);
+//        data.clear();
+//        data.addAll(resColl);
 //        System.out.println("После сортировки collSort: " + resColl);
     }
 
