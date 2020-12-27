@@ -133,7 +133,7 @@ public class CollectionsSort {
 //        long methodTime1 = new Date().getTime() - startTime;
         long methodTime1 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime1, "mySort"));
-        System. out.println("Сортировка mySort: " + methodTime1);
+//        System. out.println("Сортировка mySort: " + methodTime1);
 
 //        startTime = new Date().getTime();
         startTime = System.currentTimeMillis();
@@ -141,7 +141,7 @@ public class CollectionsSort {
 //        long methodTime2 = new Date().getTime() - startTime;
         long methodTime2 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime2, "minSort"));
-        System. out.println("Сортировка minSort: " + methodTime2);
+//        System. out.println("Сортировка minSort: " + methodTime2);
 
 //        startTime = new Date().getTime();
         startTime = System.currentTimeMillis();
@@ -149,7 +149,7 @@ public class CollectionsSort {
 //        long methodTime3 = new Date().getTime() - startTime;
         long methodTime3 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime3, "collSort"));
-        System. out.println("Сортировка collSort: " + methodTime3);
+//        System. out.println("Сортировка collSort: " + methodTime3);
 
         //Подготовка к выводу результата. Создаю коллекцию на основе объектов String
         Collection<String> resColl = new ArrayList<>();
