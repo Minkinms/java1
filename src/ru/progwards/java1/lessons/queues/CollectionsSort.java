@@ -41,7 +41,7 @@ public class CollectionsSort {
     }
 }*/
     public static void mySort(Collection<Integer> data){
-//        System.out.println("До сортировки: " + data);
+        System.out.println("До сортировки: " + data);
         List<Integer> resColl = new ArrayList<>(data);
         data.clear();
         for (int i = 0; i < resColl.size(); i++) {
@@ -52,7 +52,7 @@ public class CollectionsSort {
             }
         }
         data.addAll(resColl);
-//        System.out.println("После сортировки mySort: " + resColl);
+        System.out.println("После сортировки mySort: " + resColl);
     }
 
 
@@ -63,26 +63,26 @@ public class CollectionsSort {
 - делать так до тех пор, пока все элементы не окажутся в новой коллекции
 - скопировать новую коллекцию в старую*/
     public static void minSort(Collection<Integer> data){
-//        System.out.println("До сортировки: " + data);
+        System.out.println("До сортировки: " + data);
         List<Integer> helpColl = new ArrayList<>();
         while (!data.isEmpty()){
             helpColl.add(Collections.min(data));
             data.remove(Collections.min(data));
         }
         data.addAll(helpColl);
-//        System.out.println("После сортировки minSort: " + data);
+        System.out.println("После сортировки minSort: " + data);
     }
 
 
 //1.3 Реализовать метод public static void collSort(Collection<Integer> data) используя метод sort из Collections
     public static void collSort(Collection<Integer> data){
-//        System.out.println("До сортировки: " + data);
+        System.out.println("До сортировки: " + data);
         Collections.sort( new ArrayList<Integer> (data));
 //        List<Integer> resColl = new ArrayList<>(data);
 //        resColl.sort(null);
 //        data.clear();
 //        data.addAll(resColl);
-//        System.out.println("После сортировки collSort: " + resColl);
+        System.out.println("После сортировки collSort: " + data);
     }
 
 
@@ -132,7 +132,7 @@ public class CollectionsSort {
 //        long methodTime1 = new Date().getTime() - startTime;
         long methodTime1 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime1, "mySort"));
-//        System. out.println("Сортировка mySort: " + methodTime1);
+        System. out.println("Сортировка mySort: " + methodTime1);
 
 //        startTime = new Date().getTime();
         startTime = System.currentTimeMillis();
@@ -140,7 +140,7 @@ public class CollectionsSort {
 //        long methodTime2 = new Date().getTime() - startTime;
         long methodTime2 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime2, "minSort"));
-//        System. out.println("Сортировка minSort: " + methodTime2);
+        System. out.println("Сортировка minSort: " + methodTime2);
 
 //        startTime = new Date().getTime();
         startTime = System.currentTimeMillis();
@@ -148,7 +148,7 @@ public class CollectionsSort {
 //        long methodTime3 = new Date().getTime() - startTime;
         long methodTime3 = System.currentTimeMillis() - startTime;
         resultTreeSet.add(new Method(methodTime3, "collSort"));
-//        System. out.println("Сортировка collSort: " + methodTime3);
+        System. out.println("Сортировка collSort: " + methodTime3);
 
         //Подготовка к выводу результата. Создаю коллекцию на основе объектов String
         Collection<String> resColl = new ArrayList<>();
