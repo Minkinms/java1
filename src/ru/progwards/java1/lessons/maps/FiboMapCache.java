@@ -40,7 +40,7 @@ public class FiboMapCache {
     }
 
 //    Реализовать метод public void clearCahe() который устанавливает переменную fiboCache в null
-    public void clearCache(){
+    public void clearCahe(){
         fiboCache.clear();
     }
 
