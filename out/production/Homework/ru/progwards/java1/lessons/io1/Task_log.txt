@@ -1,0 +1,4 @@
+C:\Java\Progwards\HW 01.11.2020\src\ru\progwards\java1\lessons\io1\Task10_2_.txt (Не удается найти указанный файл)
+C:\Java\Progwards\HW 01.11.2020\src\ru\progwards\java1\lessons\io1\Task10_2_.txt (Не удается найти указанный файл)
+Index 50 out of bounds for length 50
+Index 50 out of bounds for length 50
