@@ -25,9 +25,9 @@ public class BigAlgebra {
         System.out.println("Число: " + num3 + " в степени: " + pow3 + " Ответ: " + fastPow(num3, pow3));
 
          */
-        //for (int i = 1; i <= 10; i++){
-            //System.out.println(fibonacci(i));
-        //}
+        for (int i = 1; i <= 10; i++){
+            System.out.println(fibonacci(i));
+        }
 
 
     }
