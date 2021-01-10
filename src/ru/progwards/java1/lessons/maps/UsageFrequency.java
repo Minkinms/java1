@@ -11,8 +11,8 @@ import java.util.*;
 public class UsageFrequency {
     public static void main(String[] args) {
         try {
-            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\Censor_text1.txt";
-//            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\wiki.test.tokens";
+//            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\Censor_text1.txt";
+            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\wiki.test.tokens";
             UsageFrequency usageFrequency = new UsageFrequency();
             usageFrequency.processFile(fileName);
 //            System.out.println(Arrays.toString(usageFrequency.charsFromFile));
@@ -58,22 +58,25 @@ public class UsageFrequency {
     public Map<String, Integer> getWords(){
         Map<String, Integer> wordsMap = new HashMap<>();
         StringBuilder stringSymbols = new StringBuilder();
-        int i = 0;
+
         for(Character character:charsFromFile){
             if(Character.isLetter(character)){ //Перебираю массив символов по признаку "это буква" или " это цифра"
                 stringSymbols.append(character);
-//                stringSymbols.append("|");
-                i++;
             }else stringSymbols.append(" ");
         }
-        System.out.println(stringSymbols);
+//        System.out.println(stringSymbols);
 
 //        String[] array = stringSymbols.toString().split("\\s*,\\s*");
 //        System.out.println(Arrays.toString(array));
-        try(Scanner scanner = new Scanner(stringSymbols.toString()).useDelimiter(" ")) {
+        try(Scanner scanner = new Scanner(stringSymbols.toString())) {
             while (scanner.hasNext()) {
                 String word = scanner.next();
-                System.out.println(word);
+//                System.out.println(word);
+                if(wordsMap.containsKey(word)){
+                    wordsMap.put(word, wordsMap.get(word) + 1);
+                }else {
+                    wordsMap.put(word, 1);
+                }
             }
         }
 
