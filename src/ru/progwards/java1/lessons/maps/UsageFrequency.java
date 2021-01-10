@@ -8,7 +8,7 @@ import java.util.*;
 
 //Реализовать класс, подсчитывающий частоту использования слов и букв в словах на основе текстов. Методы:
 //2.4 Протестировать на файле wiki.train.tokens (во вложении), для отладки можно использовать wiki.test.tokens
-public class UsageFrequency {
+public class UsageFrequency  {
     public static void main(String[] args) {
         try {
 //            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\Censor_text1.txt";
@@ -34,6 +34,8 @@ public class UsageFrequency {
             raf.read(bytes);
             textFromFile = new String(bytes);
             charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
+        }catch (IOException er){
+            System.out.println(er.toString());
         }
     }
 
@@ -55,7 +57,7 @@ public class UsageFrequency {
 
 //    2.3  - вернуть Map, который содержит все найденные слова и количество раз,
 //    которое каждое слово встретилось. Знаки препинания, такие как “.,!? @” и др являются разделителями.
-    public Map<String, Integer> getWords(){
+    public Map<String, Integer> getWords() {
         Map<String, Integer> wordsMap = new HashMap<>();
         StringBuilder stringSymbols = new StringBuilder();
 
