@@ -8,7 +8,7 @@ import java.util.*;
 
 //Реализовать класс, подсчитывающий частоту использования слов и букв в словах на основе текстов. Методы:
 //2.4 Протестировать на файле wiki.train.tokens (во вложении), для отладки можно использовать wiki.test.tokens
-public class UsageFrequency  {
+public class UsageFrequency {
     public static void main(String[] args) {
         try {
 //            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\Censor_text1.txt";
@@ -18,7 +18,7 @@ public class UsageFrequency  {
 //            System.out.println(Arrays.toString(usageFrequency.charsFromFile));
             usageFrequency.getLetters();
             usageFrequency.getWords();
-        }catch (Exception e){
+        }catch (IOException e){
             System.out.println(e.toString());
         }
 
@@ -34,8 +34,6 @@ public class UsageFrequency  {
             raf.read(bytes);
             textFromFile = new String(bytes);
             charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
-        }catch (IOException er){
-            System.out.println(er.toString());
         }
     }
 
