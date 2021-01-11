@@ -35,7 +35,7 @@ public class UsageFrequency {
             raf.read(bytes);
             textFromFile = new String(bytes);
             charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
-        }catch (FileNotFoundException e){
+        }        catch (Exception e){
             System.out.println(e.getMessage());
         }
     }

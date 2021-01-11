@@ -24,8 +24,6 @@ public class FiboMapCache {
     // и если да - вернуть его из кэша, если нет - рассчитать и добавить в кэш.
     // Учитывать значение переменной cacheOn
     public BigDecimal fiboNumber(int n){
-//        System.out.println(fibonacci(n));
-
         if(cacheOn){
             if (!fiboCache.containsKey(n)) {
                 if(n > 2){
@@ -39,7 +37,6 @@ public class FiboMapCache {
         }else {
             return fibonacci(n);               //Если кэш выключен, просто считаем
         }
-
     }
 
 //    Реализовать метод public void clearCahe() который устанавливает переменную fiboCache в null
