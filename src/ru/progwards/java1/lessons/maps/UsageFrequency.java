@@ -35,14 +35,14 @@ public class UsageFrequency {
         }
 
 
-//        try(RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
-//            byte[] bytes = new byte[(int) raf.length()];      //Массив байт для чтения из файла
-//            raf.read(bytes);
-//            textFromFile = new String(bytes);
-//            charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
-//        }        catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
+        try(RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
+            byte[] bytes = new byte[(int) raf.length()];      //Массив байт для чтения из файла
+            raf.read(bytes);
+            textFromFile = new String(bytes);
+            charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
+        }        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     // 2.2 вернуть Map, который содержит все найденные буквы и цифры, и количество раз,
