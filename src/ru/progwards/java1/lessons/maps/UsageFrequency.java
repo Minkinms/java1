@@ -82,6 +82,8 @@ public class UsageFrequency {
                     wordsMap.put(word, 1);
                 }
             }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
         }
 
         return wordsMap;
