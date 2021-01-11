@@ -1,26 +1,20 @@
 package ru.progwards.java1.lessons.maps;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.util.*;
 
 //Реализовать класс, подсчитывающий частоту использования слов и букв в словах на основе текстов. Методы:
 //2.4 Протестировать на файле wiki.train.tokens (во вложении), для отладки можно использовать wiki.test.tokens
 public class UsageFrequency {
     public static void main(String[] args) {
-        try {
-//            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\Censor_text1.txt";
-            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\wiki.test.tokens";
-            UsageFrequency usageFrequency = new UsageFrequency();
-            usageFrequency.processFile(fileName);
+        //            String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\Censor_text1.txt";
+                    String fileName = "C:\\Java\\Progwards\\HW 11.01.2021 задания до 15\\src\\ru\\progwards\\java1\\lessons\\maps\\Censor_text1.txt";
+//        String fileName = "G:\\Java\\Progwards\\Homework 10.01.2020\\src\\ru\\progwards\\java1\\lessons\\maps\\wiki.test.tokens";
+        UsageFrequency usageFrequency = new UsageFrequency();
+        usageFrequency.processFile(fileName);
 //            System.out.println(Arrays.toString(usageFrequency.charsFromFile));
-            usageFrequency.getLetters();
-            usageFrequency.getWords();
-        }catch (IOException e){
-            System.out.println(e.toString());
-        }
+//        usageFrequency.getLetters();
+//        usageFrequency.getWords();
 
     }
 
@@ -29,15 +23,26 @@ public class UsageFrequency {
     String textFromFile;
 
     // 2.1 загрузить содержимое файла
-    public void processFile(String fileName) throws IOException {
-        try(RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
-            byte[] bytes = new byte[(int) raf.length()];      //Массив байт для чтения из файла
-            raf.read(bytes);
-            textFromFile = new String(bytes);
-            charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
-        }        catch (Exception e){
-            System.out.println(e.getMessage());
+    public void processFile(String fileName) {
+        File file = new File(fileName);
+        try(Scanner scanner = new Scanner(file)){
+            while (scanner.hasNextLine()) {
+                String str = scanner.nextLine();
+                System. out.println(str);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
+
+
+//        try(RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
+//            byte[] bytes = new byte[(int) raf.length()];      //Массив байт для чтения из файла
+//            raf.read(bytes);
+//            textFromFile = new String(bytes);
+//            charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
+//        }        catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
     }
 
     // 2.2 вернуть Map, который содержит все найденные буквы и цифры, и количество раз,

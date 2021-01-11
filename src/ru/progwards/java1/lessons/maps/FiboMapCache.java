@@ -9,6 +9,7 @@ import java.util.Map;
 public class FiboMapCache {
     public static void main(String[] args) {
         test();
+
     }
 
     //Переменные класса
@@ -27,7 +28,7 @@ public class FiboMapCache {
         if(cacheOn){
             if (!fiboCache.containsKey(n)) {
                 if(n > 2){
-                    fiboCache.put(n,fiboCache.get(n-1).add(fiboCache.get(n-2))); //Расчитываю и добавляю в кэш
+                    fiboCache.put(n,fiboCache.get(n-1).add(fiboCache.get(n-2))); //Рассчитываю и добавляю в кэш
                 }else{
                     fiboCache.put(1, new BigDecimal("1"));
                     fiboCache.put(2, new BigDecimal("1"));
@@ -42,6 +43,7 @@ public class FiboMapCache {
 //    Реализовать метод public void clearCahe() который устанавливает переменную fiboCache в null
     public void clearCahe(){
         fiboCache.clear();
+
     }
 
 //    Для проверки работы реализовать public static void test() -
@@ -56,15 +58,6 @@ public class FiboMapCache {
             fiboMapCache.fiboNumber(i);
         }
         System.out.println("fiboNumber cacheOn=" + fiboMapCache.cacheOn + " время выполнения " + ((long) new Date().getTime() - start));
-
-/*
-        FiboMapCache fiboMapCache1 = new FiboMapCache(true);
-        start = new Date().getTime();
-        for(int i = 1; i <= 1000; i++){
-            fiboMapCache1.fiboNumber(i);
-        }
-        System.out.println("fiboNumber cacheOn=" + fiboMapCache1.cacheOn + " время выполнения " + ((long) new Date().getTime() - start));
-*/
 
         FiboMapCache fiboMapCache2 = new FiboMapCache(false);
         start = new Date().getTime();
