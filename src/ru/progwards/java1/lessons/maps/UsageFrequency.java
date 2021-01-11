@@ -14,7 +14,7 @@ public class UsageFrequency {
         usageFrequency.processFile(fileName);
 //            System.out.println(Arrays.toString(usageFrequency.charsFromFile));
 //        usageFrequency.getLetters();
-//        usageFrequency.getWords();
+        usageFrequency.getWords();
 
     }
 
@@ -68,7 +68,7 @@ public class UsageFrequency {
         StringBuilder stringSymbols = new StringBuilder();
 
         for(Character character:charsFromFile){
-            if(Character.isLetter(character)){ //Перебираю массив символов по признаку "это буква" или " это цифра"
+            if(Character.isAlphabetic(character) || Character.isDigit(character)){ //Перебираю массив символов по признаку "это буква" или " это цифра"
                 stringSymbols.append(character);
             }else stringSymbols.append(" ");
         }
