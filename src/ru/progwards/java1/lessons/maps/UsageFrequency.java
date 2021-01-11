@@ -27,6 +27,7 @@ public class UsageFrequency {
     //Переменные класса
     private char[] charsFromFile;       //Массив символов из файла
     String textFromFile;
+
     // 2.1 загрузить содержимое файла
     public void processFile(String fileName) throws IOException {
         try(RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
@@ -34,6 +35,8 @@ public class UsageFrequency {
             raf.read(bytes);
             textFromFile = new String(bytes);
             charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
+        }catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
         }
     }
 
@@ -69,6 +72,7 @@ public class UsageFrequency {
 //        String[] array = stringSymbols.toString().split("\\s*,\\s*");
 //        System.out.println(Arrays.toString(array));
         try(Scanner scanner = new Scanner(stringSymbols.toString())) {
+
             while (scanner.hasNext()) {
                 String word = scanner.next();
 //                System.out.println(word);

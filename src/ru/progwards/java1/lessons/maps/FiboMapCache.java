@@ -27,12 +27,15 @@ public class FiboMapCache {
 //        System.out.println(fibonacci(n));
 
         if(cacheOn){
-            if(fiboCache.containsKey(n)){
-                return fiboCache.get(n);  //Возвращаю значение числа Фибоначчи в BigDecimal по ключу n
-            }else {
-                fiboCache.put(n, fibonacci(n)); //Расчитываю и добавляю в кэш
-                return fibonacci(n);            //Т.к. нужно вернуть значение
+            if (!fiboCache.containsKey(n)) {
+                if(n > 2){
+                    fiboCache.put(n,fiboCache.get(n-1).add(fiboCache.get(n-2))); //Расчитываю и добавляю в кэш
+                }else{
+                    fiboCache.put(1, new BigDecimal("1"));
+                    fiboCache.put(2, new BigDecimal("1"));
+                }
             }
+            return fiboCache.get(n);  //Возвращаю значение числа Фибоначчи в BigDecimal по ключу n
         }else {
             return fibonacci(n);               //Если кэш выключен, просто считаем
         }
@@ -55,21 +58,23 @@ public class FiboMapCache {
         for(int i = 1; i <= 1000; i++){
             fiboMapCache.fiboNumber(i);
         }
-//        System.out.println((long) new Date().getTime() - start);
-
-//        fiboMapCache = new FiboMapCache(true);
-        start = new Date().getTime();
-        for(int i = 1; i <= 1000; i++){
-            fiboMapCache.fiboNumber(i);
-        }
         System.out.println("fiboNumber cacheOn=" + fiboMapCache.cacheOn + " время выполнения " + ((long) new Date().getTime() - start));
 
-        fiboMapCache = new FiboMapCache(false);
+/*
+        FiboMapCache fiboMapCache1 = new FiboMapCache(true);
         start = new Date().getTime();
         for(int i = 1; i <= 1000; i++){
-            fiboMapCache.fiboNumber(i);
+            fiboMapCache1.fiboNumber(i);
         }
-        System.out.println("fiboNumber cacheOn=" + fiboMapCache.cacheOn + " время выполнения " + ((long) new Date().getTime() - start));
+        System.out.println("fiboNumber cacheOn=" + fiboMapCache1.cacheOn + " время выполнения " + ((long) new Date().getTime() - start));
+*/
+
+        FiboMapCache fiboMapCache2 = new FiboMapCache(false);
+        start = new Date().getTime();
+        for(int i = 1; i <= 1000; i++){
+            fiboMapCache2.fiboNumber(i);
+        }
+        System.out.println("fiboNumber cacheOn=" + fiboMapCache2.cacheOn + " время выполнения " + ((long) new Date().getTime() - start));
 
     }
 
