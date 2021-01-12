@@ -24,15 +24,15 @@ public class UsageFrequency {
 
     // 2.1 загрузить содержимое файла
     public void processFile(String fileName) {
-        File file = new File(fileName);
-        try(Scanner scanner = new Scanner(file)){
-            while (scanner.hasNextLine()) {
-                String str = scanner.nextLine();
-                System. out.println(str);
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+//        File file = new File(fileName);
+//        try(Scanner scanner = new Scanner(file)){
+//            while (scanner.hasNextLine()) {
+//                String str = scanner.nextLine();
+//                System. out.println(str);
+//            }
+//        } catch (Exception exception) {
+//            exception.printStackTrace();
+//        }
 
 
         try(RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
