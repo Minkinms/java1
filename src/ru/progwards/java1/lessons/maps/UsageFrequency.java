@@ -20,7 +20,7 @@ public class UsageFrequency {
 
     //Переменные класса
     private char[] charsFromFile;       //Массив символов из файла
-    String textFromFile;
+//    String textFromFile;
 
     // 2.1 загрузить содержимое файла
     public void processFile(String fileName) {
@@ -38,8 +38,7 @@ public class UsageFrequency {
         try(RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
             byte[] bytes = new byte[(int) raf.length()];      //Массив байт для чтения из файла
             raf.read(bytes);
-            textFromFile = new String(bytes);
-            charsFromFile = textFromFile.toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
+            charsFromFile = new String(bytes).toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
         }        catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -67,30 +66,23 @@ public class UsageFrequency {
         Map<String, Integer> wordsMap = new HashMap<>();
         StringBuilder stringSymbols = new StringBuilder();
 
-        for(Character character:charsFromFile){
-            if(Character.isAlphabetic(character) || Character.isDigit(character)){ //Перебираю массив символов по признаку "это буква" или " это цифра"
-                stringSymbols.append(character);
-            }else stringSymbols.append(" ");
-        }
-//        System.out.println(stringSymbols);
+        if(charsFromFile != null){
+            for(Character character:charsFromFile){
+                if(Character.isAlphabetic(character) || Character.isDigit(character)){ //Перебираю массив символов по признаку "это буква" или " это цифра"
+                    stringSymbols.append(character);
+                }else stringSymbols.append(" "); //Получаю строку слов или цифр, разделенную только пробелами (возможно несколькими)
+            }
 
-//        String[] array = stringSymbols.toString().split("\\s*,\\s*");
-//        System.out.println(Arrays.toString(array));
-        try(Scanner scanner = new Scanner(stringSymbols.toString())) {
-
-            while (scanner.hasNext()) {
+            Scanner scanner = new Scanner(stringSymbols.toString());
+            while (scanner.hasNext()) {         //Прохожу по строке и отделяю слова
                 String word = scanner.next();
-//                System.out.println(word);
                 if(wordsMap.containsKey(word)){
                     wordsMap.put(word, wordsMap.get(word) + 1);
                 }else {
                     wordsMap.put(word, 1);
                 }
             }
-        } catch (Exception e){
-            System.out.println(e.getMessage());
         }
-
         return wordsMap;
     }
 }
