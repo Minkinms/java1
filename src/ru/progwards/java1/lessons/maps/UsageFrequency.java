@@ -13,7 +13,7 @@ public class UsageFrequency {
         UsageFrequency usageFrequency = new UsageFrequency();
         usageFrequency.processFile(fileName);
 //            System.out.println(Arrays.toString(usageFrequency.charsFromFile));
-//        usageFrequency.getLetters();
+        usageFrequency.getLetters();
         usageFrequency.getWords();
 
     }
@@ -25,21 +25,25 @@ public class UsageFrequency {
     // 2.1 загрузить содержимое файла
     public void processFile(String fileName) {
 //        File file = new File(fileName);
+////        byte[] bytes = new byte[(int)file.length()];
+////        int i = 0;
+//        StringBuilder strB = new StringBuilder();
 //        try(Scanner scanner = new Scanner(file)){
-//            while (scanner.hasNextLine()) {
-//                String str = scanner.nextLine();
-//                System. out.println(str);
-//            }
+//            while (scanner.hasNext()) {
+//                strB.append(scanner.next());
+//                strB.append(" ");
+////                i++;
+//             }
 //        } catch (Exception exception) {
 //            exception.printStackTrace();
 //        }
-
+//        charsFromFile = strB.toString().toCharArray();
 
         try(RandomAccessFile raf = new RandomAccessFile(fileName, "r")) {  //Поток для чтения файла
             byte[] bytes = new byte[(int) raf.length()];      //Массив байт для чтения из файла
             raf.read(bytes);
             charsFromFile = new String(bytes).toCharArray();   //Создание массива символов из файла на основе строки, созданной из массива байт
-        }        catch (Exception e){
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
