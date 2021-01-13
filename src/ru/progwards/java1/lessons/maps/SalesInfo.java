@@ -112,7 +112,7 @@ public class SalesInfo {
             }
 
         }
-        return null;
+        return listCustomers;
     }
 
     public Double getCustomerSum(String customer){
