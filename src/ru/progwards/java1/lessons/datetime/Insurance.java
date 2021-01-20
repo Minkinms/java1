@@ -29,7 +29,7 @@ public class Insurance {
 //        System.out.println(duration1.toString());   //PT1440H
         //Использование первого конструктора
         Insurance ins_1 = new Insurance(zdt_test1);
-        ins_1.setDuration(duration1);               //Продолжительност 1
+//        ins_1.setDuration(duration1);               //Продолжительность 1
         ZonedDateTime zdt_test6 = ZonedDateTime.parse("2020-02-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
 //        System.out.println(ins_1.checkValid(zdt_test6));
         System.out.println(ins_1.toString());
@@ -67,7 +67,7 @@ public class Insurance {
 
 //  1.2. Реализовать приватные свойства класса:
     private ZonedDateTime start; //- дата-время начала действия страховки.
-    private Duration duration = Duration.ofDays(0); //- продолжительность действия.
+    private Duration duration; //- продолжительность действия.
 
 
 
