@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class Insurance {
     public static void main(String[] args) {
-//        String str = "01.01.2020 16:00:00.000 +0300 Moscow Standard Time";
+/*//        String str = "01.01.2020 16:00:00.000 +0300 Moscow Standard Time";
         String str = "2020-01-01T16:00+03:00[Europe/Moscow]"; //2020-01-01T16:00+03:00[Europe/Moscow]
         Locale locale = Locale.US;
 //        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SSS Z zzzz").withLocale(locale);
@@ -58,7 +58,7 @@ public class Insurance {
 //        String str6 = "2021-01-01T00:00";
 //        Insurance ins_6 = new Insurance(str6, FormatStyle.LONG);
 //        ins_6.setDuration("PT1440H", FormatStyle.FULL); //Продолжительность - 2 месяца
-//        System.out.println(ins_6.toString());
+//        System.out.println(ins_6.toString());*/
 
     }
 
@@ -73,7 +73,7 @@ public class Insurance {
 
 //  1.2 Реализовать конструкторы:
 //  - установить дату-время начала действия страховки.
-    public Insurance(ZonedDateTime start){
+    public Insurance(ZonedDateTime start) throws DateTimeException{
         this.start = start;
     }
 
@@ -82,7 +82,7 @@ public class Insurance {
     LONG  - ISO_LOCAL_DATE_TIME
     FULL - ISO_ZONED_DATE_TIME
     Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.*/
-    public Insurance(String strStart, FormatStyle style){
+    public Insurance(String strStart, FormatStyle style) throws DateTimeException{
 //        DateTimeFormatter dtf;          //Возможно, что устанавливать формат не нужно. этот по умолчанию
         switch (style){
             case SHORT:
@@ -125,35 +125,17 @@ public class Insurance {
             FULL - стандартный формат Duration, который получается через toString()*/
     //PT1440H
 
-    public void setDuration(String strDuration, FormatStyle style){
+    public void setDuration(String strDuration, FormatStyle style) throws RuntimeException{
         switch (style){
             case SHORT:
                 this.duration = Duration.ofMillis(Long.parseLong(strDuration));
                 break;
             case LONG:
                 LocalDateTime localDateTime = LocalDateTime.parse(strDuration);  //ISO_LOCAL_DATE_TIME;
-
-//                System.out.println(localDateTime.getHour());
                 this.duration = Duration.between(start, start.plusYears(localDateTime.getYear())
                                                         .plusMonths(localDateTime.getMonthValue())
                                                         .plusDays(localDateTime.getDayOfYear())
                                                         .plusHours(localDateTime.getHour()));
-//                this.duration = Duration.between(start, start.plusMonths(localDateTime.getMonthValue()));
-//                System.out.println(duration.toDays());
-//                this.duration = Duration.between(start, start.plusMonths(localDateTime.getMonthValue()).plusDays(localDateTime.getDayOfYear()));
-////                                                        .plusYears(localDateTime.getYear())
-////                                                        .plusHours(localDateTime.getHour()));
-//                System.out.println(duration.toDays());
-
-
-//                System.out.println(localDateTime.getMinute());
-//                System.out.println(localDateTime.getDayOfYear());
-//                System.out.println(localDateTime.getMonthValue());
-//                System.out.println(start.plusMonths(localDateTime.getMonthValue())); //"2020-12-20T00:00"
-//                System.out.println(start.plusMonths(localDateTime.getMonthValue()).plusDays(localDateTime.getDayOfYear()));
-                //"2020-12-20T00:00"
-//                System.out.println(duration.toDays());
-//                System.out.println(start.plusMonths(localDateTime.getMonthValue()).plusYears(localDateTime.getYear()).plusHours(localDateTime.getHour()));
                 break;
             case FULL:
                 this.duration = Duration.parse(strDuration);
@@ -167,11 +149,8 @@ public class Insurance {
     public boolean checkValid(ZonedDateTime dateTime) {
         if(dateTime.compareTo(this.start) >=0){
             if(this.duration != null){
-                if((dateTime.compareTo(this.start.plusDays(duration.toDays()) )) < 0){
-                    return true;
-                }else return false;
+                return dateTime.compareTo(this.start.plusDays(duration.toDays())) < 0;
             }else return true;
-
         }else return false;
     }
 
