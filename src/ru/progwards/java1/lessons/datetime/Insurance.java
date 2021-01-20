@@ -17,48 +17,48 @@ public class Insurance {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
         ZonedDateTime zdt_test1 = ZonedDateTime.parse("2020-01-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
 
-        ZonedDateTime zdt_test3 = ZonedDateTime.parse("2020-12-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
-        ZonedDateTime zdt_test4 = ZonedDateTime.parse("2021-11-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
-        ZonedDateTime zdt_test5 = zdt_test3.plusDays(366);
-        System.out.println(zdt_test3.compareTo(zdt_test4));
+//        ZonedDateTime zdt_test3 = ZonedDateTime.parse("2020-12-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
+//        ZonedDateTime zdt_test4 = ZonedDateTime.parse("2021-11-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
+//        ZonedDateTime zdt_test5 = zdt_test3.plusDays(366);
+//        System.out.println(zdt_test3.compareTo(zdt_test4));
 //        System.out.println(zdt_test1);
 //        System.out.println(zdt_test2);
 //        System.out.println(zdt_test3 + "\n");
 
-        Duration duration1 = Duration.ofDays(32);   //Установка продолжительности через дни
-//        System.out.println(duration1.toString());   //PT1440H
-        //Использование первого конструктора
-        Insurance ins_1 = new Insurance(zdt_test1);
-//        ins_1.setDuration(duration1);               //Продолжительность 1
-        ZonedDateTime zdt_test6 = ZonedDateTime.parse("2020-02-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
-//        System.out.println(ins_1.checkValid(zdt_test6));
-        System.out.println(ins_1.toString());
-        //Использование второго конструктора
-        String str2 = "2020-09-01";
-        Insurance ins_2 = new Insurance(str2, FormatStyle.SHORT);
-        ZonedDateTime zdt_test2 = ZonedDateTime.parse("2021-09-01T00:00+03:00[Europe/Moscow]", dateTimeFormatter);
-        ins_2.setDuration(zdt_test2);
-        System.out.println(ins_2.toString());
+//        Duration duration1 = Duration.ofDays(32);   //Установка продолжительности через дни
+////        System.out.println(duration1.toString());   //PT1440H
+//        //Использование первого конструктора
+//        Insurance ins_1 = new Insurance(zdt_test1);
+////        ins_1.setDuration(duration1);               //Продолжительность 1
+//        ZonedDateTime zdt_test6 = ZonedDateTime.parse("2020-02-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
+////        System.out.println(ins_1.checkValid(zdt_test6));
+//        System.out.println(ins_1.toString());
+//        //Использование второго конструктора
+//        String str2 = "2020-09-01";
+//        Insurance ins_2 = new Insurance(str2, FormatStyle.SHORT);
+//        ZonedDateTime zdt_test2 = ZonedDateTime.parse("2021-09-01T00:00+03:00[Europe/Moscow]", dateTimeFormatter);
+//        ins_2.setDuration(zdt_test2);
+//        System.out.println(ins_2.toString());
+//
+//        String str3 = "2020-10-01T02:00";
+//        Insurance ins_3 = new Insurance(str3, FormatStyle.LONG);
+//        ins_3.setDuration( 6, 1, 1);
+//        System.out.println(ins_3.toString());
+//
+//        String str4 = "2020-05-01T16:00+03:00[Europe/Moscow]";
+//        Insurance ins_4 = new Insurance(str4, FormatStyle.FULL);
+//        ins_4.setDuration("2592000000", FormatStyle.SHORT); //Продолжительность - месяц
+//        System.out.println(ins_4.toString());
 
-        String str3 = "2020-10-01T02:00";
-        Insurance ins_3 = new Insurance(str3, FormatStyle.LONG);
-        ins_3.setDuration( 6, 1, 1);
-        System.out.println(ins_3.toString());
-
-        String str4 = "2020-05-01T16:00+03:00[Europe/Moscow]";
-        Insurance ins_4 = new Insurance(str4, FormatStyle.FULL);
-        ins_4.setDuration("2592000000", FormatStyle.SHORT); //Продолжительность - месяц
-        System.out.println(ins_4.toString());
-
-        String str5 = "2020-01-19T00:00";
+        String str5 = "2020-12-20T00:00";
         Insurance ins_5 = new Insurance(str5, FormatStyle.LONG);
-        ins_5.setDuration("0000-01-01T06:10", FormatStyle.LONG); //Продолжительность - 2 месяца
+        ins_5.setDuration("0000-01-04T06:10", FormatStyle.LONG); //Продолжительность - 2 месяца
         System.out.println(ins_5.toString());
 
-        String str6 = "2021-01-01T00:00";
-        Insurance ins_6 = new Insurance(str6, FormatStyle.LONG);
-        ins_6.setDuration("PT1440H", FormatStyle.FULL); //Продолжительность - 2 месяца
-        System.out.println(ins_6.toString());
+//        String str6 = "2021-01-01T00:00";
+//        Insurance ins_6 = new Insurance(str6, FormatStyle.LONG);
+//        ins_6.setDuration("PT1440H", FormatStyle.FULL); //Продолжительность - 2 месяца
+//        System.out.println(ins_6.toString());
 
     }
 
@@ -132,9 +132,28 @@ public class Insurance {
                 break;
             case LONG:
                 LocalDateTime localDateTime = LocalDateTime.parse(strDuration);  //ISO_LOCAL_DATE_TIME;
-                this.duration = Duration.between(start, start.plusMonths(localDateTime.getMonthValue())
-                                                        .plusYears(localDateTime.getYear()))
-                                                        .plusHours(localDateTime.getHour());
+
+//                System.out.println(localDateTime.getHour());
+                this.duration = Duration.between(start, start.plusYears(localDateTime.getYear())
+                                                        .plusMonths(localDateTime.getMonthValue())
+                                                        .plusDays(localDateTime.getDayOfYear())
+                                                        .plusHours(localDateTime.getHour()));
+//                this.duration = Duration.between(start, start.plusMonths(localDateTime.getMonthValue()));
+//                System.out.println(duration.toDays());
+//                this.duration = Duration.between(start, start.plusMonths(localDateTime.getMonthValue()).plusDays(localDateTime.getDayOfYear()));
+////                                                        .plusYears(localDateTime.getYear())
+////                                                        .plusHours(localDateTime.getHour()));
+//                System.out.println(duration.toDays());
+
+
+//                System.out.println(localDateTime.getMinute());
+//                System.out.println(localDateTime.getDayOfYear());
+//                System.out.println(localDateTime.getMonthValue());
+//                System.out.println(start.plusMonths(localDateTime.getMonthValue())); //"2020-12-20T00:00"
+//                System.out.println(start.plusMonths(localDateTime.getMonthValue()).plusDays(localDateTime.getDayOfYear()));
+                //"2020-12-20T00:00"
+//                System.out.println(duration.toDays());
+//                System.out.println(start.plusMonths(localDateTime.getMonthValue()).plusYears(localDateTime.getYear()).plusHours(localDateTime.getHour()));
                 break;
             case FULL:
                 this.duration = Duration.parse(strDuration);
