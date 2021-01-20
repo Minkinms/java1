@@ -17,10 +17,10 @@ public class Insurance {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
         ZonedDateTime zdt_test1 = ZonedDateTime.parse("2020-01-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
 
-//        ZonedDateTime zdt_test3 = ZonedDateTime.parse("2020-12-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
-//        ZonedDateTime zdt_test4 = ZonedDateTime.parse("2020-11-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
-//        ZonedDateTime zdt_test5 = zdt_test3.plusDays(366);
-//        System.out.println(zdt_test3.compareTo(zdt_test4));
+        ZonedDateTime zdt_test3 = ZonedDateTime.parse("2020-12-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
+        ZonedDateTime zdt_test4 = ZonedDateTime.parse("2021-11-01T16:00+03:00[Europe/Moscow]", dateTimeFormatter);
+        ZonedDateTime zdt_test5 = zdt_test3.plusDays(366);
+        System.out.println(zdt_test3.compareTo(zdt_test4));
 //        System.out.println(zdt_test1);
 //        System.out.println(zdt_test2);
 //        System.out.println(zdt_test3 + "\n");
@@ -146,13 +146,14 @@ public class Insurance {
 //  - проверить действительна ли страховка на указанную дату-время.
 // Если продолжительность не задана считать страховку бессрочной.
     public boolean checkValid(ZonedDateTime dateTime) {
-        if(this.duration != null){
-            if((dateTime.compareTo(this.start.plusDays(duration.toDays()))) < 0){
-                return true;
+        if(dateTime.compareTo(this.start) >=0){
+            if(this.duration != null){
+                if((dateTime.compareTo(this.start.plusDays(duration.toDays()) )) < 0){
+                    return true;
+                }else return false;
+            }else return true;
 
-            }else return false;
-        }else return true;
-
+        }else return false;
     }
 
 //  - вернуть строку формата "Insurance issued on " + start + validStr,
