@@ -146,7 +146,7 @@ public class Insurance {
 //  - проверить действительна ли страховка на указанную дату-время.
 // Если продолжительность не задана считать страховку бессрочной.
     public boolean checkValid(ZonedDateTime dateTime) {
-       if((dateTime.compareTo(this.start.plusDays(duration.toDays()))) <= 0){
+       if((dateTime.compareTo(this.start.plusDays(duration.toDays()))) <= 0 || this.duration == null){
            return true;
 
        }else return false;
