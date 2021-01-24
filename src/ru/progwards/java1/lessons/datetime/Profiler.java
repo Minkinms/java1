@@ -18,7 +18,7 @@ public class Profiler {
 
 
         Profiler profiler = new Profiler();
-        Profiler.StatisticInfo profStatInf = profiler.new StatisticInfo();
+        StatisticInfo profStatInf = new StatisticInfo();
 
         long start = System.currentTimeMillis();
 //        long start1 = Instant.now().getNano();
@@ -62,7 +62,7 @@ public class Profiler {
             statisticInfoMap.get(name).count += 1;
             statisticInfoMap.get(name).sectionTime = (int)System.currentTimeMillis();
         }else {
-            Profiler.StatisticInfo profStatInf = new Profiler().new StatisticInfo();
+            StatisticInfo profStatInf = new StatisticInfo();
             profStatInf.sectionName = name;
             profStatInf.sectionTime = (int)System.currentTimeMillis();
             profStatInf.depthSection = depthMap.size();
@@ -111,7 +111,7 @@ public class Profiler {
      }
 
     //2.4 Реализовать class StatisticInfo
-    class StatisticInfo{
+/*    class StatisticInfo{
         //Переменные класса
         public String sectionName;      //имя секции
         //Полное время выполнения секции в миллисекундах.
@@ -135,7 +135,7 @@ public class Profiler {
                     ", count=" + count +
                     '}';
         }
-    }
+    }*/
 
 
 }
