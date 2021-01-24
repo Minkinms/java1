@@ -4,9 +4,6 @@ package ru.progwards.java1.lessons.datetime;
 
 
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
 
 public class Insurance {
     public static void main(String[] args) {
@@ -69,8 +66,6 @@ public class Insurance {
     private ZonedDateTime start; //- дата-время начала действия страховки.
     private Duration duration; //- продолжительность действия.
 
-
-
 //  1.2 Реализовать конструкторы:
 //  - установить дату-время начала действия страховки.
     public Insurance(ZonedDateTime start) throws DateTimeException{
@@ -83,21 +78,17 @@ public class Insurance {
     FULL - ISO_ZONED_DATE_TIME
     Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.*/
     public Insurance(String strStart, FormatStyle style) throws DateTimeException{
-//        DateTimeFormatter dtf;          //Возможно, что устанавливать формат не нужно. этот по умолчанию
         switch (style){
             case SHORT:
-//                dtf = DateTimeFormatter.ISO_LOCAL_DATE;
-                LocalDate localDate = LocalDate.parse(strStart);
-                this.start = ZonedDateTime.of(localDate, LocalTime.MIDNIGHT, ZoneId.of("Europe/Moscow"));   //LocalTime.MIDNIGHT пришлось принять
+                LocalDate localDate = LocalDate.parse(strStart);    //формат ISO_LOCAL_DATE
+                this.start = ZonedDateTime.of(localDate, LocalTime.MIDNIGHT, ZoneId.of("Europe/Moscow"));   //LocalTime.MIDNIGHT принял
                 break;
             case LONG:
-//                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-                LocalDateTime localDateTime = LocalDateTime.parse(strStart);
+                LocalDateTime localDateTime = LocalDateTime.parse(strStart);    //Формат ISO_LOCAL_DATE_TIME
                 this.start = ZonedDateTime.of(localDateTime, ZoneId.of("Europe/Moscow"));
                 break;
             case FULL:
-//                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
-                this.start = ZonedDateTime.parse(strStart);
+                this.start = ZonedDateTime.parse(strStart);     //Формат ISO_ZONED_DATE_TIME
                 break;
         }
     }
@@ -123,8 +114,6 @@ public class Insurance {
     LONG  - ISO_LOCAL_DATE_TIME - как период, например “0000-06-03T10:00:00” означает,
             что продолжительность действия страховки 0 лет, 6 месяцев, 3 дня 10 часов.
             FULL - стандартный формат Duration, который получается через toString()*/
-    //PT1440H
-
     public void setDuration(String strDuration, FormatStyle style) throws RuntimeException{
         switch (style){
             case SHORT:
@@ -147,8 +136,8 @@ public class Insurance {
 //  - проверить действительна ли страховка на указанную дату-время.
 // Если продолжительность не задана считать страховку бессрочной.
     public boolean checkValid(ZonedDateTime dateTime) {
-        if(dateTime.compareTo(this.start) >=0){
-            if(this.duration != null){
+        if(dateTime.compareTo(this.start) >=0){                 //Если текущая дата позднее начала действия страховки
+            if(this.duration != null){                          //Если продолжительность установлена
                 return dateTime.compareTo(this.start.plusDays(duration.toDays())) < 0;
             }else return true;
         }else return false;
@@ -159,7 +148,7 @@ public class Insurance {
 //  " is not valid", если она недействительна.
     public String toString() {
         String validStr;
-        ZonedDateTime thisDay = Instant.now().atZone(ZoneId.of("Europe/Moscow"));
+        ZonedDateTime thisDay = Instant.now().atZone(ZoneId.of("Europe/Moscow"));       //Определение текущей даты
         if(checkValid(thisDay)){
             validStr = " is valid";
         }else validStr = " is not valid";
