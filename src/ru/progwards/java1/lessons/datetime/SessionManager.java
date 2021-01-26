@@ -41,7 +41,9 @@ public SessionManager(int sessionValid) -
 * */
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 public class SessionManager {
@@ -174,10 +176,15 @@ public class SessionManager {
 
     //3.8  - удаляет все сессии с истекшим сроком годности.
     public void deleteExpired(){
+        List<UserSession> list = new ArrayList<>();
         for (UserSession userSession: sessions.values()){
             if(!checkValid(userSession)){
-                sessions.remove(userSession.getSessionHandle(), userSession);
+                list.add(userSession);
+//                sessions.values().remove(userSession);
             }
+        }
+        for (UserSession userSession:list){
+            sessions.remove(userSession.getSessionHandle());
         }
     }
 
