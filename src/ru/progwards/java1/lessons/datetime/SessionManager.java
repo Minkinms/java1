@@ -176,7 +176,7 @@ public class SessionManager {
     public void deleteExpired(){
         for (UserSession userSession: sessions.values()){
             if(!checkValid(userSession)){
-                sessions.remove(userSession.getSessionHandle());
+                sessions.remove(userSession.getSessionHandle(), userSession);
             }
         }
     }
