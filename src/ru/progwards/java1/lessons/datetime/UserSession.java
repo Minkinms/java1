@@ -21,13 +21,15 @@ public UserSession(String userName) - создать сессию пользов
 
 */
 public class UserSession {
-    private int sessionHandle;
+    //Переменные класса
+    private int sessionHandle;  //
     private String userName;
     private LocalDateTime lastAccess;
 
+    //Конструктор класса
     public UserSession(String userName){
         this.userName = userName;
-        this.sessionHandle = new Random().nextInt(100);
+        this.sessionHandle = new Random().nextInt(100); //случайное число 0-100
         updateLastAccess();
     }
 

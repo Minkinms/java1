@@ -120,11 +120,8 @@ public class SessionManager {
 
     }
 
-
-
-
     //переменные класса
-    private Map<Integer, UserSession> sessions = new Hashtable<>();
+    private Map<Integer, UserSession> sessions = new Hashtable<>();     //Использую Hashtable, как более быстрый для поиска (согласно лекции)
     private int sessionValid;
 
     //Конструктор класса.
@@ -142,9 +139,8 @@ public class SessionManager {
     // Если срок валидности истек, или такой  сессии нет, возвращает null.
     // В противном случае возвращает сессию, обновив ее дату доступа.
     public UserSession find(String userName){
-        for(UserSession userSession:sessions.values()){
+        for(UserSession userSession:sessions.values()){     //перебираю Map на предмет совпадения Имени и валидности
             if(userName.equals(userSession.getUserName()) && checkValid(userSession)){
-//                System.out.println(checkValid(userSession));
                 userSession.updateLastAccess();
                 return userSession;
             }
@@ -161,7 +157,7 @@ public class SessionManager {
     // Если срок валидности истек, или такой  сессии нет, возвращает null.
     // В противном случае возвращает сессию, обновив ее дату доступа.
     public UserSession get(int sessionHandle){
-        if(sessions.containsKey(sessionHandle) && checkValid(sessions.get(sessionHandle))){            //Проверка наличия сессии. Добавить проверку валидности!
+        if(sessions.containsKey(sessionHandle) && checkValid(sessions.get(sessionHandle))){  //Проверка наличия сессии и валидности!
             sessions.get(sessionHandle).updateLastAccess();
             return sessions.get(sessionHandle);
         }
@@ -176,15 +172,15 @@ public class SessionManager {
 
     //3.8  - удаляет все сессии с истекшим сроком годности.
     public void deleteExpired(){
-        List<UserSession> list = new ArrayList<>();
+        List<UserSession> list = new ArrayList<>();         //Вспомогательный список для удаления просроченных сессий
         for (UserSession userSession: sessions.values()){
             if(!checkValid(userSession)){
                 list.add(userSession);
-//                sessions.values().remove(userSession);
+//                sessions.values().remove(userSession);    //при попытке удаления во время перебора бросается exception
             }
         }
         for (UserSession userSession:list){
-            sessions.remove(userSession.getSessionHandle());
+            sessions.remove(userSession.getSessionHandle()); //Удаление сессий по получившемуся списку
         }
     }
 
