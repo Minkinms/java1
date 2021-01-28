@@ -39,7 +39,7 @@ public SessionManager(int sessionValid) -
 - Удалить оставшуюся через метод delete
 - Убедиться что удаление прошло
 * */
-
+//Были проблемы с ReviewBoard. Комментарий для изменения и перезаписи
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Hashtable;

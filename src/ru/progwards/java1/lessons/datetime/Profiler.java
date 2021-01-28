@@ -48,7 +48,8 @@ public class Profiler {
     public static Map<Integer, String> depthMap = new HashMap<>();  //Дополниетльное хранилище для определения вложенности секций
 
     //2.1 Реализовать методы
-    //- войти в профилировочную секцию, замерить время входа.
+    //- войти в профилировочную секцию, замерить время входа
+    //TODO:Попробовать сделать через стек
     public static void enterSection(String name){
         if(statisticInfoMap.containsKey(name)){
             statisticInfoMap.get(name).count += 1;
