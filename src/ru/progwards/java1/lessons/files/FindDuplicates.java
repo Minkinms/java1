@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public class FindDuplicates {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 //        String startPath = "C:\\Java\\Progwards\\HW 28.01.2021 задания до 17\\src\\ru\\progwards\\java1\\lessons\\files\\Minkin";
         String startPath = "C:\\Minkin";
         FindDuplicates findDuplicates = new FindDuplicates();
@@ -22,25 +22,30 @@ public class FindDuplicates {
     List<FileInfo> filesList = new ArrayList<>(); //Список всех файлов
 
     //
-    public List<List<String>> findDuplicates(String startPath) throws IOException {
+    public List<List<String>> findDuplicates(String startPath) {
         List<List<String>> resultList = new ArrayList<>();
-        Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<Path>(){
-            @Override
-            public FileVisitResult visitFile(Path path, BasicFileAttributes attrs){
-                FileInfo fileInfo = new FileInfo(path);
+        try {
+            Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<>() {
+                @Override
+                public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
+                    FileInfo fileInfo = new FileInfo(path);
 //                System.out.println(fileInfo);
-                if(filesList.contains(fileInfo)){
-                    duplicatesSet.add(fileInfo);
+                    if (filesList.contains(fileInfo)) {
+                        duplicatesSet.add(fileInfo);
+                    }
+                    filesList.add(fileInfo);
+                    return FileVisitResult.CONTINUE;
                 }
-                filesList.add(fileInfo);
-                return FileVisitResult.CONTINUE;
-            }
 
-            @Override
-            public FileVisitResult visitFileFailed(Path file, IOException exc){
-                return FileVisitResult.CONTINUE;
-            }
-        });
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) {
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+
+        }catch (IOException exception){
+            System.out.println(exception.getMessage());
+        }
 
         filesList.retainAll(duplicatesSet);
         for (FileInfo fileInfo:filesList){
