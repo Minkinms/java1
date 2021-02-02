@@ -1,7 +1,6 @@
 package ru.progwards.java1.lessons.files;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class FileInfo {
     Path file_path;             //абсолютный путь к файлу
 
     //Конструктор класса
-    public FileInfo(Path file_path) throws IOException {
+    public FileInfo(Path file_path) {
         File fileInfo = new File(file_path.toString());
         this.file_name = fileInfo.getName();
         this.file_path = file_path;

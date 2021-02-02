@@ -21,11 +21,12 @@ public class FindDuplicates {
     public Set<FileInfo> duplicatesSet = new HashSet<>(); //Множество
     List<FileInfo> filesList = new ArrayList<>(); //Список всех файлов
 
+    //
     public List<List<String>> findDuplicates(String startPath) throws IOException {
         List<List<String>> resultList = new ArrayList<>();
         Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<Path>(){
             @Override
-            public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
+            public FileVisitResult visitFile(Path path, BasicFileAttributes attrs){
                 FileInfo fileInfo = new FileInfo(path);
 //                System.out.println(fileInfo);
                 if(filesList.contains(fileInfo)){
@@ -36,7 +37,7 @@ public class FindDuplicates {
             }
 
             @Override
-            public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+            public FileVisitResult visitFileFailed(Path file, IOException exc){
                 return FileVisitResult.CONTINUE;
             }
         });
