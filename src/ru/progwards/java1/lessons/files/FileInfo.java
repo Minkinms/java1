@@ -1,6 +1,8 @@
 package ru.progwards.java1.lessons.files;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class FileInfo {
     Date file_lmt_date;
     Integer file_size;          //размер файла
     Path file_path;             //абсолютный путь к файлу
+    String fileLine;            //Содержимое файла
 
     //Конструктор класса
     public FileInfo(Path file_path) {
@@ -28,6 +31,13 @@ public class FileInfo {
         this.file_size = (int)fileInfo.length();
 //        this.file_lmt = (FileTime)Files.getAttribute(file_path, "lastModifiedTime");
         file_lmt_date = new Date(fileInfo.lastModified());
+
+        try {
+            fileLine = Files.readString(this.file_path);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<String> getFileList(){
@@ -43,6 +53,7 @@ public class FileInfo {
         if (this == o) return true;         //Подходит ли к проверке по содержимому?
         if (!(o instanceof FileInfo)) return false;
         FileInfo fileInfo = (FileInfo) o;
+        if(!fileLine.equals(fileInfo.fileLine)) return false;
         return Objects.equals(file_name, fileInfo.file_name) &&
                 Objects.equals(file_lmt_date, fileInfo.file_lmt_date) &&
                 Objects.equals(file_size, fileInfo.file_size);
