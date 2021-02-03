@@ -42,7 +42,7 @@ public class FileInfo {
 
     public List<String> getFileList(){
         List<String> fileInfoList = new ArrayList<>();
-//        fileInfoList.add(file_name);
+        fileInfoList.add(file_name);
         fileInfoList.add(file_path.toString());
         return fileInfoList;
     }
