@@ -31,9 +31,9 @@ public class FindDuplicates {
                     FileInfo fileInfo = new FileInfo(path);
 //                System.out.println(fileInfo);
                     if (filesList.contains(fileInfo)) {
-                        duplicatesSet.add(fileInfo);
+                        duplicatesSet.add(fileInfo);    //Отдельное множество для повторяющихся
                     }
-                    filesList.add(fileInfo);
+                    filesList.add(fileInfo);        //Собираю список всех файлов
                     return FileVisitResult.CONTINUE;
                 }
 
@@ -48,8 +48,17 @@ public class FindDuplicates {
         }
 
         filesList.retainAll(duplicatesSet);
-        for (FileInfo fileInfo:filesList){
-            resultList.add(fileInfo.getFileList());
+//        for (FileInfo fileInfo:filesList){
+//            resultList.add(fileInfo.getFileList());
+//        }
+        for(FileInfo fileInfo:duplicatesSet){
+            List<String> duplicatedFilesString = new ArrayList<>();
+            for(FileInfo duplicateFromList:filesList){
+                if(duplicateFromList.equals(fileInfo)){
+                    duplicatedFilesString.add(duplicateFromList.file_path.toString());
+                }
+            }
+            resultList.add(duplicatedFilesString);
         }
 
         return resultList;
