@@ -121,7 +121,7 @@ public class FilesSelect {
         return false;
     }
 
-    //Метод для создания каталога
+    //Метод для создания каталога.
     private void newDir(String nameDir) {
         Path pathNewDir = outFolderPath.resolve(nameDir);
         try{
