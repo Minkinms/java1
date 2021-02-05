@@ -37,9 +37,6 @@ public class FilesSelect {
     private Path outFolderPath;
     private List<String> keys = new ArrayList<>();
 
-    List<String> pathsList = new ArrayList<>();
-
-
     //Сортировка файлов по их содержимому
     public void selectFiles(String inFolder, String outFolder, List<String> keys){
         inFolderPath = Path.of(inFolder);
@@ -55,10 +52,10 @@ public class FilesSelect {
         try {
             Files.walkFileTree(inFolderPath, new SimpleFileVisitor<>(){
                 @Override
-                public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
-                    if(pathMatcher.matches(path)){
+                public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
+                    if(pathMatcher.matches(path)){      //Выбираю файлы .txt
 //                    System.out.println(path);
-                        checkKeysInFile(path);
+                        checkKeysInFile(path);  //Проверяю содержимое в выбранных файлах
                     }
                     return FileVisitResult.CONTINUE;
                 }
@@ -76,14 +73,14 @@ public class FilesSelect {
     //Метод поиска слов в файлах
     private void checkKeysInFile(Path filePath) {
         try {
-            String fileContent = Files.readString(filePath);
+            String fileContent = Files.readString(filePath);    //считывание содержимого
             for(String key:keys){
-                if(fileContent.contains(key)){
-                    System.out.println(filePath);
-                    if(!findDirNamedKey(key)){
+                if(fileContent.contains(key)){          //Поиск совпадений по ключевым словам
+//                    System.out.println(filePath);
+                    if(!findDirNamedKey(key)){          //Создание каталога с именем key, если такого нет
                         newDir(key);
                     }
-                    doCopyFile(filePath, key);
+                    doCopyFile(filePath, key);          //Копирование файла в каталог
                 }
             }
         }catch (IOException exception){
@@ -94,11 +91,10 @@ public class FilesSelect {
 
     //Метод для копирования файла
     private void doCopyFile(Path filePath, String key)  {
-        Path pathTargetDir = outFolderPath.resolve(key);
-//        Path p = filePath.getFileName();
-        Path p2 = pathTargetDir.resolve(filePath.getFileName());
+        //Целевой путь = имя папки для результата + папка с именем ключа + имя файла для копирования
+        Path pathTargetDir = outFolderPath.resolve(key).resolve(filePath.getFileName());
         try {
-            Files.copy(filePath, p2, StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(filePath, pathTargetDir, StandardCopyOption.REPLACE_EXISTING);
         }catch (IOException exception){
             System.out.println(exception.getMessage());
         }
@@ -108,13 +104,13 @@ public class FilesSelect {
     //Поиск каталогов keys
     private boolean findDirNamedKey(String key){
         File targetDir = new File(outFolderPath.toString());
-        File[] listDirs = targetDir.listFiles(new FileFilter() {
+        File[] listDirs = targetDir.listFiles(new FileFilter() {    //Получаю список каталогов в целевой папке
             @Override
             public boolean accept(File pathname) {
                 return pathname.isDirectory();
             }
         });
-
+        //Ищу каталоги с именем key
         if(listDirs != null) {
             for (File dir : listDirs) {
                 if (dir.getName().equals(key)) {
