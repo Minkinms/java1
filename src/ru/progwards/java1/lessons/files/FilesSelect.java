@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FilesSelect {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         String inFolder = "C:\\Minkin";
         String outFolder = "C:\\Minkin\\Task2";
         List<String> keys = new ArrayList<>(Arrays.asList("Реализовать", "метод", "сигнатурой"));
@@ -41,7 +41,7 @@ public class FilesSelect {
 
 
     //Сортировка файлов по их содержимому
-    public void selectFiles(String inFolder, String outFolder, List<String> keys) throws IOException {
+    public void selectFiles(String inFolder, String outFolder, List<String> keys){
         inFolderPath = Path.of(inFolder);
         outFolderPath = Path.of(outFolder);
         this.keys = keys;
@@ -50,46 +50,58 @@ public class FilesSelect {
     }
 
     //Метод для поиска файлов
-    private void findFiles() throws IOException {
+    private void findFiles() {
         PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:**/*.txt");
-        Files.walkFileTree(inFolderPath, new SimpleFileVisitor<>(){
-            @Override
-            public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
-                if(pathMatcher.matches(path)){
+        try {
+            Files.walkFileTree(inFolderPath, new SimpleFileVisitor<>(){
+                @Override
+                public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
+                    if(pathMatcher.matches(path)){
 //                    System.out.println(path);
-                    checkKeysInFile(path);
+                        checkKeysInFile(path);
+                    }
+                    return FileVisitResult.CONTINUE;
                 }
-                return FileVisitResult.CONTINUE;
-            }
 
-            @Override
-            public FileVisitResult visitFileFailed(Path file, IOException exc){
-                return FileVisitResult.CONTINUE;
-            }
-        });
-    }
-
-    //Метод поиска слов в файлах
-    private void checkKeysInFile(Path filePath) throws IOException {
-        String fileContent = Files.readString(filePath);
-        for(String key:keys){
-            if(fileContent.contains(key)){
-                System.out.println(filePath);
-                if(!findDirNamedKey(key)){
-                    newDir(key);
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc){
+                    return FileVisitResult.CONTINUE;
                 }
-                doCopyFile(filePath, key);
-            }
+            });
+        }catch (IOException exception){
+            System.out.println(exception.getMessage());
         }
     }
 
+    //Метод поиска слов в файлах
+    private void checkKeysInFile(Path filePath) {
+        try {
+            String fileContent = Files.readString(filePath);
+            for(String key:keys){
+                if(fileContent.contains(key)){
+                    System.out.println(filePath);
+                    if(!findDirNamedKey(key)){
+                        newDir(key);
+                    }
+                    doCopyFile(filePath, key);
+                }
+            }
+        }catch (IOException exception){
+            System.out.println(exception.getMessage());
+        }
+
+    }
+
     //Метод для копирования файла
-    private void doCopyFile(Path filePath, String key) throws IOException {
+    private void doCopyFile(Path filePath, String key)  {
         Path pathTargetDir = outFolderPath.resolve(key);
-        Path relPath = filePath.relativize(pathTargetDir);
-        Path p = filePath.getFileName();
-        Path p2 = pathTargetDir.resolve(p);
-        Files.copy(filePath, p2, StandardCopyOption.REPLACE_EXISTING);
+//        Path p = filePath.getFileName();
+        Path p2 = pathTargetDir.resolve(filePath.getFileName());
+        try {
+            Files.copy(filePath, p2, StandardCopyOption.REPLACE_EXISTING);
+        }catch (IOException exception){
+            System.out.println(exception.getMessage());
+        }
 
     }
 
@@ -114,8 +126,12 @@ public class FilesSelect {
     }
 
     //Метод для создания каталога
-    private void newDir(String nameDir) throws IOException {
+    private void newDir(String nameDir) {
         Path pathNewDir = outFolderPath.resolve(nameDir);
-        Files.createDirectory(pathNewDir);
+        try{
+            Files.createDirectory(pathNewDir);
+        }catch (IOException exception){
+            System.out.println(exception.getMessage());
+        }
     }
 }
