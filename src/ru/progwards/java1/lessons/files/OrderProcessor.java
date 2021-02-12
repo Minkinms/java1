@@ -183,11 +183,11 @@ public class OrderProcessor {
         TreeMap<String, Double> resultMap = new TreeMap<>();
         for (Order order : orderList){
             for(OrderItem orderItem : order.items){
-                if(resultMap.containsKey(orderItem.goodsName)){
-                    double goodsSum = resultMap.get(orderItem.goodsName) + (orderItem.price * orderItem.count);
-                    resultMap.put(orderItem.goodsName, goodsSum);
+                if(resultMap.containsKey(orderItem.googsName)){
+                    double goodsSum = resultMap.get(orderItem.googsName) + (orderItem.price * orderItem.count);
+                    resultMap.put(orderItem.googsName, goodsSum);
                 }else {
-                    resultMap.put(orderItem.goodsName, orderItem.price * orderItem.count);
+                    resultMap.put(orderItem.googsName, orderItem.price * orderItem.count);
                 }
             }
         }
