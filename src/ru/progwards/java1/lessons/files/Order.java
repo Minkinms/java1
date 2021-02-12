@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +43,11 @@ public class Order{
     public void getFromFileAttributes(Path path) {
         try {
 //            System.out.println(Files.getAttribute(path, "lastModifiedTime").toString());
-            this.datetime = LocalDateTime.parse(Files.getAttribute(path, "lastModifiedTime").toString(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"));   //Формат ввел вручную
+            FileTime fileTime = (FileTime) Files.getAttribute(path, "lastModifiedTime");
+            Instant instant = fileTime.toInstant();
+            this.datetime = LocalDateTime.ofInstant(instant, ZoneId.of("Europe/Moscow"));
+//            this.datetime = LocalDateTime.parse(Files.getAttribute(path, "lastModifiedTime").toString(),
+//                    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"));   //Формат ввел вручную
                                                                                         //Были проблемы. Менялось кол-во знаков микросекунд
         }catch (IOException exc){
             System.out.println(exc.getMessage());

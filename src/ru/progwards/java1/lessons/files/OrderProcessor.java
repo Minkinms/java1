@@ -18,13 +18,22 @@ ZZZZ - обязательные 4 символа customerId - идентифик
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.nio.file.attribute.FileTime;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class OrderProcessor {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Path path = Path.of("C:\\Minkin_Orders\\S01-A001Z1-0001.csv");
+        FileTime fileTime = (FileTime) Files.getAttribute(path, "lastModifiedTime");
+        Instant instant = fileTime.toInstant();
+        ZonedDateTime zdt = instant.atZone(ZoneId.of("Europe/Moscow"));
+        LocalDateTime ldt = LocalDateTime.ofInstant(instant, ZoneId.of("Europe/Moscow"));
+        System.out.println(ldt);
+        System.out.println(Files.getAttribute(path, "lastModifiedTime").getClass());
+
+
         String startPath = "C:\\Minkin_Orders";
         OrderProcessor orderProcessor = new OrderProcessor(startPath);
 //        LocalDate start = LocalDate.of(2021, 2, 7);
