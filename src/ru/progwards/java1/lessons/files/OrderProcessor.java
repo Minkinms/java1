@@ -34,36 +34,36 @@ public class OrderProcessor {
         LocalDate finish = null;
         String shopId = null;
         System.out.println("Количество файлов с ошибками " + orderProcessor.loadOrders(start, finish, shopId));
-/*        for (Order ord : orderProcessor.orderList){
+        for (Order ord : orderProcessor.orderList){
             System.out.println("\n" + ord);
             for (OrderItem oi : ord.items){
                 System.out.println(oi);
             }
-        }*/
+        }
 //---------------------------------------------
         System.out.println("\n Метод process \n");
-/*        shopId = "S03";
+        shopId = "S03";
         for (Order ord : orderProcessor.process(shopId)){
             System.out.println("\n" + ord);
             for (OrderItem oi : ord.items){
                 System.out.println(oi);
             }
-        }*/
+        }
 //---------------------------------------------
         System.out.println("\n Метод statisticsByShop \n");
-/*        for (var entry : orderProcessor.statisticsByShop().entrySet()){    //Map<String (shopID), Double>
+        for (var entry : orderProcessor.statisticsByShop().entrySet()){    //Map<String (shopID), Double>
             System.out.println("shopID: " + entry.getKey() + " Сумма " + entry.getValue() );
-        }*/
+        }
 //---------------------------------------------
         System.out.println("\n Метод statisticsByGoods \n");
-/*        for (var entry : orderProcessor.statisticsByGoods().entrySet()){    //Map<String (shopID), Double>
+        for (var entry : orderProcessor.statisticsByGoods().entrySet()){    //Map<String (shopID), Double>
             System.out.println("Товар:  " + entry.getKey() + "; Сумма: " + entry.getValue() );
-        }*/
+        }
 //---------------------------------------------
         System.out.println("\n Метод statisticsByDay \n");
-/*        for (var entry : orderProcessor.statisticsByDay().entrySet()){    //Map<String (shopID), Double>
+        for (var entry : orderProcessor.statisticsByDay().entrySet()){    //Map<String (shopID), Double>
             System.out.println("День:  " + entry.getKey() + "; Сумма: " + entry.getValue() );
-        }*/
+        }
 
 
     }
@@ -95,7 +95,9 @@ public class OrderProcessor {
         List<Path> ordersPath = new ArrayList<>(findFiles());   //Список путей с правильными именами файлов. Запись кол-ва файлов  ошибками в именах
         for(Path path:ordersPath){
 //            System.out.println(path);
-            Order order = new Order(path);
+//            Order order = new Order(path);
+            Order order = new Order();
+            createOrder(order, path);       //Создание заказа без использования конструктора класса Order
             if(order.fileHasNoWrong){
                 orderAllList.add(order);    //Общий список. До сортировки
             }else {
@@ -106,6 +108,14 @@ public class OrderProcessor {
         getOrderList(orderAllList, start, finish, shopId);    //Метод для формирования списка по условиям
 
         return this.countWrongOrders;
+    }
+
+    //Создание заказа без использования конструктора класса Order
+    public void createOrder(Order order, Path orderPath){
+        order.getFromFileName(orderPath);
+        order.getFromFileAttributes(orderPath);
+        order.getItemsFromFile(orderPath);
+        order.getSum();
     }
 
     //Метод для формирования списка по условиям

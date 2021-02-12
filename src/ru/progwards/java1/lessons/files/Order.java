@@ -22,15 +22,14 @@ public class Order{
     public boolean fileHasNoWrong = false;
 
     //Конструктор класса
-    public Order(Path orderPath){
+/*    public Order(Path orderPath){
         getFromFileName(orderPath);
         getFromFileAttributes(orderPath);
         getItemsFromFile(orderPath);
         getSum();
-    }
+    }*/
 
     public void getFromFileName(Path path) {
-//        Order order = new Order();
         File orderFileInfo = new File(path.toString());
         String[] orderFileName = orderFileInfo.getName().split("-");
         this.shopId = orderFileName[0].trim();
@@ -55,7 +54,8 @@ public class Order{
             List<String> itemsLines = new ArrayList<>(Files.readAllLines(path));
             for (String itemLine:itemsLines){
                 if(checkItem(itemLine)){
-                    items.add(new OrderItem(itemLine));
+//                    items.add(new OrderItem(itemLine));
+                    items.add(createOrderItem(itemLine));
                     fileHasNoWrong = true;
                 }else{
                     fileHasNoWrong = false;
@@ -66,6 +66,15 @@ public class Order{
         }catch (IOException exc){
             System.out.println(exc.getMessage());
         }
+    }
+
+    public OrderItem createOrderItem(String itemLine) {
+        OrderItem orderItem = new OrderItem();
+        String[] itemInfoArray = itemLine.split(",");
+        orderItem.googsName = itemInfoArray[0];
+        orderItem.count = Integer.parseInt(itemInfoArray[1].trim());
+        orderItem.price = Double.parseDouble(itemInfoArray[2].trim());
+        return orderItem;
     }
 
     //Проверка содержимого перед формированием заказа
