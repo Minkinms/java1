@@ -25,13 +25,13 @@ import java.util.*;
 
 public class OrderProcessor {
     public static void main(String[] args) throws IOException {
-        Path path = Path.of("C:\\Minkin_Orders\\S01-A001Z1-0001.csv");
+/*        Path path = Path.of("C:\\Minkin_Orders\\S01-A001Z1-0001.csv");
         FileTime fileTime = (FileTime) Files.getAttribute(path, "lastModifiedTime");
         Instant instant = fileTime.toInstant();
         ZonedDateTime zdt = instant.atZone(ZoneId.of("Europe/Moscow"));
         LocalDateTime ldt = LocalDateTime.ofInstant(instant, ZoneId.of("Europe/Moscow"));
         System.out.println(ldt);
-        System.out.println(Files.getAttribute(path, "lastModifiedTime").getClass());
+        System.out.println(Files.getAttribute(path, "lastModifiedTime").getClass());*/
 
 
         String startPath = "C:\\Minkin_Orders";
@@ -51,28 +51,28 @@ public class OrderProcessor {
         }
 //---------------------------------------------
         System.out.println("\n Метод process \n");
-        shopId = "S03";
+/*        shopId = "S03";
         for (Order ord : orderProcessor.process(shopId)){
             System.out.println("\n" + ord);
             for (OrderItem oi : ord.items){
                 System.out.println(oi);
             }
-        }
+        }*/
 //---------------------------------------------
         System.out.println("\n Метод statisticsByShop \n");
-        for (var entry : orderProcessor.statisticsByShop().entrySet()){    //Map<String (shopID), Double>
+/*        for (var entry : orderProcessor.statisticsByShop().entrySet()){    //Map<String (shopID), Double>
             System.out.println("shopID: " + entry.getKey() + " Сумма " + entry.getValue() );
-        }
+        }*/
 //---------------------------------------------
         System.out.println("\n Метод statisticsByGoods \n");
-        for (var entry : orderProcessor.statisticsByGoods().entrySet()){    //Map<String (shopID), Double>
+/*        for (var entry : orderProcessor.statisticsByGoods().entrySet()){    //Map<String (shopID), Double>
             System.out.println("Товар:  " + entry.getKey() + "; Сумма: " + entry.getValue() );
-        }
+        }*/
 //---------------------------------------------
         System.out.println("\n Метод statisticsByDay \n");
-        for (var entry : orderProcessor.statisticsByDay().entrySet()){    //Map<String (shopID), Double>
+/*        for (var entry : orderProcessor.statisticsByDay().entrySet()){    //Map<String (shopID), Double>
             System.out.println("День:  " + entry.getKey() + "; Сумма: " + entry.getValue() );
-        }
+        }*/
 
 
     }
@@ -107,11 +107,11 @@ public class OrderProcessor {
 //            Order order = new Order(path);
             Order order = new Order();
             createOrder(order, path);       //Создание заказа без использования конструктора класса Order
-            if(order.fileHasNoWrong){
+//            if(order.fileHasNoWrong){
                 orderAllList.add(order);    //Общий список. До сортировки
-            }else {
-                countWrongOrders++;
-            }
+//            }else {
+//                countWrongOrders++;
+//            }
         }
 
         getOrderList(orderAllList, start, finish, shopId);    //Метод для формирования списка по условиям
