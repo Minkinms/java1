@@ -232,7 +232,7 @@ public class OrderProcessor {
         }
 
         if(start != null){
-            LocalDateTime startLDT = LocalDateTime.of(start, LocalTime.NOON);
+            LocalDateTime startLDT = LocalDateTime.of(start, LocalTime.MIDNIGHT);
             orderMap = new TreeMap<>(orderMap.tailMap(startLDT));
         }
         if(finish != null){
