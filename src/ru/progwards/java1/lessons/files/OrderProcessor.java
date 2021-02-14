@@ -36,10 +36,10 @@ public class OrderProcessor {
 
         String startPath = "C:\\Minkin_Orders";
         OrderProcessor orderProcessor = new OrderProcessor(startPath);
-//        LocalDate start = LocalDate.of(2021, 2, 7);
-//        LocalDate finish = LocalDate.of(2021, 2, 7);
+        LocalDate start = LocalDate.of(2021, 2, 7);
+//        LocalDate finish = LocalDate.of(2021, 2, 12);
 //        String shopId = "S01";
-        LocalDate start =  null;
+//        LocalDate start =  null;
         LocalDate finish = null;
         String shopId = null;
         System.out.println("Количество файлов с ошибками " + orderProcessor.loadOrders(start, finish, shopId));
@@ -102,6 +102,7 @@ public class OrderProcessor {
     public int loadOrders(LocalDate start, LocalDate finish, String shopId){
         List<Order> orderAllList = new ArrayList<>();      //Список заказов полный
         List<Path> ordersPath = new ArrayList<>(findFiles());   //Список путей с правильными именами файлов. Запись кол-ва файлов  ошибками в именах
+//        List<Path> ordersPath = new ArrayList<>(findFiles1(start, finish));
         for(Path path:ordersPath){
 //            System.out.println(path);
 //            Order order = new Order(path);
@@ -119,6 +120,86 @@ public class OrderProcessor {
         return this.countWrongOrders;
     }
 
+    //Метод для отбора файлов с подходящим форматов имени
+    private List<Path> findFiles1(LocalDate start, LocalDate finish) {
+        TreeMap<LocalDateTime, Path> orderFilesMap = new TreeMap<>();
+        PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:**/*.csv");
+        try {
+            Files.walkFileTree(startPath, new SimpleFileVisitor<>(){
+                @Override
+                public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
+                    if(pathMatcher.matches(path)){      //Файлы соответствующие шаблону
+//                    System.out.println(path);
+                        try {
+                            FileTime fileTime = (FileTime) Files.getAttribute(path, "lastModifiedTime");    //Получение даты файла из аттрибута
+                            Instant instant = fileTime.toInstant();
+                            LocalDateTime fileDate = LocalDateTime.ofInstant(instant, ZoneId.of("Europe/Moscow"));
+                            orderFilesMap.put(fileDate, path);
+                        }catch (IOException exception){
+                            System.out.println(exception.getMessage());
+                        }
+
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc){
+                    System.out.println("Ошибка в названии пути");
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        }catch (IOException exception){
+            System.out.println(exception.getMessage());
+        }
+
+//        checkConditions(orderFilesMap, start, finish);
+//        List<Path> orderFilesList = new ArrayList<>(orderFilesMap.values());
+        List<Path> orderFilesList = new ArrayList<>(checkConditions(orderFilesMap, start, finish).values());
+        return orderFilesList;
+    }
+
+
+    //Метод для отбора файлов с подходящим форматов имени
+    private List<Path> findFiles() {
+        List<Path> orderFiles = new ArrayList<>();
+        PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:**/???[-]??????[-]????.csv");
+        try {
+            Files.walkFileTree(startPath, new SimpleFileVisitor<>(){
+                @Override
+                public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
+
+
+                    if(pathMatcher.matches(path)){      //Файлы соответствующие шаблону
+//                    System.out.println(path);
+                        orderFiles.add(path);
+                        //
+                    }else {
+//                        System.out.println("Ошибка в названии файла");
+                        countWrongOrders++;     //Количество файлов с ошибкми в именах
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc){
+                    System.out.println("Ошибка в названии пути");
+                    return FileVisitResult.CONTINUE;
+                }
+
+            });
+
+//            System.out.println("\nВсего неподходящих файлов " + countWrongOrders);
+
+        }catch (IOException exception){
+            System.out.println(exception.getMessage());
+        }
+
+        return orderFiles;
+    }
+
+
+
     //Создание заказа без использования конструктора класса Order
     public void createOrder(Order order, Path orderPath){
         order.getFromFileName(orderPath);
@@ -127,23 +208,36 @@ public class OrderProcessor {
         order.getSum();
     }
 
+    //Проверка условий отбора файлов
+    public TreeMap<LocalDateTime, Path> checkConditions(TreeMap<LocalDateTime, Path> orderFilesMap, LocalDate start, LocalDate finish) {   //TODO:Сделать проверку только по датам
+        if(start != null){
+            LocalDateTime startLDT = LocalDateTime.of(start, LocalTime.MIDNIGHT);
+            orderFilesMap = new TreeMap<>(orderFilesMap.headMap(startLDT));
+        }
+        if(finish != null){
+            LocalDateTime startLDT = LocalDateTime.of(finish, LocalTime.MIDNIGHT);
+            orderFilesMap = new TreeMap<>(orderFilesMap.tailMap(startLDT));
+        }
+        return orderFilesMap;
+    }
+
     //Метод для формирования списка по условиям
 /*    Если start == null, значит нет ограничения по дате слева,
     если finish == null, значит нет ограничения по дате справа,
     если shopId == null - грузим для всех магазинов.*/
     public void getOrderList(List<Order> orderAllList, LocalDate start, LocalDate finish, String shopId){
         TreeMap<LocalDateTime, Order> orderMap = new TreeMap<>();
-        for (Order order : orderAllList){
+        for (Order order : orderAllList){           //Создание Мар с ключем по дате
             orderMap.put(order.datetime, order);
         }
 
         if(start != null){
             LocalDateTime startLDT = LocalDateTime.of(start, LocalTime.MIDNIGHT);
-            orderMap = new TreeMap<>(orderMap.headMap(startLDT));
+            orderMap = new TreeMap<>(orderMap.tailMap(startLDT));
         }
         if(finish != null){
             LocalDateTime startLDT = LocalDateTime.of(finish, LocalTime.MIDNIGHT);
-            orderMap = new TreeMap<>(orderMap.tailMap(startLDT));
+            orderMap = new TreeMap<>(orderMap.headMap(startLDT));
         }
         if(shopId != null){
             for(Order order : orderMap.values()){
@@ -229,41 +323,6 @@ public class OrderProcessor {
         return resultMap;
     }
 
-    //Метод для отбора файлов с подходящим форматов имени
-    private List<Path> findFiles() {
-        List<Path> orderFiles = new ArrayList<>();
-        PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:**/???[-]??????[-]????.csv");
-        try {
-            Files.walkFileTree(startPath, new SimpleFileVisitor<>(){
 
-                @Override
-                public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
-                    if(pathMatcher.matches(path)){      //Выбираю файлы по шаблону
-//                    System.out.println(path);
-                    orderFiles.add(path);
-                          //
-                    }else {
-//                        System.out.println("Ошибка в названии файла");
-                        countWrongOrders++;     //Количество файлов с ошибкми в именах
-                    }
-                    return FileVisitResult.CONTINUE;
-                }
-
-                @Override
-                public FileVisitResult visitFileFailed(Path file, IOException exc){
-                    System.out.println("Ошибка в названии пути");
-                    return FileVisitResult.CONTINUE;
-                }
-
-            });
-
-//            System.out.println("\nВсего неподходящих файлов " + countWrongOrders);
-
-        }catch (IOException exception){
-            System.out.println(exception.getMessage());
-        }
-
-        return orderFiles;
-    }
 
 }
