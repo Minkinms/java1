@@ -43,6 +43,7 @@ public class OrderProcessor {
         LocalDate finish = null;
         String shopId = null;
         System.out.println("Количество файлов с ошибками " + orderProcessor.loadOrders(start, finish, shopId));
+        System.out.println("Количество файлов с ошибками " + orderProcessor.loadOrders(start, finish, shopId));
         for (Order ord : orderProcessor.orderList){
             System.out.println("\n" + ord);
             for (OrderItem oi : ord.items){
@@ -100,6 +101,7 @@ public class OrderProcessor {
     Метод возвращает количество файлов с ошибками.
     При этом, если в классе содержалась информация, ее надо удалить*/
     public int loadOrders(LocalDate start, LocalDate finish, String shopId){
+        this.countWrongOrders = 0;
         List<Order> orderAllList = new ArrayList<>();      //Список заказов полный
         List<Path> ordersPath = new ArrayList<>(findFiles());   //Список путей с правильными именами файлов. Запись кол-ва файлов  ошибками в именах
 //        List<Path> ordersPath = new ArrayList<>(findFiles1(start, finish));

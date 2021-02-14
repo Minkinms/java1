@@ -106,7 +106,7 @@ public class Order{
     //Расчет суммы стоимости всех позиций в заказе
     public void getSum(){
         for (OrderItem orderItem : items){
-            sum += (orderItem.count * orderItem.price);
+            this.sum += (orderItem.count * orderItem.price);
         }
     }
 
