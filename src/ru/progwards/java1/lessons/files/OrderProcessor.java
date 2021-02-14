@@ -232,11 +232,11 @@ public class OrderProcessor {
         }
 
         if(start != null){
-            LocalDateTime startLDT = LocalDateTime.of(start, LocalTime.MIDNIGHT);
+            LocalDateTime startLDT = LocalDateTime.of(start, LocalTime.NOON);
             orderMap = new TreeMap<>(orderMap.tailMap(startLDT));
         }
         if(finish != null){
-            LocalDateTime startLDT = LocalDateTime.of(finish, LocalTime.MIDNIGHT);
+            LocalDateTime startLDT = LocalDateTime.of(finish, LocalTime.NOON);
             orderMap = new TreeMap<>(orderMap.headMap(startLDT));
         }
         if(shopId != null){
