@@ -37,7 +37,8 @@ public class Order{
         String[] orderFileName = orderFileInfo.getName().split("-");
         this.shopId = orderFileName[0].trim();
         this.orderId = orderFileName[1].trim();
-        this.customerId = orderFileName[2].trim();
+        this.customerId = orderFileName[2].trim().substring(0, 4);
+
     }
 
     public void getFromFileAttributes(Path path) {

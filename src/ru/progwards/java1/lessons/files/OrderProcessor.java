@@ -52,7 +52,7 @@ public class OrderProcessor {
         }
 //---------------------------------------------
         System.out.println("\n Метод process \n");
-        shopId = "S02";
+        shopId = null;
         for (Order ord : orderProcessor.process(shopId)){
             System.out.println("\n" + ord);
             for (OrderItem oi : ord.items){
