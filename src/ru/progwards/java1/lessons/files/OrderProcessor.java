@@ -52,7 +52,7 @@ public class OrderProcessor {
         }
 //---------------------------------------------
         System.out.println("\n Метод process \n");
-        shopId = "S03";
+        shopId = "S02";
         for (Order ord : orderProcessor.process(shopId)){
             System.out.println("\n" + ord);
             for (OrderItem oi : ord.items){
@@ -130,7 +130,9 @@ public class OrderProcessor {
         for(Path path:ordersPath){
             Order order = new Order();
             createOrder(order, path);       //Создание заказа без использования конструктора класса Order
-            orderList.add(order);
+            if(order.fileHasNoWrong) {
+                orderList.add(order);
+            }
         }
 
 
