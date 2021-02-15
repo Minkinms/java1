@@ -52,13 +52,13 @@ public class OrderProcessor {
         }
 //---------------------------------------------
         System.out.println("\n Метод process \n");
-/*        shopId = "S03";
+        shopId = "S03";
         for (Order ord : orderProcessor.process(shopId)){
             System.out.println("\n" + ord);
             for (OrderItem oi : ord.items){
                 System.out.println(oi);
             }
-        }*/
+        }
 //---------------------------------------------
         System.out.println("\n Метод statisticsByShop \n");
 /*        for (var entry : orderProcessor.statisticsByShop().entrySet()){    //Map<String (shopID), Double>
@@ -359,9 +359,11 @@ public class OrderProcessor {
     public List<Order> process(String shopId) {
         List<Order> ordersProcess = new ArrayList<>();
         for (Order order : orderList) {
-            if (order.shopId.equals(shopId)) {
-                ordersProcess.add(order);
-            }
+            if(shopId != null) {
+                if (order.shopId.equals(shopId)) {
+                    ordersProcess.add(order);
+                }
+            }else ordersProcess.add(order);
         }
         ordersProcess.sort(new Comparator<Order>() {        //Хотя в TreeMap они уже отсортированы
             @Override
