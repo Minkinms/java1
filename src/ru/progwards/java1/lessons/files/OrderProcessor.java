@@ -103,6 +103,7 @@ public class OrderProcessor {
     При этом, если в классе содержалась информация, ее надо удалить*/
     public int loadOrders(LocalDate start, LocalDate finish, String shopId) {
         this.countWrongOrders = 0;
+        orderList.clear();
         List<Order> orderAllList = new ArrayList<>();      //Список заказов полный
         //Было
 /*        List<Path> ordersPath = new ArrayList<>(findFiles());   //Список путей с правильными именами файлов. Запись кол-ва файлов  ошибками в именах
