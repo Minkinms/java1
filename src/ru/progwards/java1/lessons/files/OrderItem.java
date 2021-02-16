@@ -2,7 +2,7 @@ package ru.progwards.java1.lessons.files;
 
 public class OrderItem {
 
-    public String googsName;    //наименование товара
+    public String googsName;    //наименование товара. Кажется опечатка в "googs"
     public int count;           //количество
     public double price;        //цена за единицу
 

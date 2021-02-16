@@ -8,23 +8,22 @@ import java.nio.file.attribute.FileTime;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order{
 
     //переменные класса
-    public String shopId;   //идентификатор магазина
-    public String orderId;  //идентификатор заказа
-    public String customerId;   //идентификатор покупателя
+    public String shopId;           //идентификатор магазина
+    public String orderId;          //идентификатор заказа
+    public String customerId;       //идентификатор покупателя
     public LocalDateTime datetime;  //дата-время заказа (из атрибутов файла - дата последнего изменения)
     public List<OrderItem> items = new ArrayList<>();   //список позиций в заказе, отсортированный по наименованию товара
     public double sum;  //сумма стоимости всех позиций в заказе
 
     public boolean fileHasNoWrong = false;
 
-    //Конструктор класса
+    //Конструктор класса (С конструктором было лучше)
 /*    public Order(Path orderPath){
         getFromFileName(orderPath);
         getFromFileAttributes(orderPath);
@@ -32,6 +31,7 @@ public class Order{
         getSum();
     }*/
 
+    //Получение данных из имени файла
     public void getFromFileName(Path path) {
         File orderFileInfo = new File(path.toString());
         String[] orderFileName = orderFileInfo.getName().split("-");
@@ -41,40 +41,37 @@ public class Order{
 
     }
 
+    //Получение данных из аттрибута
     public void getFromFileAttributes(Path path) {
         try {
-//            System.out.println(Files.getAttribute(path, "lastModifiedTime").toString());
             FileTime fileTime = (FileTime) Files.getAttribute(path, "lastModifiedTime");
             Instant instant = fileTime.toInstant();
             this.datetime = LocalDateTime.ofInstant(instant, ZoneId.of("Europe/Moscow"));
-//            this.datetime = LocalDateTime.parse(Files.getAttribute(path, "lastModifiedTime").toString(),
-//                    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"));   //Формат ввел вручную
-                                                                                        //Были проблемы. Менялось кол-во знаков микросекунд
         }catch (IOException exc){
             System.out.println(exc.getMessage());
         }
     }
 
-
+    //Получение данных из содержимого файла
     public void getItemsFromFile(Path path){
+        //Считываю и затем перебираю массив строк из файла
         try {
             List<String> itemsLines = new ArrayList<>(Files.readAllLines(path));
             for (String itemLine:itemsLines){
                 if(checkItem(itemLine)){
-//                    items.add(new OrderItem(itemLine));
-                    items.add(createOrderItem(itemLine));
+                    items.add(createOrderItem(itemLine));   //Создаю товар в заказе
                     fileHasNoWrong = true;
                 }else{
                     fileHasNoWrong = false;
                     break;
                 }
             }
-//            System.out.println(items);
         }catch (IOException exc){
             System.out.println(exc.getMessage());
         }
     }
 
+    //Метод для создания заказа
     public OrderItem createOrderItem(String itemLine) {
         OrderItem orderItem = new OrderItem();
         String[] itemInfoArray = itemLine.split(",");
@@ -85,6 +82,7 @@ public class Order{
     }
 
     //Проверка содержимого перед формированием заказа
+    //три поля, разделенные ",". Первое поле  - содержание не важно, второе и третье должны быть цифры
     public boolean checkItem(String itemLine){
         String[] itemInfoArray = itemLine.split(",");
         return itemInfoArray.length == 3 && isDigit(itemInfoArray[1].trim()) && isDigit(itemInfoArray[2].trim());
@@ -92,10 +90,11 @@ public class Order{
     }
 
     //Проверка формата данных в заказе
+    //Есть ли готовые методы проверки на цифру?
     public boolean isDigit(String str){
         char[] chars = str.toCharArray();
         for (char ch : chars){
-            if(Character.isDigit(ch)){
+            if(Character.isDigit(ch)){ //Возможно нужна проверка на "." для double
                 return true;
             }else{
                break;
@@ -120,9 +119,5 @@ public class Order{
                 "; последнее обновление: " + datetime.toString();
 
     }
-//
-//    @Override
-//    public int compareTo(Order o) {
-//        return this.datetime.compareTo(o.datetime);
-//    }
+
 }
