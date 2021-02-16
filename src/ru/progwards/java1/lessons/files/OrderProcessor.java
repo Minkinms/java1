@@ -36,12 +36,12 @@ public class OrderProcessor {
 
         String startPath = "C:\\Minkin_Orders";
         OrderProcessor orderProcessor = new OrderProcessor(startPath);
-//        LocalDate start = LocalDate.of(2021, 2, 11);
-//        LocalDate finish = LocalDate.of(2021, 2, 12);
-//        String shopId = "S02";
+//        LocalDate start = LocalDate.of(2021, 2, 13);
+        LocalDate finish = LocalDate.of(2021, 2, 12);
+        String shopId = "S02";
         LocalDate start =  null;
-        LocalDate finish = null;
-        String shopId = null;
+//        LocalDate finish = null;
+//        String shopId = null;
         System.out.println("Количество файлов с ошибками " + orderProcessor.loadOrders(start, finish, shopId));
 //        System.out.println("Количество файлов с ошибками " + orderProcessor.loadOrders(start, finish, shopId));
         for (Order ord : orderProcessor.orderList) {
@@ -71,9 +71,9 @@ public class OrderProcessor {
         }*/
 //---------------------------------------------
         System.out.println("\n Метод statisticsByDay \n");
-/*        for (var entry : orderProcessor.statisticsByDay().entrySet()){    //Map<String (shopID), Double>
+        for (var entry : orderProcessor.statisticsByDay().entrySet()){    //Map<String (shopID), Double>
             System.out.println("День:  " + entry.getKey() + "; Сумма: " + entry.getValue() );
-        }*/
+        }
 
 
     }
@@ -203,7 +203,7 @@ public class OrderProcessor {
                     }
                 }else {
                     if(finish != null &&  fileDateTime != null){
-                        if(fileDateTime.compareTo(LocalDateTime.of(finish, LocalTime.MAX)) >= 0) {
+                        if(fileDateTime.compareTo(LocalDateTime.of(finish, LocalTime.MAX)) <= 0) {
                             result.add(path);
                         }
                     }else {
@@ -367,7 +367,7 @@ public class OrderProcessor {
                 }
             }else ordersProcess.add(order);
         }
-        ordersProcess.sort(new Comparator<Order>() {        //Хотя в TreeMap они уже отсортированы
+        ordersProcess.sort(new Comparator<Order>() {        //
             @Override
             public int compare(Order o1, Order o2) {
                 return o1.datetime.compareTo(o2.datetime);
