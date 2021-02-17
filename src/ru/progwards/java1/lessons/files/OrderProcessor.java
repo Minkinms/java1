@@ -106,6 +106,8 @@ public class OrderProcessor {
             createOrder(order, path);       //Создание заказа без использования конструктора класса Order
             if(order.fileHasNoWrong) {
                 orderList.add(order);
+            }else {
+             countWrongOrders++;     //Количество файлов с ошибками
             }
         }
         return this.countWrongOrders;
@@ -184,9 +186,9 @@ public class OrderProcessor {
         for(Path path : ordersPath){
             if(pathMatcher.matches(path)){
                 result.add(path);
-            }else {
-                countWrongOrders++;     //Количество файлов с ошибкми в именах
-            }
+            }//else {
+               // countWrongOrders++;     //Количество файлов с ошибкми в именах
+            //}
         }
         return result;
     }
