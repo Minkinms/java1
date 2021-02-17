@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Order{
@@ -69,6 +70,13 @@ public class Order{
         }catch (IOException exc){
             System.out.println(exc.getMessage());
         }
+
+        items.sort(new Comparator<OrderItem>() {
+            @Override
+            public int compare(OrderItem o1, OrderItem o2) {
+                return o1.googsName.compareTo(o2.googsName);
+            }
+        });
     }
 
     //Метод для создания заказа
